@@ -7,12 +7,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { DefaultModule } from './layouts/default/default.module';
+import { InsertdetailsComponent } from './modules/insertdetails/insertdetails.component';
+import { ViewdetailsComponent } from './modules/viewdetails/viewdetails.component';
 //import { DefaultComponent } from './layouts/default/default.component';
 //import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    InsertdetailsComponent,
+    ViewdetailsComponent,
     //DefaultComponent,
     //DashboardComponent
   ],

@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { DefaultComponent } from './layouts/default/default.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { PostsComponent } from './modules/posts/posts.component';
+import { InsertdetailsComponent } from './modules/insertdetails/insertdetails.component';
+import { ViewdetailsComponent } from './modules/viewdetails/viewdetails.component';
 
 
 const routes: Routes = [{
@@ -16,6 +18,14 @@ const routes: Routes = [{
     {
       path : 'posts',
       component : PostsComponent
+    },
+    {
+      path : 'insertdetails',
+      component : InsertdetailsComponent
+    },
+    {
+      path : 'viewdetails',
+      component : ViewdetailsComponent
     }
   ]
 

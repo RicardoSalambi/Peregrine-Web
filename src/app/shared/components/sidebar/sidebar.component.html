@@ -1,1 +1,15 @@
-<p>sidebar works!</p>
+<div fxFlex fxLayout="column">
+    <ul fxLayout="column" fxLayoutGap="20px">
+        <li>
+            <button mat-raised-button (click)="goToPage('insertdetails')">Add Team Member</button>
+        </li>
+        <li>
+            <button mat-raised-button (click)="goToPage('')">Update Team Member Details</button>
+        </li>
+        <li>
+            <button mat-raised-button (click)="goToPage('viewdetails')">View Members</button>
+        </li>
+
+
+    </ul>
+</div>
