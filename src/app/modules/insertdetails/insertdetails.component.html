@@ -8,6 +8,7 @@
         <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
             <mat-label>Work Number</mat-label>
             <input matInput value="" required>
+            <mat-hint align="end">Assigned by Peregrine</mat-hint>
         </mat-form-field>
     </div>
 
@@ -45,7 +46,7 @@
 
     <div>
         <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
-            <mat-label>Duty</mat-label>
+            <mat-label>Nationality</mat-label>
             <input matInput value="" required>
         </mat-form-field>
     </div>
@@ -83,18 +84,6 @@
         </mat-form-field>
     </div>
 
-
-    <div>
-        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
-            <mat-label>Address</mat-label>
-            <input matInput value="" required>
-        </mat-form-field>
-    </div>
-
-    <div>
-        <button mat-raised-button disabled>Upload CV</button>
-    </div>
-
     <div>
         <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
             <mat-label>House</mat-label>
@@ -106,11 +95,27 @@
         </mat-form-field>
     </div>
 
+
+    <div class="Comments">
+        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 70%;">
+            <mat-label>Address</mat-label>
+            <textarea matInput rows="5" cols="2" required></textarea>
+        </mat-form-field>
+    </div>
+
+<!--
+    <div>
+        <button mat-raised-button disabled>Upload CV</button>
+    </div>
+-->
+
+    
+
     <div class="Comments">
         <mat-form-field appearance="outline" floatLabel="auto" style="width: 70%;">
             <mat-label>Comments</mat-label>
             <textarea matInput rows="5" cols="2"></textarea>
-            <mat-hint align="end">Example Hint</mat-hint>
+            <mat-hint align="end">Insert Additional details about this Team Member</mat-hint>
         </mat-form-field>
     </div>
 

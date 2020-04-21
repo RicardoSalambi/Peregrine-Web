@@ -8,6 +8,7 @@ div{
     grid-row-gap: 1%;
     height: 100%;
     overflow: auto;
+    /*background-color: #ffffff;*/
 }
 
 .header{
@@ -23,6 +24,7 @@ div{
     grid-template-columns: repeat(3 , 1fr);
     align-items: center;
     grid-column: 1/3;
+    height: 20vh;                                      /*This might the problem to the scroll problem*/
 }
 
 .mat-raised-button{

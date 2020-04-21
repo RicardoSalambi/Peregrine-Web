@@ -9,6 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { DefaultModule } from './layouts/default/default.module';
 import { InsertdetailsComponent } from './modules/insertdetails/insertdetails.component';
 import { ViewdetailsComponent } from './modules/viewdetails/viewdetails.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 //import { DefaultComponent } from './layouts/default/default.component';
 //import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
@@ -26,7 +28,9 @@ import { ViewdetailsComponent } from './modules/viewdetails/viewdetails.componen
     BrowserAnimationsModule,
     DefaultModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
