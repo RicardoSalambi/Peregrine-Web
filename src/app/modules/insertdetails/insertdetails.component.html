@@ -121,15 +121,15 @@
 
     <div class="wrapper2">
         <div>
-            <button mat-raised-button disabled>Upload CV</button>
+            <input type="file" (change)="onFileSelected($event)">
         </div>
     
         <div>
-            <button mat-raised-button class="uploadbutton">Upload CV</button>
+            <button mat-raised-button class="uploadbutton" (click)="clicking()">Upload CV</button>
         </div>
     
         <div>
-            <button mat-raised-button class="submitbutton">Submit</button>
+            <button mat-raised-button class="submitbutton" (click)="clicking()">Submit</button>
         </div>
     </div>
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CrudOperationsService } from '../../services/crud-operations.service'
 
 @Component({
   selector: 'app-insertdetails',
@@ -7,9 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InsertdetailsComponent implements OnInit {
 
-  constructor() { }
+  datas;
+
+  constructor(private crudService : CrudOperationsService) { }
 
   ngOnInit(): void {
+  }
+
+  onFileSelected(event){
+    console.log(event);
+    
+  }
+
+  clicking()
+  {
+    alert('Data has been logged on the console');
+    
+    this.crudService.getRequest('/event').subscribe(data => {
+      //console.log(data);
+      this.datas = data;
+    });
+
+    
+
+    console.log(this.datas);
+
   }
 
 }

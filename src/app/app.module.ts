@@ -11,6 +11,7 @@ import { InsertdetailsComponent } from './modules/insertdetails/insertdetails.co
 import { ViewdetailsComponent } from './modules/viewdetails/viewdetails.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { HttpClientModule } from '@angular/common/http';
 //import { DefaultComponent } from './layouts/default/default.component';
 //import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
@@ -30,7 +31,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatInputModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
