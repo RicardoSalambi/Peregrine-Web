@@ -1,13 +1,24 @@
-<div fxFlex fxLayout="column">
+<div fxFlex fxLayout="column" class="sidebar-color">
     <ul fxLayout="column" fxLayoutGap="20px">
         <li>
-            <button mat-raised-button (click)="goToPage('insertdetails')">Add Team Member</button>
+            
+            <button mat-flat-button (click)="goToPage('insertdetails')"> 
+                <mat-icon>person</mat-icon> 
+                Add Team Member
+            </button>
+            
         </li>
         <li>
-            <button mat-raised-button (click)="goToPage('')">Update Team Member Details</button>
+            <button mat-flat-button (click)="goToPage('')">
+                <mat-icon>update</mat-icon> 
+                Update Team Member Details
+            </button>
         </li>
         <li>
-            <button mat-raised-button (click)="goToPage('viewdetails')">View Members</button>
+            <button mat-flat-button (click)="goToPage('viewdetails')">
+                <mat-icon>person_outline</mat-icon> 
+                View Members
+            </button>
         </li>
 
 

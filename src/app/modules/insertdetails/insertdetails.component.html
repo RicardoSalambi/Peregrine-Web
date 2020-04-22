@@ -7,7 +7,7 @@
     <div class="texts">
         <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
             <mat-label>Work Number</mat-label>
-            <input matInput value="" required>
+            <input matInput value="" required id="worknumber">
             <mat-hint align="end">Assigned by Peregrine</mat-hint>
         </mat-form-field>
     </div>
@@ -15,7 +15,7 @@
     <div>
         <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
             <mat-label>Skills</mat-label>
-            <input matInput value="" required>
+            <input matInput value="" required id="skills">
         </mat-form-field>
     </div>
 
@@ -23,7 +23,7 @@
     <div>
         <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
             <mat-label>Name</mat-label>
-            <input matInput value="" required>
+            <input matInput value="" required id="name">
         </mat-form-field>
     </div>
 
@@ -31,7 +31,7 @@
     <div>
         <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
             <mat-label>Position</mat-label>
-            <input matInput value="" required>
+            <input matInput value="" required id="position">
         </mat-form-field>
     </div>
 
@@ -39,7 +39,7 @@
     <div>
         <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
             <mat-label>Surname</mat-label>
-            <input matInput value="" required>
+            <input matInput value="" required id="surname">
         </mat-form-field>
     </div>
 
@@ -47,7 +47,7 @@
     <div>
         <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
             <mat-label>Nationality</mat-label>
-            <input matInput value="" required>
+            <input matInput value="" required id="nationality">
         </mat-form-field>
     </div>
 
@@ -55,7 +55,7 @@
     <div>
         <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
             <mat-label>Qualification</mat-label>
-            <input matInput value="" required>
+            <input matInput value="" required id="qualification">
         </mat-form-field>
     </div>
 
@@ -63,7 +63,7 @@
     <div>
         <mat-form-field appearance="outline" floatLabel="auto" style="width: 40%;">
             <mat-label>Gender</mat-label>
-            <select matNativeControl required>
+            <select matNativeControl required id="gender">
               <option value=""></option>
               <option value="Female">Female</option>
               <option value="Male">Male</option>
@@ -76,7 +76,7 @@
     <div>
         <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
             <mat-label>Departments</mat-label>
-            <select matNativeControl required>
+            <select matNativeControl required id="departments">
               <option value=""></option>
               <option value="IT">IT</option>
               <option value="Finance">Finance</option>
@@ -87,11 +87,27 @@
     <div>
         <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
             <mat-label>House</mat-label>
-            <select matNativeControl required>
+            <select matNativeControl required id="house">
               <option value=""></option>
-              <option value="House 1">House 1</option>
-              <option value="House 2">House 2</option>
+              <option value="House1">House 1</option>
+              <option value="House2">House 2</option>
             </select>
+        </mat-form-field>
+    </div>
+
+    <div class="Comments"> 
+        <!--
+        <input type="file" (change)="onFileSelected($event)">
+        -->
+
+        <button type="button" mat-raised-button (click)="fileInput.click()" class="uploadbutton">Upload CV</button>
+        <input hidden type="file" (change)="onFileSelected($event)" #fileInput  id="file">
+
+        <br/><br/>
+
+        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+            <mat-label>Curriculum Vitae Documents</mat-label>
+            <input matInput type="text" id="filename" value="" disabled>
         </mat-form-field>
     </div>
 
@@ -99,7 +115,7 @@
     <div class="Comments">
         <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 70%;">
             <mat-label>Address</mat-label>
-            <textarea matInput rows="5" cols="2" required></textarea>
+            <textarea matInput rows="5" cols="2" required id="address"></textarea>
         </mat-form-field>
     </div>
 
@@ -114,20 +130,13 @@
     <div class="Comments">
         <mat-form-field appearance="outline" floatLabel="auto" style="width: 70%;">
             <mat-label>Comments</mat-label>
-            <textarea matInput rows="5" cols="2"></textarea>
+            <textarea matInput rows="5" cols="2" id="comments"></textarea>
             <mat-hint align="end">Insert Additional details about this Team Member</mat-hint>
         </mat-form-field>
     </div>
 
-    <div class="wrapper2">
-        <div>
-            <input type="file" (change)="onFileSelected($event)">
-        </div>
-    
-        <div>
-            <button mat-raised-button class="uploadbutton" (click)="clicking()">Upload CV</button>
-        </div>
-    
+    <div class="wrapper2"> 
+
         <div>
             <button mat-raised-button class="submitbutton" (click)="clicking()">Submit</button>
         </div>
