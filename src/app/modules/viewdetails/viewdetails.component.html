@@ -10,15 +10,18 @@
         </mat-form-field>
     
     </div>
-    
     <div>
-        <mat-card>Simple card</mat-card>
+        <mat-grid-list cols="3">
+
+            <mat-grid-tile *ngFor="let worker of workers">
+                {{worker.name}}
+            <!--
+                <br>
+                {{worker.role}}
+            -->
+            </mat-grid-tile>
+
+        </mat-grid-list>
     </div>
-    <div>
-        <mat-card>Simple card</mat-card>
-    </div>
-    <div>
-        <mat-card>Simple card</mat-card>
-    </div>
-    
 </div>
+

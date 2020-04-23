@@ -12,6 +12,7 @@ import { ViewdetailsComponent } from './modules/viewdetails/viewdetails.componen
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
+import {MatGridListModule} from '@angular/material/grid-list';
 //import { DefaultComponent } from './layouts/default/default.component';
 //import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
@@ -32,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatCardModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
