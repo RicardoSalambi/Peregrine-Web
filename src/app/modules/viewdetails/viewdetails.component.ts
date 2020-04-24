@@ -26,6 +26,21 @@ export class ViewdetailsComponent implements OnInit {
       name  : 'Random',
       role  : 'Employee'
 
+    },
+    {
+      name  : 'Ricardo Salambi',
+      role  : 'CEO, Owner, Founder, Genius'
+
+    },
+    {
+      name  : 'Charles Gudza',
+      role  : 'Director, Takes orders'
+
+    },
+    {
+      name  : 'Random',
+      role  : 'Employee'
+
     }];
 
   }

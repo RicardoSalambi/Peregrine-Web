@@ -13,7 +13,27 @@
 }
 
 mat-grid-tile{
-    background-color: lightblue;
+    /*background-color: lightblue;*/
     border-radius: 90px;
+    margin: 0;
 }
+
+.profile-card{
+
+    text-align: center;
+    padding: 20px;
+    
+    img{
+        height: 200px;
+        width: 30vw;
+        object-fit: cover;
+        border-radius: 0px;
+    }
+    mat-label{
+    /*height: 30vh;*/
+    }
+}
+
+
+
 

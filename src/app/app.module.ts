@@ -12,7 +12,17 @@ import { ViewdetailsComponent } from './modules/viewdetails/viewdetails.componen
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
+import { DependanciesComponent } from './modules/dependancies/dependancies.component';
+import { DisciplinaryComponent } from './modules/disciplinary/disciplinary.component';
+import { ExternalsituationsComponent } from './modules/externalsituations/externalsituations.component';
+import { WorkleaveComponent } from './modules/workleave/workleave.component';
+import { TrainingComponent } from './modules/training/training.component';
+import { PerformanceComponent } from './modules/performance/performance.component';
 //import { DefaultComponent } from './layouts/default/default.component';
 //import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
@@ -21,6 +31,13 @@ import {MatGridListModule} from '@angular/material/grid-list';
     AppComponent,
     InsertdetailsComponent,
     ViewdetailsComponent,
+
+    DependanciesComponent,
+    DisciplinaryComponent,
+    ExternalsituationsComponent,
+    WorkleaveComponent,
+    TrainingComponent,
+    PerformanceComponent,
     //DefaultComponent,
     //DashboardComponent
   ],
@@ -34,7 +51,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatCardModule,
     MatIconModule,
     HttpClientModule,
-    MatGridListModule
+    MatGridListModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

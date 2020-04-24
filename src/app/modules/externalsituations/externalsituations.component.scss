@@ -1,0 +1,20 @@
+div{
+    text-align: center;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(1 , 1fr);
+    grid-row-gap: 5%;
+    height: 70vh;
+    overflow: auto;
+    /*background-color: #ffffff;*/
+}
+
+.uploadbutton{
+    background-color: lightblue;
+}
+
+.submitbutton{
+    background-color: lightgreen;
+}

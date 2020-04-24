@@ -14,11 +14,29 @@
         <mat-grid-list cols="3">
 
             <mat-grid-tile *ngFor="let worker of workers">
-                {{worker.name}}
-            <!--
-                <br>
-                {{worker.role}}
-            -->
+            
+                <div class="profile-card">
+                    <img src="https://image.shutterstock.com/image-vector/kraken-octopus-mascot-esport-logo-600w-1568553793.jpg" alt="">
+                    <br>
+                    <mat-label>
+                        {{worker.name}} 
+                    </mat-label>
+                </div>
+        <!--         
+            <mat-card>
+
+                <mat-card-header>
+                    <div mat-card-avatar></div>
+                    <mat-card-title>Name of Worker</mat-card-title>
+                </mat-card-header>    
+                <img mat-card-avatar src="https://image.shutterstock.com/image-vector/kraken-octopus-mascot-esport-logo-600w-1568553793.jpg" >
+                <mat-card-content>
+                    <p>Hello paragraph</p>
+                </mat-card-content>
+                <mat-card-actions></mat-card-actions>
+
+            </mat-card>
+        -->
             </mat-grid-tile>
 
         </mat-grid-list>

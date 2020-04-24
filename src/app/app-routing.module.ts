@@ -5,6 +5,12 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { PostsComponent } from './modules/posts/posts.component';
 import { InsertdetailsComponent } from './modules/insertdetails/insertdetails.component';
 import { ViewdetailsComponent } from './modules/viewdetails/viewdetails.component';
+import { DependanciesComponent } from './modules/dependancies/dependancies.component';
+import { DisciplinaryComponent } from './modules/disciplinary/disciplinary.component';
+import { ExternalsituationsComponent } from './modules/externalsituations/externalsituations.component';
+import { PerformanceComponent } from './modules/performance/performance.component';
+import { TrainingComponent } from './modules/training/training.component';
+import { WorkleaveComponent } from './modules/workleave/workleave.component';
 
 
 const routes: Routes = [{
@@ -26,6 +32,30 @@ const routes: Routes = [{
     {
       path : 'viewdetails',
       component : ViewdetailsComponent
+    },
+    {
+      path : 'dependancies',
+      component : DependanciesComponent
+    },
+    {
+      path : 'disciplinary',
+      component : DisciplinaryComponent
+    },
+    {
+      path : 'externalsituations',
+      component : ExternalsituationsComponent
+    },
+    {
+      path : 'performance',
+      component : PerformanceComponent
+    },
+    {
+      path : 'training',
+      component : TrainingComponent
+    },
+    {
+      path : 'workleave',
+      component : WorkleaveComponent
     }
   ]
 

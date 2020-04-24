@@ -1,0 +1,75 @@
+<div class="wrapper">
+
+    <div class="header">
+        <h2>Update Training Details</h2>
+    </div>
+    
+
+    <div>
+        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+            <mat-label>Work Number</mat-label>
+            <input matInput value="" required id="worknumber">
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+            <mat-label>Training Description</mat-label>
+            <input matInput value="" required id="trainingdescription">
+        </mat-form-field>
+    </div>
+
+    <div>
+    <!--
+        <mat-form-field>
+            <input matInput [matDatePicker]="myDatePicker">
+            <mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #myDatePicker></mat-datepicker>
+        </mat-form-field>
+    -->
+
+    <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="picker" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <!--<button matSuffix [matDatepickerToggle]="picker"></button>-->
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    
+    </div>
+
+    <div>
+        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="picker2" required>
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <!--<button matSuffix [matDatepickerToggle]="picker"></button>-->
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="wrapper2"> 
+        <!--
+        <input type="file" (change)="onFileSelected($event)">
+        -->
+
+        <button type="button" mat-raised-button (click)="fileInput.click()" class="uploadbutton">Upload Training Certificates</button>
+        <input hidden type="file" (change)="onFileSelected($event)" #fileInput  id="file">
+
+        <br/><br/>
+
+        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+            <mat-label>Training Certificates</mat-label>
+            <input matInput type="text" id="trainingcertificates" value="" disabled>
+        </mat-form-field>
+    </div>
+
+    <div class="wrapper2"> 
+
+        <div>
+            <button mat-raised-button class="submitbutton" >Submit</button>
+        </div>
+
+    </div>
+
+</div>

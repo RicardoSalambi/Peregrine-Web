@@ -1,8 +1,8 @@
-<app-header></app-header>
+<app-header (toggleSidebarEvent)="sideBarToggler()"></app-header>
 
 <mat-drawer-container class="body-color">
 
-    <mat-drawer mode="side" opened>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
         <app-sidebar></app-sidebar>
     </mat-drawer>
 
