@@ -16,6 +16,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { DependanciesComponent } from './modules/dependancies/dependancies.component';
 import { DisciplinaryComponent } from './modules/disciplinary/disciplinary.component';
@@ -54,7 +55,8 @@ import { PerformanceComponent } from './modules/performance/performance.componen
     MatGridListModule,
     MatExpansionModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
