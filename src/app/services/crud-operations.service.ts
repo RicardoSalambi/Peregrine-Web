@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const httpOptions = {
   headers : new HttpHeaders({
-    'Content-Type' : 'application/json'
+    'Content-Type' : 'application/pdf'
   })
 }
 
@@ -36,5 +36,13 @@ export class CrudOperationsService {
   deleteRequest(){
 
     return this.http.delete(this.url, httpOptions);
+  }
+
+
+  addRequest2(urlextension,data){
+    const url = `${this.url}${urlextension}`;
+    console.log(url);
+    this.http.post
+    return this.http.post(url, data, httpOptions);
   }
 }
