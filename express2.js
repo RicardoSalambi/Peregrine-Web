@@ -17,7 +17,7 @@ const port = process.env.PORT || 5000;
 
 const app = express()
   .use(cors())
-  .use(bodyParser.json())
+  .use(bodyParser.raw())
   .use(events(connection));
 
 app.listen(port, () => {

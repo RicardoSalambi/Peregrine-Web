@@ -11,31 +11,57 @@ function createRouter(db) {
     next();
   });*/
 
-  router.post('/eventplace/:worknumber/:name/:surname/:qualification/:department/:skills/:position/:nationality/:gender/:house/:address/:comments', (req, res, next) => {      
+  router.post('/fileupload', (req, res, next) => {    
+
+    var sqlQ = `INSERT INTO peregrinefiles (File) VALUES (${req.files})`;
+
+    console.log(sqlQ);
+
+    db.query(sqlQ,
+    (error) => {
+      if (error) {
+        console.error(error);
+        res.status(500).json({status: 'error'});
+      } else {
+        res.status(200).json({status: 'ok'});
+      }
+    });    
+    
+  });
+
+  router.post('/eventplace/:worknumber/:name/:surname/:qualification/:department/:skills/:position/:nationality/:gender/:house/:address/:comments', (req, res, next) => {   
+    
+    var sqlQ = `INSERT INTO peregrineworkers (worknumber, name, surname,qualification,department,skills,position,nationality,gender,house,address,comments) VALUES (
+      ${req.params.worknumber},
+      '${req.params.name}',
+      '${req.params.surname}',
+      '${req.params.qualification}',
+      '${req.params.department}',
+      '${req.params.skills}',
+      '${req.params.position}',
+      '${req.params.nationality}',
+      '${req.params.gender}',
+      '${req.params.house}',
+      '${req.params.address}',
+      '${req.params.comments}')`;
+    
     db.query(
-      `INSERT INTO peregrineworkers (worknumber, name, surname,qualification,department,skills,position,nationality,gender,house,address,comments) VALUES (
-          ${req.params.worknumber},
-          '${req.params.name}',
-          '${req.params.surname}',
-          '${req.params.qualification}',
-          '${req.params.department}',
-          '${req.params.skills}',
-          '${req.params.position}',
-          '${req.params.nationality}',
-          '${req.params.gender}',
-          '${req.params.house}',
-          '${req.params.address}',
-          '${req.params.comments}')`,
-      [123456789, 26.26, 62.62,'Ricardo','Salambi','null'],
-      (error) => {
-        if (error) {
+      sqlQ,                             //[123456789, 26.26, 62.62,'Ricardo','Salambi','null'],      
+      (error) => 
+      {
+        if (error) 
+        {
           console.error(error);
           res.status(500).json({status: 'error'});
-        } else {
+        } 
+        else 
+        {
           res.status(200).json({status: 'ok'});
         }
       }
     );
+
+    
   });
 
   router.get('/event', function (req, res, next) { ///:id/:id2
