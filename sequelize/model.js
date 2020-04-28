@@ -1,17 +1,17 @@
 const Sequelize = require('sequelize');
 const connection = require('./dbconnection')
 
-module.exports = connection.define('peregrinefiles', {
+module.exports = connection.define('peregrineworkers', {
     
-    count  : {
+    /*count  : {
       type  : Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
     File  : {
       type  : Sequelize.BLOB('long')
-    }
-    /*worknumber  : {
+    }*/
+    worknumber  : {
       type  : Sequelize.INTEGER,
       primaryKey    : true
     },
@@ -47,7 +47,10 @@ module.exports = connection.define('peregrinefiles', {
     },
     comments  : {
       type  : Sequelize.TEXT
-    }*/
+    },
+    documents  : {
+      type  : Sequelize.BLOB('long')
+    }
     
 
 
