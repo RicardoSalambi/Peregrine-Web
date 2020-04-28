@@ -1,55 +1,59 @@
-<div class="wrapper">
-    <div>
-        <h2>Update Member Disciplinaries</h2>
-    </div>
+<form action="http://localhost:5000/add" method="POST" enctype="multipart/form-data">
     
-
-    <div>
-        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
-            <mat-label>Work Number</mat-label>
-            <input matInput value="" required id="worknumber">
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
-            <mat-label>Memeber Disciplinary Description</mat-label>
-            <input matInput value="" required id="MDD">
-        </mat-form-field>
-    </div>
-
-    <div> 
-        <!--
-        <input type="file" (change)="onFileSelected($event)">
-        -->
-
-        <button type="button" mat-raised-button (click)="fileInput.click()" class="uploadbutton">Upload Member Forms</button>
-        <input hidden type="file" (change)="onFileSelected($event)" #fileInput  id="file">
-
-        <br/><br/>
-
-        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
-            <mat-label>Member Forms</mat-label>
-            <input matInput type="text" id="filename" value="" disabled>
-        </mat-form-field>
-    </div>
-
-    <div class="Comments">
-        <mat-form-field appearance="outline" floatLabel="auto" style="width: 70%;">
-            <mat-label>Comments</mat-label>
-            <textarea matInput rows="5" cols="2" id="comments"></textarea>
-            <mat-hint align="end">Insert Additional details about this Team Member</mat-hint>
-        </mat-form-field>
-    </div>
-
-    
-
-    <div class="wrapper2"> 
+    <div class="wrapper">
+        <div>
+            <h2>Update Member Disciplinaries</h2>
+        </div>
+        
 
         <div>
-            <button mat-raised-button class="submitbutton" >Submit</button>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Work Number</mat-label>
+                <input matInput value="" required id="worknumber">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Memeber Disciplinary Description</mat-label>
+                <input matInput value="" required id="MDD">
+            </mat-form-field>
+        </div>
+
+        <div> 
+            <!--
+            <input type="file" (change)="onFileSelected($event)">
+            -->
+
+            <button type="button" mat-raised-button (click)="fileInput.click()" class="uploadbutton">Upload Member Forms</button>
+            <input hidden type="file" (change)="onFileSelected($event)" #fileInput  id="file">
+
+            <br/><br/>
+
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Member Forms</mat-label>
+                <input matInput type="text" id="filename" value="" disabled>
+            </mat-form-field>
+        </div>
+
+        <div class="Comments">
+            <mat-form-field appearance="outline" floatLabel="auto" style="width: 70%;">
+                <mat-label>Comments</mat-label>
+                <textarea matInput rows="5" cols="2" id="comments"></textarea>
+                <mat-hint align="end">Insert Additional details about this Team Member</mat-hint>
+            </mat-form-field>
+        </div>
+
+        
+
+        <div class="wrapper2"> 
+
+            <div>
+                <button mat-raised-button class="submitbutton" >Submit</button>
+            </div>
+
         </div>
 
     </div>
 
-</div>
+</form>

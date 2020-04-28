@@ -24,6 +24,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 
 
@@ -54,7 +55,8 @@ import { MatInputModule } from '@angular/material/input';
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatMenuModule
+    MatMenuModule,
+    HighchartsChartModule
   ]
 })
 export class DefaultModule { }

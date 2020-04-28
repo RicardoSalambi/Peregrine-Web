@@ -17,12 +17,12 @@ export class DependanciesComponent implements OnInit {
 
   onFileSelected(event){
     console.log(event);
-    //const file: any = document.querySelector('#filename');
-    //file.value = <File>event.target.files[0].name;
-    const file = <File>event.target.files[0];
+    const file: any = document.querySelector('#filename');
+    file.value = <File>event.target.files[0].name;
+    /*const file = <File>event.target.files[0];
 
     //this.fd = new FormData();
-    this.fd.append('File',file, file.name);
+    this.fd.append('File',file, file.name);*/
 
     
   }

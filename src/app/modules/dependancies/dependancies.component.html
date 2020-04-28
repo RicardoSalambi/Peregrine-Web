@@ -1,53 +1,59 @@
+<form action="http://localhost:5000/add" method="POST" enctype="multipart/form-data">
 
-<div class="wrapper">
-    <div>
-        <h2>Update Member Dependancies</h2>
-    </div>
-    
-
-    <div>
-        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
-            <mat-label>Work Number</mat-label>
-            <input matInput value="" required id="worknumber">
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
-            <mat-label>Next of Kin</mat-label>
-            <input matInput value="" required id="NOK">
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
-            <mat-label>Emergency Contact</mat-label>
-            <input matInput value="" required id="emergencycontact">
-        </mat-form-field>
-    </div>
-
-    <div> 
-        <!--
-        <input type="file" (change)="onFileSelected($event)">
-        -->
-
-        <button type="button" mat-raised-button (click)="fileInput.click()" class="uploadbutton">Upload Beneficiary Forms</button>
-        <input hidden type="file" (change)="onFileSelected($event)" #fileInput  id="file">
-
-        <br/><br/>
-
-        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
-            <mat-label>Beneficiary Forms</mat-label>
-            <input matInput type="text" id="filename" value="" disabled>
-        </mat-form-field>
-    </div>
-
-    <div class="wrapper2"> 
-
+    <div class="wrapper">
         <div>
-            <button mat-raised-button class="submitbutton" (click)="submit()">Submit</button>
+            <h2>Update Member Dependancies</h2>
+        </div>
+        
+        
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Work Number</mat-label>
+                <input matInput value="" required id="worknumber">
+            </mat-form-field>
         </div>
 
-    </div>
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Next of Kin</mat-label>
+                <input matInput value="" required id="NOK">
+            </mat-form-field>
+        </div>
 
-</div>
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Emergency Contact</mat-label>
+                <input matInput value="" required id="emergencycontact">
+            </mat-form-field>
+        </div>
+
+        <div> 
+            <!--
+            <input type="file" (change)="onFileSelected($event)">
+            -->
+
+            <button type="button" mat-raised-button (click)="fileInput.click()" class="uploadbutton">Upload Beneficiary Forms</button>
+            <input hidden type="file" (change)="onFileSelected($event)" #fileInput  id="file" name="file">
+
+            <br/><br/>
+
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Beneficiary Forms</mat-label>
+                <input matInput type="text" id="filename" value="" disabled>
+            </mat-form-field>
+        </div>
+
+        <div class="wrapper2"> 
+
+            <div>
+                <button mat-raised-button class="submitbutton" type="submit">Submit</button>
+            </div>
+
+        </div>
+
+       
+        
+
+    </div>
+    
+ </form>

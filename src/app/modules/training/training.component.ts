@@ -14,7 +14,7 @@ export class TrainingComponent implements OnInit {
 
   onFileSelected(event){
     console.log(event);
-    const inputNode: any = document.querySelector('#filename');
+    const inputNode: any = document.querySelector('#trainingcertificates');
     inputNode.value = <File>event.target.files[0].name;
     
   }
