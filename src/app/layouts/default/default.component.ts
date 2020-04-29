@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-default',
@@ -17,6 +18,18 @@ export class DefaultComponent implements OnInit {
   sideBarToggler()
   {
     this.sideBarOpen = !this.sideBarOpen;
+
+    let shand = document.getElementsByClassName('mat-drawer-content') as HTMLCollectionOf<HTMLElement>;
+    
+    if(this.sideBarOpen)
+    {
+      shand[0].style.width = "80vw";
+    }
+    else
+    {
+      shand[0].style.width = "100vw";
+    }
+
   }
 
 }

@@ -3,8 +3,8 @@
     display: grid;
     grid-template-columns: 1fr;
     /*grid-row-gap: 5%;
-    height: 100%;*/
-    overflow: auto;
+    height: 100%;
+    overflow-y: scroll;*/
     text-align: center;
 }
 
@@ -56,8 +56,8 @@ mat-grid-tile{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 5%;
-    /*height: 100%;*/
-    overflow: auto;
+    /*height: 100%;
+    overflow: auto;*/
     text-align: center;
 }
 
