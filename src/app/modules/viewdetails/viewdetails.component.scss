@@ -34,6 +34,31 @@ mat-grid-tile{
     }
 }
 
+.mat-card{
+    max-width: 15vw;
+    margin: auto;
+}
 
+.mat-card-avatar{
+    /*background-image: url(/src/assets/img/kraken-octopus-mascot-esport-logo-design_122297-92.jpg);*/
+    background-size: cover;
+}
+
+.mat-card-actions{
+    display: flex;
+}
+
+.mat-card-actions .flex-spacer{
+    width: 100%;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 5%;
+    /*height: 100%;*/
+    overflow: auto;
+    text-align: center;
+}
 
 
