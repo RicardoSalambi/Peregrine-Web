@@ -11,9 +11,12 @@ import { ExternalsituationsComponent } from './modules/externalsituations/extern
 import { PerformanceComponent } from './modules/performance/performance.component';
 import { TrainingComponent } from './modules/training/training.component';
 import { WorkleaveComponent } from './modules/workleave/workleave.component';
+import { SigninupComponent } from './modules/signinup/signinup.component';
 
 
-const routes: Routes = [{
+const routes: Routes = [
+{ path : 'signinup', component : SigninupComponent },
+{
   path : '',
   component : DefaultComponent,
   children : [

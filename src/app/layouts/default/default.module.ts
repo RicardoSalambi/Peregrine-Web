@@ -12,6 +12,7 @@ import { ExternalsituationsComponent } from 'src/app/modules/externalsituations/
 import { WorkleaveComponent } from 'src/app/modules/workleave/workleave.component';
 import { TrainingComponent } from 'src/app/modules/training/training.component';
 import { PerformanceComponent } from 'src/app/modules/performance/performance.component';
+import { SigninupComponent } from 'src/app/modules/signinup/signinup.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
@@ -25,6 +26,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { HighchartsChartModule } from 'highcharts-angular';
+
+import { FormsModule } from '@angular/forms';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
+
 
 
 
@@ -40,6 +48,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     WorkleaveComponent,
     TrainingComponent,
     PerformanceComponent,
+    SigninupComponent
   ],
   imports: [
     CommonModule,
@@ -56,7 +65,11 @@ import { HighchartsChartModule } from 'highcharts-angular';
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    FormsModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    MatCheckboxModule
   ]
 })
 export class DefaultModule { }
