@@ -26,8 +26,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -67,9 +68,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatMenuModule,
     HighchartsChartModule,
     FormsModule,
+    ReactiveFormsModule,
     MatTabsModule,
     MatFormFieldModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatAutocompleteModule
   ]
 })
 export class DefaultModule { }

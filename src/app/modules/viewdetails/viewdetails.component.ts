@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-viewdetails',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewdetailsComponent implements OnInit {
   workers;
+  myControl = new FormControl();
+  filteredWorkers : Observable<string[]>;
+
+
   constructor() { }
 
   ngOnInit(): void {
+
+    
 
     this.workers = [
     {
@@ -43,6 +52,33 @@ export class ViewdetailsComponent implements OnInit {
 
     }];
 
+
+    this.filteredWorkers = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => typeof value === 'string' ? value : value.name),
+      map(name => name ? this._filter(name) : this.workers.slice())
+    );
+
+  }
+
+  private _filter(value: string): string[]
+  {
+    const filterValue = value.toLowerCase();
+    return this.workers.filter(worker => worker.name.toLowerCase().indexOf(filterValue) === 0
+    );
+  }
+
+  displayfn(subject)
+  {
+    /*if(subject)
+    {
+      return subject.name;
+    }
+    else
+    {
+      return undefined;
+    }*/
+    return subject ? subject.name : undefined;
   }
 
 }
