@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceService } from '../../viewdetails/service.service';
 //import { Router } from '@angular/router'
 
 @Component({
@@ -8,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChangedependanciesComponent implements OnInit {
 
-  constructor(/*private router : Router*/) { }
+  constructor(private service : ServiceService) { }
 
   ngOnInit(): void {
+    this.service.$stringData
+    .subscribe(string => {
+      
+      console.log(string);
+      
+    })
   }
 
   onFileSelected(event){

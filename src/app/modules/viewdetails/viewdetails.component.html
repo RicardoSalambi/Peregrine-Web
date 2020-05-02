@@ -31,8 +31,11 @@
                     <div class="flex-spacer"></div>
                     <button mat-button color="primary" [matMenuTriggerFor]="menu" ><mat-icon>menu</mat-icon></button>
                     
+                    
                 </mat-card-actions>
             </mat-card-header>
+
+            <input hidden type="text" #textInput value="{{item.name}}">
 
             <img mat-card-image src="https://avatarfiles.alphacoders.com/865/86518.png">
 
@@ -46,13 +49,13 @@
             </mat-menu>
 
             <mat-menu #chooseupdates="matMenu">
-                <button mat-menu-item (click)="goToPage( 'changememberinformation' )">Member Information</button>
-                <button mat-menu-item (click)="goToPage( 'changedependancies' )">Dependancies</button>
-                <button mat-menu-item (click)="goToPage( 'changedisciplinary' )">Disciplinary</button>
-                <button mat-menu-item (click)="goToPage( 'changeexternalsituations' )">External Situations</button>
-                <button mat-menu-item (click)="goToPage( 'changeperformance' )">Performance</button>
-                <button mat-menu-item (click)="goToPage( 'changeworkleave' )">Work Leave</button>
-                <button mat-menu-item (click)="goToPage( 'changetraining' )">Training</button>
+                <button mat-menu-item (click)="goToPage( 'changememberinformation' , textInput.value )">Member Information</button>
+                <button mat-menu-item (click)="goToPage( 'changedependancies' , textInput.value )">Dependancies</button>
+                <button mat-menu-item (click)="goToPage( 'changedisciplinary' , textInput.value )">Disciplinary</button>
+                <button mat-menu-item (click)="goToPage( 'changeexternalsituations' , textInput.value )">External Situations</button>
+                <button mat-menu-item (click)="goToPage( 'changeperformance' , textInput.value )">Performance</button>
+                <button mat-menu-item (click)="goToPage( 'changeworkleave' , textInput.value )">Work Leave</button>
+                <button mat-menu-item (click)="goToPage( 'changetraining' , textInput.value )">Training</button>
             </mat-menu>
 
         </mat-card>

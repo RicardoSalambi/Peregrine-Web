@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Router } from '@angular/router'
+import { ServiceService } from './service.service';
 
 @Component({
   selector: 'app-viewdetails',
@@ -15,7 +16,7 @@ export class ViewdetailsComponent implements OnInit {
   myControl = new FormControl();
   filteredWorkers : Observable<string[]>;
 
-  constructor(private router : Router) { }
+  constructor(private router : Router, private service : ServiceService) { }
 
   ngOnInit(): void {
 
@@ -199,10 +200,18 @@ export class ViewdetailsComponent implements OnInit {
     return subject ? subject.name : undefined;
   }
 
-  goToPage(page:String):void
+  goToPage(page:String, sendString):void
   {        
-    console.log(`${page}`);
+    //console.log(`${page}`);
     this.router.navigate([`${page}`]);
+
+    //****************** Emitter Event *********************
+    //console.log(sendString);
+    
+    this.service.sendString(sendString);
+
+
+
   }
 
 }
