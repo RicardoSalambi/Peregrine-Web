@@ -29,7 +29,8 @@
                 <mat-card-subtitle>{{item.role}}</mat-card-subtitle>
                 <mat-card-actions>
                     <div class="flex-spacer"></div>
-                    <button mat-button color="primary" [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+                    <button mat-button color="primary" [matMenuTriggerFor]="menu" ><mat-icon>menu</mat-icon></button>
+                    
                 </mat-card-actions>
             </mat-card-header>
 
@@ -39,13 +40,24 @@
                 <p>Ricardo is the best , the millinonaire , the billionaire, and the the most intelligent person in the world</p>
             </mat-card-content>-->
 
-            
+            <mat-menu #menu="matMenu" yPosition="below">
+                <button mat-menu-item>View Performance</button>
+                <button mat-menu-item [matMenuTriggerFor]="chooseupdates">Change Details</button>
+            </mat-menu>
+
+            <mat-menu #chooseupdates="matMenu">
+                <button mat-menu-item (click)="goToPage( 'changememberinformation' )">Member Information</button>
+                <button mat-menu-item (click)="goToPage( 'changedependancies' )">Dependancies</button>
+                <button mat-menu-item (click)="goToPage( 'changedisciplinary' )">Disciplinary</button>
+                <button mat-menu-item (click)="goToPage( 'changeexternalsituations' )">External Situations</button>
+                <button mat-menu-item (click)="goToPage( 'changeperformance' )">Performance</button>
+                <button mat-menu-item (click)="goToPage( 'changeworkleave' )">Work Leave</button>
+                <button mat-menu-item (click)="goToPage( 'changetraining' )">Training</button>
+            </mat-menu>
+
         </mat-card>
 
-        <mat-menu #menu="matMenu" yPosition="below">
-            <button mat-menu-item>Item 1</button>
-            <button mat-menu-item>Item 2</button>
-        </mat-menu>
+        
 
     </div>
     

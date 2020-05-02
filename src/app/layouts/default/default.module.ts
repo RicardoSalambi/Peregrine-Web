@@ -13,6 +13,14 @@ import { WorkleaveComponent } from 'src/app/modules/workleave/workleave.componen
 import { TrainingComponent } from 'src/app/modules/training/training.component';
 import { PerformanceComponent } from 'src/app/modules/performance/performance.component';
 import { SigninupComponent } from 'src/app/modules/signinup/signinup.component';
+import { ChangedependanciesComponent } from 'src/app/modules/updatepages/changedependancies/changedependancies.component';
+import { ChangememberinformationComponent } from 'src/app/modules/updatepages/changememberinformation/changememberinformation.component';
+import { ChangedisciplinaryComponent } from 'src/app/modules/updatepages/changedisciplinary/changedisciplinary.component';
+import { ChangeexternalsituationsComponent } from 'src/app/modules/updatepages/changeexternalsituations/changeexternalsituations.component';
+import { ChangeperformanceComponent } from 'src/app/modules/updatepages/changeperformance/changeperformance.component';
+import { ChangeworkleaveComponent } from 'src/app/modules/updatepages/changeworkleave/changeworkleave.component';
+import { ChangetrainingComponent } from 'src/app/modules/updatepages/changetraining/changetraining.component';
+
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
@@ -49,7 +57,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     WorkleaveComponent,
     TrainingComponent,
     PerformanceComponent,
-    SigninupComponent
+    SigninupComponent,
+    ChangedependanciesComponent,
+    ChangememberinformationComponent,
+    ChangedisciplinaryComponent,
+    ChangeexternalsituationsComponent,
+    ChangeperformanceComponent,
+    ChangeworkleaveComponent,
+    ChangetrainingComponent,
   ],
   imports: [
     CommonModule,

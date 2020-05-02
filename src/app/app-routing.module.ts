@@ -12,6 +12,14 @@ import { PerformanceComponent } from './modules/performance/performance.componen
 import { TrainingComponent } from './modules/training/training.component';
 import { WorkleaveComponent } from './modules/workleave/workleave.component';
 import { SigninupComponent } from './modules/signinup/signinup.component';
+import { ChangedependanciesComponent } from './modules/updatepages/changedependancies/changedependancies.component';
+import { ChangememberinformationComponent } from 'src/app/modules/updatepages/changememberinformation/changememberinformation.component';
+import { ChangedisciplinaryComponent } from 'src/app/modules/updatepages/changedisciplinary/changedisciplinary.component';
+import { ChangeexternalsituationsComponent } from 'src/app/modules/updatepages/changeexternalsituations/changeexternalsituations.component';
+import { ChangeperformanceComponent } from 'src/app/modules/updatepages/changeperformance/changeperformance.component';
+import { ChangeworkleaveComponent } from 'src/app/modules/updatepages/changeworkleave/changeworkleave.component';
+import { ChangetrainingComponent } from 'src/app/modules/updatepages/changetraining/changetraining.component';
+
 
 
 const routes: Routes = [
@@ -59,7 +67,36 @@ const routes: Routes = [
     {
       path : 'workleave',
       component : WorkleaveComponent
-    }
+    },
+    //*****************************************************************
+    {
+      path : 'changememberinformation',
+      component : ChangememberinformationComponent
+    },
+    {
+      path : 'changedependancies',
+      component : ChangedependanciesComponent
+    },
+    {
+      path : 'changedisciplinary',
+      component : ChangedisciplinaryComponent
+    },
+    {
+      path : 'changeexternalsituations',
+      component : ChangeexternalsituationsComponent
+    },
+    {
+      path : 'changeperformance',
+      component : ChangeperformanceComponent
+    },
+    {
+      path : 'changeworkleave',
+      component : ChangeworkleaveComponent
+    },
+    {
+      path : 'changetraining',
+      component : ChangetrainingComponent
+    },
   ]
 
 }];

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-viewdetails',
@@ -9,48 +10,165 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./viewdetails.component.scss']
 })
 export class ViewdetailsComponent implements OnInit {
+
   workers;
   myControl = new FormControl();
   filteredWorkers : Observable<string[]>;
 
-
-  constructor() { }
+  constructor(private router : Router) { }
 
   ngOnInit(): void {
 
     
 
     this.workers = [
-    {
-      name  : 'Ricardo Salambi',
-      role  : 'CEO, Owner, Founder, Genius'
-
-    },
-    {
-      name  : 'Charles Gudza',
-      role  : 'Director, Takes orders'
-
-    },
-    {
-      name  : 'Random',
-      role  : 'Employee'
-
-    },
-    {
-      name  : 'Ricardo Salambi',
-      role  : 'CEO, Owner, Founder, Genius'
-
-    },
-    {
-      name  : 'Charles Gudza',
-      role  : 'Director, Takes orders'
-
-    },
-    {
-      name  : 'Random',
-      role  : 'Employee'
-
-    }];
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    { name  : 'Ricardo Salambi', role  : 'CEO, Owner, Founder, Genius' },
+    { name  : 'Charles Gudza', role  : 'Director, Takes orders'},
+    { name  : 'Random', role  : 'Employee'},
+    
+    
+    ];
 
 
     this.filteredWorkers = this.myControl.valueChanges.pipe(
@@ -79,6 +197,12 @@ export class ViewdetailsComponent implements OnInit {
       return undefined;
     }*/
     return subject ? subject.name : undefined;
+  }
+
+  goToPage(page:String):void
+  {        
+    console.log(`${page}`);
+    this.router.navigate([`${page}`]);
   }
 
 }
