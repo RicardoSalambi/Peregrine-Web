@@ -6,13 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./performance.component.scss']
 })
 export class PerformanceComponent implements OnInit {
-  numbers;
+  numbers: any;
   constructor() { }
 
   ngOnInit(): void {
     this.numbers = 
     [
-      {number : 1},{number : 2},{number : 3},{number : 4},{number : 5},{number : 6},{number : 7},{number : 8},{number : 9},{number : 10}
+      {number : 10},{number : 20},{number : 30},{number : 40},{number : 50},{number : 60},{number : 70},{number : 80},{number : 90},{number : 100}
     ];
   }
 

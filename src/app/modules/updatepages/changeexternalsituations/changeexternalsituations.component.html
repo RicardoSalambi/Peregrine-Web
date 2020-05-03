@@ -1,1 +1,35 @@
 <p>changeexternalsituations works!</p>
+<form action="http://localhost:5000/add" method="POST" enctype="multipart/form-data">
+
+    <div class="wrapper">
+
+        <div class="header">
+            <h2>Update Member Responsibilites</h2>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Work Number</mat-label>
+                <input matInput value="" required id="worknumber">
+            </mat-form-field>
+        </div>
+
+
+        <div class="Comments">
+            <mat-form-field appearance="outline" floatLabel="auto" style="width: 70%;">
+                <mat-label>Member External Responsiblities</mat-label>
+                <textarea matInput rows="5" cols="2" id="responsiblities"></textarea>
+                <mat-hint align="end">Insert details about this Team Members Responsibilities</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="wrapper2"> 
+
+            <div>
+                <button mat-raised-button class="submitbutton">Submit</button>
+            </div>
+        </div>
+
+    </div>
+
+</form>

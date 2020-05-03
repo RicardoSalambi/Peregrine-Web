@@ -12,4 +12,10 @@ export class ChangetrainingComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onFileSelected(event){
+    console.log(event);
+    const file: any = document.querySelector('#filename');
+    file.value = <File>event.target.files[0].name;    
+  }
+
 }

@@ -201,12 +201,10 @@ export class ViewdetailsComponent implements OnInit {
   }
 
   goToPage(page:String, sendString):void
-  {        
-    //console.log(`${page}`);
+  {
     this.router.navigate([`${page}`]);
 
     //****************** Emitter Event *********************
-    //console.log(sendString);
     
     this.service.sendString(sendString);
 

@@ -45,4 +45,9 @@ export class CrudOperationsService {
     this.http.post
     return this.http.post(url, data, httpOptions);
   }
+
+
+  getfile(extension:String){
+    return this.http.get(`${this.url}/${extension}`);
+  }
 }
