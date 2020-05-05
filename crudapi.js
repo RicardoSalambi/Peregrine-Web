@@ -1,8 +1,11 @@
 const express = require('express');
-const model = require('./sequelize/model')
+const peregrineworkersmodel = require('./sequelize/models/peregrineworkers')
+const peregrinedependanciesmodel = require('./sequelize/models/peregrinedependancies')
 const upload = require('./multer/upload')
 
 const fs = require('fs');
+
+var stream = require('stream');
 
 
 function createRouter(db) 
@@ -11,52 +14,65 @@ function createRouter(db)
   const owner = '';
 
 //*******************************************************************************
-  router.get('/' , (req, res, next) => {
-    res.sendStatus(200); 
+  router.get('/allmembers' , (req, res, next) => {
+    //res.sendStatus(200); 
+    /*db.query(
+      `SELECT * FROM peregrineworkers;`, //where count = ${req.params.id2}
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          res.status(500).json({status: 'error'});
+        } else {
+          //res.status(200).json(results);
+        }
+      }
+    );*/
+
+    peregrineworkersmodel.findAll({attributes: ['name', 'worknumber','surname', 'qualification','department', 'skills','position', 'nationality','gender', 'house','address', 'comments']})
+      .then(peregrineworkers => {
+        console.log(peregrineworkers);
+        //res.sendStatus(200);        
+        res.json(peregrineworkers)
+      })
+      .catch(err => console.log(err)
+      );
+
   });
 //*******************************************************************************
 
+
+
+
+
+
+
+
+
+
 //*******************************************************************************
   router.post('/add', (req,res) =>{
+
+    var data = req.body;
+    console.log('request received:', data);
 
     upload(req, res, (err) => {
       
         if(err)
         {
-
+          console.log(err);
         }
         else 
-        {
-            console.log(req.file);
-
-            model.create({
-              File  : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename)
-            }).then((file) =>{
-
-              fs.unlink(__basedir + '/Uploads/' + req.file.filename, (err) => {
-                if (err) throw err;
-                console.log(`${__basedir + '/Uploads/' + req.file.filename} was Removed !`);
-              });
-              
-              res.sendStatus(200); 
-            })
+        {                 
             
-            /*.then(image => {
-              try
-              {
-                fs.writeFileSync(__basedir + '/up/' + image.name, image.data);		
-                
-                // exit node.js app
-                res.json({'msg': 'File uploaded successfully!', 'file': req.file});
 
-              }
-              catch(e){
-                console.log(e);
-                res.json({'err': e});
-              }
-            })*/
+            peregrinedependanciesmodel.create({
 
-            //res.sendStatus(200);            
+              worknumber        : req.body.worknumber,
+              next_of_kin       : req.body.NOK,
+              emergencycontact  : req.body.emergencycontact,
+              file              : req.file//fs.readFileSync(__basedir + '/Uploads/' + req.file.filename)
+
+            });   
         }
     });  
 
@@ -64,20 +80,34 @@ function createRouter(db)
 
 //*******************************************************************************
 
+
+
+
+
+
+
+
+
+
+
+
 //*******************************************************************************
 router.post('/memberdetailsForm', (req,res) =>{
+
+  console.log('here');
+  
 
   upload(req, res, (err) => {
     
       if(err)
       {
-
+        console.log(err);        
       }
       else 
       {
           console.log(JSON.stringify(req.body));
 
-          model.create({
+          peregrineworkersmodel.create({
             worknumber       : req.body.worknumber,
             name             : req.body.name,
             surname          : req.body.surname,
@@ -90,7 +120,7 @@ router.post('/memberdetailsForm', (req,res) =>{
             house            : req.body.house,
             address          : req.body.address,
             comments         : req.body.comments,
-            documents  : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename)
+            documents        : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename)
           }).then((file) =>{
 
             fs.unlink(__basedir + '/Uploads/' + req.file.filename, (err) => {
@@ -103,6 +133,35 @@ router.post('/memberdetailsForm', (req,res) =>{
       }
   });  
 
+});
+
+//*******************************************************************************
+
+
+
+
+
+
+//*********************************Download File*********************************
+
+router.get('/getfile', (req, res) => {
+
+  model.findByPk('1312')
+  .then(file => {
+
+    
+		var fileContents = Buffer.from(file.documents, "base64");
+		var readStream = new stream.PassThrough();
+		readStream.end(fileContents);/**/
+		
+		/*res.set('Content-disposition', 'attachment; filename=' + file.name);
+    res.set('Content-Type', file.type);*/
+    
+    readStream.pipe(/*fs.createWriteStream()*/res)
+
+		//readStream.pipe(res);
+  })
+  
 });
 
 //*******************************************************************************

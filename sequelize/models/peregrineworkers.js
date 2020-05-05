@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const connection = require('./dbconnection')
+const connection = require('../dbconnection')
 
 module.exports = connection.define('peregrineworkers', {
     
@@ -50,6 +50,9 @@ module.exports = connection.define('peregrineworkers', {
     },
     documents  : {
       type  : Sequelize.BLOB('long')
+    },
+    filename : {
+      type  : Sequelize.TEXT
     }
     
 

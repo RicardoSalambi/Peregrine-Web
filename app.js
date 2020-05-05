@@ -21,7 +21,9 @@ connection
 
 const app = express()
   .use(cors())
+  //.use(bodyParser.urlencoded())
   .use(bodyParser.raw())
+  .use(bodyParser.json())
   .use(api(connection));
 
 

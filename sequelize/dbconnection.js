@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const mysql = require('mysql2');
 
-module.exports = new Sequelize('testdb', 'root', 'NetlettiWorld@1', {
+module.exports = new Sequelize('onlineperegrinedb', 'root', 'NetlettiWorld@1', {
 
   host: 'localhost',
   dialect: 'mysql',
