@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
+//import { RxFormGroup,RxFormBuilder,FormGroupExtension } from '@rxweb/reactive-form-validators';
 import { CrudOperationsService } from '../../services/crud-operations.service'
 
 @Component({
@@ -8,29 +10,42 @@ import { CrudOperationsService } from '../../services/crud-operations.service'
 })
 export class DependanciesComponent implements OnInit {
 
-  fd = new FormData();
+  rform  : FormGroup;
 
-  constructor(private crudService : CrudOperationsService) { }
+  constructor(private crudService : CrudOperationsService, private fb: FormBuilder) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
+    this.rform = this.fb.group({
+      worknumber          : new FormControl(),
+      NOK                 : new FormControl(),
+      emergencycontact    : new FormControl(),
+      file                : new FormControl()
+    })
   }
 
-  onFileSelected(event){
-    console.log(event);
-    const file: any = document.querySelector('#filename');
-    file.value = <File>event.target.files[0].name;
-    /*const file = <File>event.target.files[0];
+  onFileSelected(event)
+  {
+    const filename: any = document.querySelector('#filename');
+    filename.value = <File>event.target.files[0].name;    
 
-    //this.fd = new FormData();
-    this.fd.append('File',file, file.name);*/
-
-    
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.rform.get('file').patchValue(file);
+    }
+   
   }
 
   submit()
   {
-    //console.log(file);
-    this.crudService.addRequest2('/fileupload', this.fd).subscribe();
+    const formData = new FormData();
+    formData.append('worknumber', this.rform.get('worknumber').value);
+    formData.append('NOK', this.rform.get('NOK').value);
+    formData.append('emergencycontact', this.rform.get('emergencycontact').value);
+    formData.append('file', this.rform.get('file').value);
+
+    //console.log(data.file);    
+    this.crudService.addRequest2('/add', formData).subscribe();
         
   }
 

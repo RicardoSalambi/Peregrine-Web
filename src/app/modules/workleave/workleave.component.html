@@ -1,3 +1,8 @@
-<form action="http://localhost:5000/add" method="POST" enctype="multipart/form-data">
-    <p>workleave works!</p>
+<form [formGroup]="rform" method="POST" enctype="multipart/form-data" (ngSubmit)="onSubmit()">
+    <div>
+        <input type="file" name="file" (change)="click($event)">
+
+        <button type="submit">Submit</button>
+    </div>
+
 </form>

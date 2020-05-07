@@ -2,7 +2,7 @@
 .wrapper {
     display: grid;
     grid-template-columns: 1fr;
-    /*grid-row-gap: 5%;*/
+    grid-row-gap: 5%;
     height: 100vh;
     overflow-y: scroll;
     text-align: center;
@@ -55,10 +55,15 @@ mat-grid-tile{
 .grid{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-row-gap: 0.1%;
+    grid-row-gap: 1%;
     /*height: 100%;
     overflow: auto;*/
     text-align: center;
 }
 
+.ender
+{
+    padding-top: 10vh;  
+    height: 20vh;
+}
 

@@ -4,7 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const httpOptions = {
   headers : new HttpHeaders({
-    'Content-Type' : 'application/pdf'
+    'enctype': 'multipart/form-data'
+    //'Content-Type' : 'multipart/form-data; boundary=???' //'application/json'//'multipart/form-data; boundary=something'
   })
 }
 
@@ -20,7 +21,7 @@ export class CrudOperationsService {
   constructor(private http : HttpClient) { }
 
   getRequest(extension:String){
-    return this.http.get(`${this.url}${extension}`);
+    return this.http.get(`${this.url}/${extension}`);
   }
 
   putRequest(){
@@ -39,12 +40,28 @@ export class CrudOperationsService {
   }
 
 
-  addRequest2(urlextension,data){
+
+
+//*************************************************************
+
+  addRequest2(urlextension:string,data:any){
+
     const url = `${this.url}${urlextension}`;
-    console.log(url);
-    this.http.post
-    return this.http.post(url, data, httpOptions);
+    return this.http.post(url, data, /*httpOptions*/);
   }
+
+//*************************************************************
+
+
+
+
+
+
+
+
+
+
+
 
 
   getfile(extension:String){

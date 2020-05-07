@@ -40,8 +40,8 @@
         <mat-card *ngFor="let item of filteredWorkers | async">
             <mat-card-header >
                 <div mat-card-avatar></div>
-                <mat-card-title>{{item.name}}</mat-card-title>
-                <mat-card-subtitle>{{item.role}}</mat-card-subtitle>
+                <mat-card-title>{{item.name}} {{item.surname}}</mat-card-title>
+                <mat-card-subtitle>{{item.qualification}} {{item.worknumber}}</mat-card-subtitle>
                 <mat-card-actions>
                     <div class="flex-spacer"></div>
                     <button mat-button color="primary" [matMenuTriggerFor]="menu" ><mat-icon>menu</mat-icon></button>
@@ -50,9 +50,9 @@
                 </mat-card-actions>
             </mat-card-header>
 
-            <input hidden type="text" #textInput value="{{item.name}}">
+            <input hidden type="text" #textInput value="{{item.worknumber}}">
 
-            <img mat-card-image src="https://avatarfiles.alphacoders.com/865/86518.png">
+            <img mat-card-image src="assets/img/86518.png">
 
             <!--<mat-card-content>
                 <p>Ricardo is the best , the millinonaire , the billionaire, and the the most intelligent person in the world</p>
@@ -77,6 +77,10 @@
 
         
 
+    </div>
+
+    <div class="ender">
+        No More Results
     </div>
     
 </div>
