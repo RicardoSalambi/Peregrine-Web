@@ -1,4 +1,4 @@
-<form action="http://localhost:5000/add" method="POST" enctype="multipart/form-data">
+<form [formGroup]="rform" (ngSubmit)="submit()" enctype="multipart/form-data">
 
     <div class="wrapper">
 
@@ -10,14 +10,14 @@
         <div>
             <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
                 <mat-label>Work Number</mat-label>
-                <input matInput value="" required id="worknumber">
+                <input matInput required formControlName="worknumber">
             </mat-form-field>
         </div>
 
         <div>
             <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
                 <mat-label>Training Description</mat-label>
-                <input matInput value="" required id="trainingdescription">
+                <input matInput required formControlName="trainingdescription">
             </mat-form-field>
         </div>
 
@@ -32,7 +32,7 @@
 
         <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
             <mat-label>Start Date</mat-label>
-            <input matInput [matDatepicker]="picker" required>
+            <input matInput [matDatepicker]="picker" required formControlName="startdate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <!--<button matSuffix [matDatepickerToggle]="picker"></button>-->
             <mat-datepicker #picker></mat-datepicker>
@@ -43,7 +43,7 @@
         <div>
             <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
                 <mat-label>End Date</mat-label>
-                <input matInput [matDatepicker]="picker2" required>
+                <input matInput [matDatepicker]="picker2" required formControlName="enddate">
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                 <!--<button matSuffix [matDatepickerToggle]="picker"></button>-->
                 <mat-datepicker #picker2></mat-datepicker>
@@ -56,20 +56,20 @@
             -->
 
             <button type="button" mat-raised-button (click)="fileInput.click()" class="uploadbutton">Upload Training Certificates</button>
-            <input hidden type="file" (change)="onFileSelected($event)" #fileInput  id="file">
+            <input hidden type="file" (change)="onFileSelected($event)" #fileInput  name="file">
 
             <br/><br/>
 
             <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
                 <mat-label>Training Certificates</mat-label>
-                <input matInput type="text" id="trainingcertificates" value="" disabled>
+                <input matInput type="text" id="trainingcertificates" disabled>
             </mat-form-field>
         </div>
 
         <div class="wrapper2"> 
 
             <div>
-                <button mat-raised-button class="submitbutton" >Submit</button>
+                <button mat-raised-button class="submitbutton" type="submit">Submit</button>
             </div>
 
         </div>

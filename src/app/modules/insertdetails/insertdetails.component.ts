@@ -16,10 +16,13 @@ export class InsertdetailsComponent implements OnInit {
 
   rform  : FormGroup;
 
-  constructor(private crudService : CrudOperationsService, private fb: FormBuilder) { }
+  constructor(private crudService : CrudOperationsService, private fb: FormBuilder) {
+    this.imgURL = 'assets/img/NoProfile.jpg';
+   }
 
   ngOnInit(): void {
-    this.imgURL = 'assets/img/NoProfile.jpg';
+    
+    
 
     this.rform = this.fb.group({
       worknumber             : new FormControl(),
@@ -44,7 +47,7 @@ export class InsertdetailsComponent implements OnInit {
 
   onImgSelected(files)
   {    
-    console.log(files); 
+    //console.log(files); 
     
     
     if (files.length === 0)
@@ -107,7 +110,7 @@ export class InsertdetailsComponent implements OnInit {
 
     //*************************************************************
 
-    this.crudService.addRequest2('/memberdetailsForm', formData).subscribe();
+    this.crudService.addRequest2('/addmemberdetails', formData).subscribe();
 
   }
 

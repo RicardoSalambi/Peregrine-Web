@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
-//import { RxFormGroup,RxFormBuilder,FormGroupExtension } from '@rxweb/reactive-form-validators';
 import { CrudOperationsService } from '../../services/crud-operations.service'
 
 @Component({
@@ -45,7 +44,7 @@ export class DependanciesComponent implements OnInit {
     formData.append('file', this.rform.get('file').value);
 
     //console.log(data.file);    
-    this.crudService.addRequest2('/add', formData).subscribe();
+    this.crudService.addRequest2('/adddependancies', formData).subscribe();
         
   }
 
