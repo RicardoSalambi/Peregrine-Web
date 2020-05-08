@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { DefaultComponent } from './default.component';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
-import { PostsComponent } from 'src/app/modules/posts/posts.component';
 import { InsertdetailsComponent } from 'src/app/modules/insertdetails/insertdetails.component';
 import { ViewdetailsComponent } from 'src/app/modules/viewdetails/viewdetails.component';
 import { DependanciesComponent } from 'src/app/modules/dependancies/dependancies.component';
