@@ -1,16 +1,15 @@
-<p>changeperformance works!</p>
-<form action="http://localhost:5000/add" method="POST" enctype="multipart/form-data">
+<form [formGroup]="rform" (ngSubmit)="submit()" enctype="multipart/form-data">
 
     <div class="wrapper">
 
         <div class="header">
-            <h2>Update Team Member Performance Details</h2>
+            <h2>Change Team Member Performance Details</h2>
         </div>
 
         <div class="texts">
             <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
                 <mat-label>Work Number</mat-label>
-                <input matInput value="" required id="worknumber">
+                <input matInput required formControlName="worknumber">
                 <mat-hint align="end">Assigned by Peregrine</mat-hint>
             </mat-form-field>
         </div>
@@ -18,7 +17,7 @@
         <div>
             <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
                 <mat-label>Work Ethic</mat-label>
-                <select matNativeControl required id="workethic">
+                <select matNativeControl required formControlName="workethic">
                     <option value={{number.number}} *ngFor="let number of numbers" >{{number.number}}</option>
                 </select>            
             </mat-form-field>
@@ -27,7 +26,7 @@
         <div>
             <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
                 <mat-label>Puntuality</mat-label>
-                <select matNativeControl required id="puntuality">
+                <select matNativeControl required formControlName="puntuality">
                     <option value={{number.number}} *ngFor="let number of numbers" >{{number.number}}</option>
                 </select>            
             </mat-form-field>
@@ -36,7 +35,7 @@
         <div>
             <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
                 <mat-label>Team Work</mat-label>
-                <select matNativeControl required id="teamwork">
+                <select matNativeControl required formControlName="teamwork">
                     <option value={{number.number}} *ngFor="let number of numbers" >{{number.number}}</option>
                 </select>            
             </mat-form-field>
@@ -45,7 +44,7 @@
         <div>
             <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;" >
                 <mat-label>Initiative</mat-label>
-                <select matNativeControl required id="initiative" >
+                <select matNativeControl required formControlName="initiative" >
                 <option value={{number.number}} *ngFor="let number of numbers" >{{number.number}}</option>
                 </select>            
             </mat-form-field>
@@ -54,7 +53,7 @@
         <div>
             <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
                 <mat-label>Positivity</mat-label>
-                <select matNativeControl required id="positivity">
+                <select matNativeControl required formControlName="positivity">
                     <option value={{number.number}} *ngFor="let number of numbers" >{{number.number}}</option>
                 </select>            
             </mat-form-field>
@@ -63,7 +62,7 @@
         <div class="Comments">
             <mat-form-field appearance="outline" floatLabel="auto" style="width: 70%;">
                 <mat-label>Comments</mat-label>
-                <textarea matInput rows="5" cols="2" id="comments"></textarea>
+                <textarea matInput rows="5" cols="2" formControlName="comments"></textarea>
                 <mat-hint align="end">Insert Additional details about this Team Member</mat-hint>
             </mat-form-field>
         </div>
@@ -71,7 +70,7 @@
         <div class="wrapper2"> 
 
             <div>
-                <button mat-raised-button class="submitbutton">Submit</button>
+                <button mat-raised-button class="submitbutton" type="submit">Submit</button>
             </div>
         </div>
 
