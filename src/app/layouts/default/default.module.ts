@@ -19,6 +19,7 @@ import { ChangeexternalsituationsComponent } from 'src/app/modules/updatepages/c
 import { ChangeperformanceComponent } from 'src/app/modules/updatepages/changeperformance/changeperformance.component';
 import { ChangeworkleaveComponent } from 'src/app/modules/updatepages/changeworkleave/changeworkleave.component';
 import { ChangetrainingComponent } from 'src/app/modules/updatepages/changetraining/changetraining.component';
+import { LogsComponent } from 'src/app/modules/logs/logs.component';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -39,6 +40,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
 
 
 
@@ -64,6 +66,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ChangeperformanceComponent,
     ChangeworkleaveComponent,
     ChangetrainingComponent,
+    LogsComponent
   ],
   imports: [
     CommonModule,
@@ -86,7 +89,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatTabsModule,
     MatFormFieldModule,
     MatCheckboxModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatTableModule
   ]
 })
 export class DefaultModule { }

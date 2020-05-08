@@ -18,6 +18,7 @@ import { ChangeexternalsituationsComponent } from 'src/app/modules/updatepages/c
 import { ChangeperformanceComponent } from 'src/app/modules/updatepages/changeperformance/changeperformance.component';
 import { ChangeworkleaveComponent } from 'src/app/modules/updatepages/changeworkleave/changeworkleave.component';
 import { ChangetrainingComponent } from 'src/app/modules/updatepages/changetraining/changetraining.component';
+import { LogsComponent } from 'src/app/modules/logs/logs.component';
 
 
 
@@ -91,6 +92,10 @@ const routes: Routes = [
     {
       path : 'changetraining',
       component : ChangetrainingComponent
+    },    
+    {
+      path : 'logs',
+      component : LogsComponent
     },
   ]
 
