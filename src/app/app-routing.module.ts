@@ -2,7 +2,6 @@ import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DefaultComponent } from './layouts/default/default.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { PostsComponent } from './modules/posts/posts.component';
 import { InsertdetailsComponent } from './modules/insertdetails/insertdetails.component';
 import { ViewdetailsComponent } from './modules/viewdetails/viewdetails.component';
 import { DependanciesComponent } from './modules/dependancies/dependancies.component';
@@ -31,10 +30,6 @@ const routes: Routes = [
     {
       path : 'dashboard',
       component : DashboardComponent
-    },
-    {
-      path : 'posts',
-      component : PostsComponent
     },
     {
       path : 'insertdetails',
