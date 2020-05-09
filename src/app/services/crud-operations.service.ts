@@ -20,9 +20,22 @@ export class CrudOperationsService {
 
   constructor(private http : HttpClient) { }
 
+  //*************************************************************
+
   getRequest(extension:String){
     return this.http.get(`${this.url}/${extension}`);
   }
+
+
+  addRequest2(urlextension:string,data:any){
+
+    const url = `${this.url}${urlextension}`;
+    return this.http.post(url, data/*, httpOptions*/);
+  }
+
+//*************************************************************
+
+  
 
   putRequest(){
     //this.http.put(this.url, data, httpOptions);
@@ -38,30 +51,6 @@ export class CrudOperationsService {
 
     return this.http.delete(this.url/*, httpOptions*/);
   }
-
-
-
-
-//*************************************************************
-
-  addRequest2(urlextension:string,data:any){
-
-    const url = `${this.url}${urlextension}`;
-    return this.http.post(url, data/*, httpOptions*/);
-  }
-
-//*************************************************************
-
-
-
-
-
-
-
-
-
-
-
 
 
   getfile(extension:String){

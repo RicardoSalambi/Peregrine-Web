@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudOperationsService } from 'src/app/services/crud-operations.service';
 
+import {MatTableDataSource} from '@angular/material/table';
+
+
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -16,40 +19,56 @@ export interface PeriodicElement {
 })
 export class LogsComponent implements OnInit {
 
-  constructor(private dataserver : CrudOperationsService) { }
+  displayedColumns: any[] = ['worknumber', 'name', 'surname', 'qualification','Buttons'];
+  dataSource: any; //= new MatTableDataSource(this.getData());
+  data: any;
 
-  displayedColumns: any[] = ['worknumber', 'name', 'surname', 'qualification'];
-  dataSource: any;
+  constructor(private dataserver : CrudOperationsService) { 
 
-  getdata: any;
+    //this.dataSource = new MatTableDataSource(this.data);
+
+  }
+
+   
+
+  //getdata: any;
 
 
   ngOnInit(): void {
   //****************************************************************************
-      this.dataserver.getRequest('getlogs').subscribe( data => {      
-        console.log(data);
-        this.dataSource = data;
-      })
+  this.dataserver.getRequest('getlogs').subscribe( (data: {worknumber: number, name: string, surname: string, qualification: string }[]) => { 
+    
+    this.dataSource = new MatTableDataSource(data)
 
-      //alert('Done')
+  })
   //****************************************************************************
 
-    /*const ELEMENT_DATA: any = [
-      {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-      {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-      {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-      {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-      {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-      {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-      {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-      {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-      {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-      {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-    ];*/
+  }
 
-    //this.dataSource = this.getdata;//ELEMENT_DATA;
+  getData(): any{
+
+    this.dataserver.getRequest('getlogs').subscribe( data => {      
+
+      return data;
+
+    })
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  onRowClicked(row)
+  {
+    console.log('Row clicked: ', row);
+  }
 
 
+  click(display)
+  {
+    console.log(display);
+    
   }
 
 }

@@ -13,12 +13,17 @@ export class ChangedependanciesComponent implements OnInit {
 
   rform  : FormGroup;
 
-  constructor(private service : ServiceService,private crudService : CrudOperationsService, private fb: FormBuilder) { }
+  key : any;
+
+  constructor(private service : ServiceService, private crudService : CrudOperationsService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.service.$stringData.subscribe(string => {      
-      console.log(string);      
+    this.service.$stringData.subscribe(value => {      
+      console.log(value);      
+      this.key = value;
     })
+
+    
 
     this.rform = this.fb.group({
       worknumber          : new FormControl(),
@@ -26,6 +31,22 @@ export class ChangedependanciesComponent implements OnInit {
       emergencycontact    : new FormControl(),
       file                : new FormControl()
     })
+
+
+    this.crudService.getRequest(`getlogs/${this.key}`).subscribe( data => {
+
+      console.log(this.key);
+      
+
+      this.rform.setValue({
+        worknumber        : this.key,
+        NOK               : data[0].next_of_kin,
+        emergencycontact  : data[0].emergencycontact,
+        file              : data[0].file
+      })
+
+    })
+    
   }
 
   onFileSelected(event)
