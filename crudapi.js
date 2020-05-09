@@ -19,7 +19,6 @@ function createRouter(db)
     db.peregrineworkersmodel.findAll({attributes: ['name', 'worknumber','surname', 'qualification','department', 'skills','position', 'nationality','gender', 'house','address', 'comments']})
       .then(peregrineworkers => {
 
-        //console.log(peregrineworkers);   
         res.json(peregrineworkers)
 
       })
@@ -27,6 +26,39 @@ function createRouter(db)
       );
 
   });
+//*******************************************************************************
+
+
+//*******************************************************************************
+router.get('/getlogs' , (req, res, next) => {
+  db.peregrineworkersmodel.findAll({attributes: ['worknumber', 'name','surname', 'qualification']})
+    .then(peregrineworkers => {
+        
+      res.json(peregrineworkers)
+
+    })
+    .catch(err => console.log(err)
+    );
+
+});
+//*******************************************************************************
+
+//*******************************************************************************
+router.get('/getlogs/:id' , (req, res, next) => {
+  db.dependancieslogmodel.findAll({
+    where: {
+      worknumber: req.params.id
+    }
+  })
+    .then(peregrineworkers => {
+        
+      res.json(peregrineworkers)
+
+    })
+    .catch(err => console.log(err)
+    );
+
+});
 //*******************************************************************************
 
 
@@ -90,7 +122,7 @@ router.post('/addmemberdetails', (req,res, next) =>{
               });
             })
             
-            res.sendStatus(200);
+            
             
 
           })  
@@ -145,7 +177,7 @@ router.post('/adddependancies', (req,res) =>{
                 console.log(`${__basedir + '/Uploads/' + req.file.filename} was Removed !`);
               });
               
-              res.sendStatus(200); 
+               
             });
             
           }); 
@@ -195,7 +227,7 @@ router.post('/adddisciplinary', (req,res) => {
                 console.log(`${__basedir + '/Uploads/' + req.file.filename} was Removed !`);
               });
               
-              res.sendStatus(200); 
+               
             });
           
         }); 
@@ -338,7 +370,7 @@ router.post('/addtraining', (req,res) =>{
               console.log(`${__basedir + '/Uploads/' + req.file.filename} was Removed !`);
             });
             
-            res.sendStatus(200); 
+             
           });
           
         }); 

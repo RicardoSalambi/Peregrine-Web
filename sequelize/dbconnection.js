@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const mysql = require('mysql2');
+const figlet = require('figlet');
 
 const peregrineworkers = require('./models/allmembers/peregrineworkers')
 const peregrineworkerslogs = require('./models/allmembers/peregrineworkerslogs')
@@ -42,6 +43,16 @@ const connection = new Sequelize('onlineperegrinedb', 'root', 'NetlettiWorld@1',
     }
   }*/
 
+});
+
+
+figlet('Peregrine', function(err, data) {
+  if (err) {
+      console.log('Something went wrong...');
+      console.dir(err);
+      return;
+  }
+  console.log(data)
 });
 
 
