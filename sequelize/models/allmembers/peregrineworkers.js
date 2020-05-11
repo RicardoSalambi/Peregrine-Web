@@ -1,11 +1,14 @@
-const Sequelize = require('sequelize');
-const connection = require('../../dbconnection')
+//const Sequelize = require('sequelize');
+//const connection = require('../../dbconnection')
 
 module.exports = (Sequelize,connection) =>  {
 
 
   return connection.define('peregrineworkers', {
     
+    date  : {
+      type  : Sequelize.DATE
+    },
     worknumber  : {
       type  : Sequelize.INTEGER,
       primaryKey    : true
@@ -52,6 +55,7 @@ module.exports = (Sequelize,connection) =>  {
     imgfile : {
       type  : Sequelize.BLOB('long')
     },
+    
     
     
 

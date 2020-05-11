@@ -11,7 +11,8 @@ return connection.define('dependancieslog', {
       primaryKey    : true
     },
     worknumber  : {
-        type  : Sequelize.INTEGER
+        type  : Sequelize.INTEGER,
+        primaryKey    : true
     },
     next_of_kin  : {
         type  : Sequelize.TEXT

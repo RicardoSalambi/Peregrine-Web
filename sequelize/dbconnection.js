@@ -19,7 +19,7 @@ const performancelogs = require('./models/performance/performancelogs')
 const training = require('./models/training/training')
 const traininglogs = require('./models/training/traininglogs')
 
-const connection = new Sequelize('onlineperegrinedb', 'root', 'NetlettiWorld@1', {
+const connection = new Sequelize('crudtest', 'root', 'NetlettiWorld@1', {
 
   host: 'localhost',
   dialect: 'mysql',
@@ -67,24 +67,144 @@ connection
 });
 
 
-
-const dependanciesmodel = dependancies(Sequelize, connection);
-const dependancieslogmodel = dependancieslog(Sequelize, connection);
+//***************************************************************************************************************************************
 
 const peregrineworkersmodel = peregrineworkers(Sequelize, connection);
 const peregrineworkerslogsmodel = peregrineworkerslogs(Sequelize, connection);
 
+peregrineworkersmodel.hasMany(peregrineworkerslogsmodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'NO ACTION', 
+  onUpdate: 'CASCADE'
+});
+peregrineworkerslogsmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+//***************************************************************************************************************************************
+
+
+
+//***************************************************************************************************************************************
+
+const dependanciesmodel = dependancies(Sequelize, connection);
+const dependancieslogmodel = dependancieslog(Sequelize, connection);
+
+dependanciesmodel.hasMany(dependancieslogmodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'NO ACTION', 
+  onUpdate: 'CASCADE'
+});
+dependancieslogmodel.belongsTo(dependanciesmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+
+peregrineworkersmodel.hasMany(dependanciesmodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'NO ACTION', 
+  onUpdate: 'CASCADE'
+});
+dependanciesmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+//***************************************************************************************************************************************
+
+
+
+//***************************************************************************************************************************************
+
 const disciplinariesmodel = disciplinaries(Sequelize, connection);
 const disciplinarieslogsmodel = disciplinarieslogs(Sequelize, connection);
+
+disciplinariesmodel.hasMany(disciplinarieslogsmodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'NO ACTION', 
+  onUpdate: 'CASCADE'
+});
+disciplinarieslogsmodel.belongsTo(disciplinariesmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+peregrineworkersmodel.hasMany(disciplinariesmodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'NO ACTION', 
+  onUpdate: 'CASCADE'
+});
+disciplinariesmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+//***************************************************************************************************************************************
+
+
+//***************************************************************************************************************************************
 
 const externalsituationsmodel = externalsituations(Sequelize, connection);
 const externalsituationslogsmodel = externalsituationslogs(Sequelize, connection);
 
+externalsituationsmodel.hasMany(externalsituationslogsmodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'NO ACTION', 
+  onUpdate: 'CASCADE'
+});
+externalsituationslogsmodel.belongsTo(externalsituationsmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+peregrineworkersmodel.hasMany(externalsituationsmodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'NO ACTION', 
+  onUpdate: 'CASCADE'
+});
+externalsituationsmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+//***************************************************************************************************************************************
+
+
+
+//***************************************************************************************************************************************
+
 const performancemodel = performance(Sequelize, connection);
 const performancelogsmodel = performancelogs(Sequelize, connection);
 
+performancemodel.hasMany(performancelogsmodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'NO ACTION', 
+  onUpdate: 'CASCADE'
+});
+performancelogsmodel.belongsTo(performancemodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+peregrineworkersmodel.hasMany(performancemodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'NO ACTION', 
+  onUpdate: 'CASCADE'
+});
+performancemodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+//***************************************************************************************************************************************
+
+
+//***************************************************************************************************************************************
+
 const trainingmodel = training(Sequelize, connection);
 const traininglogsmodel = traininglogs(Sequelize, connection);
+
+trainingmodel.hasMany(traininglogsmodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'NO ACTION', 
+  onUpdate: 'CASCADE'
+});
+traininglogsmodel.belongsTo(trainingmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+peregrineworkersmodel.hasMany(trainingmodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'NO ACTION', 
+  onUpdate: 'CASCADE'
+});
+trainingmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+//***************************************************************************************************************************************
 
 
 

@@ -43,13 +43,15 @@ router.get('/getlogs' , (req, res, next) => {
 });
 //*******************************************************************************
 
+
 //*******************************************************************************
-router.get('/getlogs/:id' , (req, res, next) => {
-  db.dependancieslogmodel.findAll({
-    where: {
-      worknumber: req.params.id
-    }
-  })
+router.get('/getallmemberslogs/:id' , (req, res, next) => {
+  db.peregrineworkerslogsmodel.findAll(
+    {
+      where: {
+        worknumber: req.params.id
+      }
+    }  )
     .then(peregrineworkers => {
         
       res.json(peregrineworkers)
@@ -60,6 +62,66 @@ router.get('/getlogs/:id' , (req, res, next) => {
 
 });
 //*******************************************************************************
+
+//*******************************************************************************
+router.get('/getallmemberslogs/:date/:id' , (req, res, next) => {
+  db.peregrineworkerslogsmodel.findAll(
+    {
+      where: {
+        date  : req.params.date,
+        worknumber: req.params.id
+      }
+    }  )
+    .then(peregrineworkers => {
+        
+      res.json(peregrineworkers)
+
+    })
+    .catch(err => console.log(err)
+    );
+
+});
+//*******************************************************************************
+
+//*******************************************************************************
+router.get('/getdependancieslogs/:id' , (req, res, next) => {
+  db.dependancieslogmodel.findAll(
+    {attributes: ['worknumber', 'name','surname', 'qualification']},
+    {
+      where: {
+        worknumber: req.params.id
+      }
+    }  
+  )
+    .then(peregrineworkers => {
+        
+      res.json(peregrineworkers)
+
+    })
+    .catch(err => console.log(err)
+    );
+
+});
+//*******************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -80,6 +142,7 @@ router.post('/addmemberdetails', (req,res, next) =>{
           //console.log(JSON.stringify(req.body));
 
           db.peregrineworkersmodel.create({
+            date             : Date.now(),
             worknumber       : req.body.worknumber,
             name             : req.body.name,
             surname          : req.body.surname,
@@ -93,7 +156,7 @@ router.post('/addmemberdetails', (req,res, next) =>{
             address          : req.body.address,
             comments         : req.body.comments,
             filename         : req.file.originalname,
-            file             : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename)
+            file             : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename),
           }).then((file) =>{
 
 

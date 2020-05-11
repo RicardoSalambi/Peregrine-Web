@@ -1,12 +1,17 @@
 module.exports = (Sequelize,connection) =>  {
 
     return connection.define('peregrineworkerslogs', {
+
       date  : {
             type  : Sequelize.DATE,
             primaryKey    : true
       },      
       worknumber  : {
         type  : Sequelize.INTEGER,
+        primaryKey    : true,
+        // foreignKey  : true,
+        // references: 'peregrineworkers',
+        // referencesKey: 'worknumber'
       },
       name  : {
         type  : Sequelize.TEXT

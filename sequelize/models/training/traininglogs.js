@@ -8,7 +8,8 @@ module.exports = (Sequelize,connection) =>  {
             primaryKey    : true
         },
         worknumber  : {
-            type  : Sequelize.INTEGER
+            type  : Sequelize.INTEGER,
+            primaryKey    : true
         },
         trainingdescription  : {
             type  : Sequelize.TEXT
