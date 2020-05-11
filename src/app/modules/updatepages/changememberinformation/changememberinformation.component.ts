@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudOperationsService } from 'src/app/services/crud-operations.service'
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
+import { globdate, globworknumber1 } from 'src/app/modules/logs/logs.component'
 
 @Component({
   selector: 'app-changememberinformation',
@@ -16,11 +17,9 @@ export class ChangememberinformationComponent implements OnInit {
 
   rform  : FormGroup;
 
-  constructor(private crudService : CrudOperationsService, private fb: FormBuilder) {
+  constructor(private crudService : CrudOperationsService, private fb: FormBuilder,private dataserver : CrudOperationsService) {
     this.imgURL = 'assets/img/NoProfile.jpg';
-   }
 
-  ngOnInit(): void {
     this.rform = this.fb.group({
       worknumber             : new FormControl(),
       skills                 : new FormControl(),
@@ -30,13 +29,46 @@ export class ChangememberinformationComponent implements OnInit {
       nationality            : new FormControl(),
       qualification          : new FormControl(),
       gender                 : new FormControl(),
-      department            : new FormControl(),
+      department             : new FormControl(),
       house                  : new FormControl(),
       //filename               : new FormControl(),
       address                : new FormControl(),
       comments               : new FormControl(),
       file                   : new FormControl()
     })
+
+   }
+
+  ngOnInit(): void {
+
+    //**************************************************************************
+    let url = `getallmemberslogs/${globdate}/${globworknumber1}`;
+
+    this.dataserver.getRequest(url).subscribe( data => {
+
+      this.rform.setValue({
+      worknumber             : data[0].worknumber,
+      skills                 : data[0].skills,
+      name                   : data[0].name,
+      position               : data[0].position,      
+      surname                : data[0].surname,
+      nationality            : data[0].nationality,
+      qualification          : data[0].qualification,
+      gender                 : data[0].gender,
+      department             : data[0].department,
+      house                  : data[0].house,
+      //filename               : data[0].name,
+      address                : data[0].address,
+      comments               : data[0].comments,
+      file                   : data[0].file
+      })
+      
+
+    })
+  //****************************************************************************
+
+    
+
   }
 
   onImgSelected(files)

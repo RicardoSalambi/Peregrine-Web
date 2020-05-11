@@ -77,13 +77,20 @@ export class ViewdetailsComponent implements OnInit {
 
 
 
-  goToPage(page:String, sendString):void
+  goToPage(table:string, sendId , page:string):void
   {
-    this.router.navigate([`${page}`]);
+    this.router.navigate([`${'logs'}`]);
 
     //****************** Emitter Event *********************
     
-    this.service.sendString(sendString);
+    //this.service.sendString(table,sendId);
+    globtable = table;
+    globworknumber = sendId;
+    globpage = page;
   }
 
 }
+
+export let globtable: string='null';
+export let globworknumber: string='null';
+export let globpage: string='null'

@@ -1,24 +1,29 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ServiceService {
 
-  $stringData = new EventEmitter();
+  @Output() $stringData : EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
-  sendString(queryString){
-    
-    //console.log(queryString);
+  sendString(settable,setsendId){
 
-    this.$stringData.emit(queryString);
-    
+    globtable = settable;
+    globworknumber = setsendId;
+
+    this.$stringData.emit({'table':settable,'worknumber':setsendId});    
 
   }
 
 
 
 }
+
+
+export let globtable='null';
+export let globworknumber: string='null';

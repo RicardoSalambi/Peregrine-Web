@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudOperationsService } from 'src/app/services/crud-operations.service';
+import { Router } from '@angular/router'
 
-import {MatTableDataSource} from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
+//import { ServiceService , globtable , globworknumber } from '../viewdetails/service.service';
+import { globtable , globworknumber, globpage } from '../viewdetails/viewdetails.component';
 
 
 export interface PeriodicElement {
@@ -19,39 +22,30 @@ export interface PeriodicElement {
 })
 export class LogsComponent implements OnInit {
 
-  displayedColumns: any[] = ['worknumber', 'name', 'surname', 'qualification','Buttons'];
+  displayedColumns: any[] = ['date','worknumber', 'name', 'surname', 'qualification','department','Buttons'];
   dataSource: any; //= new MatTableDataSource(this.getData());
   data: any;
+  
 
-  constructor(private dataserver : CrudOperationsService) { 
 
-    //this.dataSource = new MatTableDataSource(this.data);
-
-  }
-
-   
-
-  //getdata: any;
-
+  constructor(private dataserver : CrudOperationsService,private router : Router) { }
+ 
 
   ngOnInit(): void {
-  //****************************************************************************
-  this.dataserver.getRequest('getlogs').subscribe( (data: {worknumber: number, name: string, surname: string, qualification: string }[]) => { 
+
+    let url = `getallmemberslogs/${globworknumber}`;
     
-    this.dataSource = new MatTableDataSource(data)
 
-  })
-  //****************************************************************************
+    //****************************************************************************
+      this.dataserver.getRequest(url).subscribe( (data: {date: Date, worknumber: number, name: string, surname: string, qualification: string, department: string }[]) => { 
+        
+        this.dataSource = new MatTableDataSource(data)
 
-  }
+        console.log(`After :${globtable} , ${globworknumber}`);
 
-  getData(): any{
+      })
+    //****************************************************************************
 
-    this.dataserver.getRequest('getlogs').subscribe( data => {      
-
-      return data;
-
-    })
   }
 
   applyFilter(event: Event) {
@@ -65,10 +59,15 @@ export class LogsComponent implements OnInit {
   }
 
 
-  click(display)
+  click(date,worknumber)
   {
-    console.log(display);
-    
+    globdate = date;
+    globworknumber1 = worknumber;
+
+    this.router.navigate([`${globpage}`]);
   }
 
 }
+
+export let globdate;
+export let globworknumber1;

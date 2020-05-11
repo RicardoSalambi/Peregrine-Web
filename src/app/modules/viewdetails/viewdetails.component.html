@@ -64,13 +64,13 @@
             </mat-menu>
 
             <mat-menu #chooseupdates="matMenu">
-                <button mat-menu-item (click)="goToPage( 'changememberinformation' , textInput.value )">Member Information</button>
-                <button mat-menu-item (click)="goToPage( 'changedependancies' , textInput.value )">Dependancies</button>
-                <button mat-menu-item (click)="goToPage( 'changedisciplinary' , textInput.value )">Disciplinary</button>
-                <button mat-menu-item (click)="goToPage( 'changeexternalsituations' , textInput.value )">External Situations</button>
-                <button mat-menu-item (click)="goToPage( 'changeperformance' , textInput.value )">Performance</button>
-                <button mat-menu-item (click)="goToPage( 'changeworkleave' , textInput.value )">Work Leave</button>
-                <button mat-menu-item (click)="goToPage( 'changetraining' , textInput.value )">Training</button>
+                <button mat-menu-item (click)="goToPage( 'peregrineworkers' , textInput.value , 'changememberinformation' )">Member Information</button>
+                <button mat-menu-item (click)="goToPage( 'changedependancies' , textInput.value , 'changedependancies' )">Dependancies</button>
+                <button mat-menu-item (click)="goToPage( 'changedisciplinary' , textInput.value , 'changedisciplinary' )">Disciplinary</button>
+                <button mat-menu-item (click)="goToPage( 'changeexternalsituations' , textInput.value , 'changeexternalsituations' )">External Situations</button>
+                <button mat-menu-item (click)="goToPage( 'changeperformance' , textInput.value , 'changeperformance' )">Performance</button>
+                <button mat-menu-item (click)="goToPage( 'changeworkleave' , textInput.value , 'changeworkleave' )">Work Leave</button>
+                <button mat-menu-item (click)="goToPage( 'changetraining' , textInput.value , 'changetraining' )">Training</button>
             </mat-menu>
 
         </mat-card>
@@ -80,7 +80,9 @@
     </div>
 
     <div class="ender">
-        No More Results
+        <mat-label >
+            No More Results
+        </mat-label>
     </div>
     
 </div>
