@@ -44,7 +44,7 @@ export class ChangeperformanceComponent implements OnInit {
     formData.append('comments', this.rform.get('comments').value);
 
     //console.log(data.file);    
-    this.crudService.addRequest2('/addperformance', formData).subscribe();
+    this.crudService.addRequest('addperformance', formData).subscribe();
         
   }
 

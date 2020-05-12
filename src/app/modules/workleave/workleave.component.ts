@@ -34,7 +34,7 @@ export class WorkleaveComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.rform.get('file').value);
 
-    this.crudService.addRequest2('/add', formData).subscribe();
+    this.crudService.addRequest('add', formData).subscribe();
 
     /*this.httpClient.post<any>(this.SERVER_URL, formData).subscribe(
       (res) => console.log(res),

@@ -45,7 +45,7 @@ export class ChangetrainingComponent implements OnInit {
     formData.append('file', this.rform.get('file').value);
 
     //console.log(data.file);    
-    this.crudService.addRequest2('/addtraining', formData).subscribe();
+    this.crudService.addRequest('addtraining', formData).subscribe();
         
   }
 

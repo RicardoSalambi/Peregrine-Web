@@ -27,10 +27,10 @@ export class CrudOperationsService {
   }
 
 
-  addRequest2(urlextension:string,data:any){
+  addRequest(urlextension:string,data:any){
 
-    const url = `${this.url}${urlextension}`;
-    return this.http.post(url, data/*, httpOptions*/);
+    const url = `${this.url}/${urlextension}`;
+    return this.http.post(url, data);
   }
 
 //*************************************************************
@@ -41,11 +41,11 @@ export class CrudOperationsService {
     //this.http.put(this.url, data, httpOptions);
   }
 
-  addRequest(data,urlextension){
+  /*addRequest(data,urlextension){
     const url = `${this.url}${this.postExtension}${urlextension}`;
     console.log(url);
-    return this.http.post(url, data/*, httpOptions*/);
-  }
+    return this.http.post(url, data);
+  }*/
 
   deleteRequest(){
 

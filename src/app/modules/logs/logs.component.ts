@@ -33,15 +33,13 @@ export class LogsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let url = `getallmemberslogs/${globworknumber}`;
+    let url = `get${globtable}/${globworknumber}/${globtable}`;
     
 
     //****************************************************************************
       this.dataserver.getRequest(url).subscribe( (data: {date: Date, worknumber: number, name: string, surname: string, qualification: string, department: string }[]) => { 
         
         this.dataSource = new MatTableDataSource(data)
-
-        console.log(`After :${globtable} , ${globworknumber}`);
 
       })
     //****************************************************************************

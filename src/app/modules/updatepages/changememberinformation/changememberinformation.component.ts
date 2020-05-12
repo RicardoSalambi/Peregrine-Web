@@ -42,7 +42,7 @@ export class ChangememberinformationComponent implements OnInit {
   ngOnInit(): void {
 
     //**************************************************************************
-    let url = `getallmemberslogs/${globdate}/${globworknumber1}`;
+    let url = `getperegrineworkerslogsdetails/${globdate}/${globworknumber1}`;
 
     this.dataserver.getRequest(url).subscribe( data => {
 
@@ -57,7 +57,6 @@ export class ChangememberinformationComponent implements OnInit {
       gender                 : data[0].gender,
       department             : data[0].department,
       house                  : data[0].house,
-      //filename               : data[0].name,
       address                : data[0].address,
       comments               : data[0].comments,
       file                   : data[0].file
@@ -132,11 +131,12 @@ export class ChangememberinformationComponent implements OnInit {
     formData.append('address', this.rform.get('address').value);
     formData.append('comments', this.rform.get('comments').value);
     formData.append('file', this.rform.get('file').value);
+    
 
 
     //*************************************************************
 
-    this.crudService.addRequest2('/addmemberdetails', formData).subscribe();
+    this.crudService.addRequest('addmemberdetails', formData).subscribe();
 
   }
 

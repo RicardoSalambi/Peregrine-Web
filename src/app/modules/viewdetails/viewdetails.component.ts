@@ -6,6 +6,8 @@ import { Router } from '@angular/router'
 import { ServiceService } from './service.service';
 import { CrudOperationsService } from 'src/app/services/crud-operations.service';
 
+//import * as moment from 'moment-timezone';
+
 @Component({
   selector: 'app-viewdetails',
   templateUrl: './viewdetails.component.html',
@@ -20,6 +22,9 @@ export class ViewdetailsComponent implements OnInit {
   constructor(private router : Router, private service : ServiceService, private dataserver : CrudOperationsService) { }
 
   ngOnInit() {    
+
+    
+    //console.log(moment().tz("Africa/Johannesburg").format())
 
     this.dataserver.getRequest('allmembers').subscribe( data => {
       

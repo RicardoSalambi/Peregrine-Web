@@ -27,7 +27,7 @@ export class ChangeexternalsituationsComponent implements OnInit {
     formData.append('responsiblities', this.rform.get('responsiblities').value);
 
     //console.log(data.file);    
-    this.crudService.addRequest2('/addexternalsituations', formData).subscribe();
+    this.crudService.addRequest('addexternalsituations', formData).subscribe();
         
   }
 

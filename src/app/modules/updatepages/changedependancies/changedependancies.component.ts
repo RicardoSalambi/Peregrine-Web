@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../../viewdetails/service.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CrudOperationsService } from 'src/app/services/crud-operations.service'
-//import { Router } from '@angular/router'
+import { globdate, globworknumber1 } from 'src/app/modules/logs/logs.component'
 
 @Component({
   selector: 'app-changedependancies',
@@ -13,18 +13,10 @@ export class ChangedependanciesComponent implements OnInit {
 
   rform  : FormGroup;
 
-  key : any;
+  //key : any;
 
-  constructor(private service : ServiceService, private crudService : CrudOperationsService, private fb: FormBuilder) { }
-
-  ngOnInit(): void {
-    this.service.$stringData.subscribe(value => {      
-      console.log(value);      
-      this.key = value;
-    })
-
+  constructor(private crudService : CrudOperationsService, private fb: FormBuilder) { 
     
-
     this.rform = this.fb.group({
       worknumber          : new FormControl(),
       NOK                 : new FormControl(),
@@ -32,14 +24,14 @@ export class ChangedependanciesComponent implements OnInit {
       file                : new FormControl()
     })
 
+  }
 
-    this.crudService.getRequest(`getlogs/${this.key}`).subscribe( data => {
+  ngOnInit(): void {       
 
-      console.log(this.key);
+    this.crudService.getRequest(`getdependancieslogsdetails/${globdate}/${globworknumber1}`).subscribe( data => {
       
-
       this.rform.setValue({
-        worknumber        : this.key,
+        worknumber        : data[0].worknumber,
         NOK               : data[0].next_of_kin,
         emergencycontact  : data[0].emergencycontact,
         file              : data[0].file
@@ -69,8 +61,8 @@ export class ChangedependanciesComponent implements OnInit {
     formData.append('emergencycontact', this.rform.get('emergencycontact').value);
     formData.append('file', this.rform.get('file').value);
 
-    //console.log(data.file);    
-    this.crudService.addRequest2('/adddependancies', formData).subscribe();
+    
+    this.crudService.addRequest('adddependancies', formData).subscribe();
         
   }
 

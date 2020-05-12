@@ -58,7 +58,11 @@
         <div>
             <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
                 <mat-label>Nationality</mat-label>
-                <input matInput required formControlName="nationality">
+                <!--<input matInput required formControlName="nationality">-->
+                <select matNativeControl required formControlName="nationality">
+                    <option value=""></option>
+                    <option value="{{nation.nation}}" *ngFor="let nation of nationalities" >{{nation.nation}}</option>
+                </select>  
             </mat-form-field>
         </div>
 

@@ -44,7 +44,7 @@ export class DisciplinaryComponent implements OnInit {
     formData.append('comments', this.rform.get('comments').value);
 
     //console.log(data.file);    
-    this.crudService.addRequest2('/adddisciplinary', formData).subscribe();
+    this.crudService.addRequest('adddisciplinary', formData).subscribe();
 
   }
 

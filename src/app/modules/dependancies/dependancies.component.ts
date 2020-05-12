@@ -44,7 +44,7 @@ export class DependanciesComponent implements OnInit {
     formData.append('file', this.rform.get('file').value);
 
     //console.log(data.file);    
-    this.crudService.addRequest2('/adddependancies', formData).subscribe();
+    this.crudService.addRequest('adddependancies', formData).subscribe();
         
   }
 
