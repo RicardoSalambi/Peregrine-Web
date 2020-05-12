@@ -6,6 +6,9 @@ module.exports = (Sequelize,connection) =>  {
 
     return connection.define('dependancies', {
 
+        date  : {
+            type  : Sequelize.DATE
+        },
         worknumber  : {
             type  : Sequelize.INTEGER,
             primaryKey    : true

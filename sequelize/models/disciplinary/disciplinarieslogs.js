@@ -13,7 +13,10 @@ module.exports = (Sequelize,connection) =>  {
         },
         MDD  : {
             type  : Sequelize.TEXT
-        },        
+        },    
+        filename : {
+            type  : Sequelize.TEXT
+        },    
         file  : {
             type  : Sequelize.BLOB('long')
         },

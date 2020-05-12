@@ -2,7 +2,10 @@ module.exports = (Sequelize,connection) =>  {
 
 
     return connection.define('trainings', {
-
+        
+        date  : {
+            type  : Sequelize.DATE
+        },
         worknumber  : {
             type  : Sequelize.INTEGER,
             primaryKey    : true
@@ -15,6 +18,9 @@ module.exports = (Sequelize,connection) =>  {
         },
         enddate : {
             type  : Sequelize.DATEONLY
+        },
+        filename : {
+            type  : Sequelize.TEXT
         },
         file  : {
             type  : Sequelize.BLOB('long')

@@ -20,6 +20,9 @@ module.exports = (Sequelize,connection) =>  {
         enddate : {
             type  : Sequelize.DATEONLY
         },
+        filename : {
+            type  : Sequelize.TEXT
+        },
         file  : {
             type  : Sequelize.BLOB('long')
         }   

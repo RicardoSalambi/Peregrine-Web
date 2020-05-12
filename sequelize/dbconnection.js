@@ -23,9 +23,9 @@ const connection = new Sequelize('crudtest', 'root', 'NetlettiWorld@1', {
 
   host: 'localhost',
   dialect: 'mysql',
+  timezone: '+02:00',
   define: {
     timestamps: false,
-    //max_allowed_packet : 100000000,
   },
 
   pool: {
@@ -37,11 +37,9 @@ const connection = new Sequelize('crudtest', 'root', 'NetlettiWorld@1', {
     // net_buffer_length = 1000000 
   },
 
-  /*dialectOptions: {
-    options: {
-      encrypt: true
-    }
-  }*/
+  dialectOptions: {
+    timezone: "local"
+  }
 
 });
 
@@ -215,6 +213,8 @@ connection.sync()
 
 
 module.exports = {
+
+  connection,
 
   dependanciesmodel,
   dependancieslogmodel,
