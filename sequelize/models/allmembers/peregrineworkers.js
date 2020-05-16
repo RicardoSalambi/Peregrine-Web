@@ -1,6 +1,3 @@
-//const Sequelize = require('sequelize');
-//const connection = require('../../dbconnection')
-
 module.exports = (Sequelize,connection) =>  {
 
 

@@ -1,27 +1,24 @@
 module.exports = (Sequelize,connection) =>  {
 
 
-    return connection.define('dependancies', {
-
+    return connection.define('workleave', {
+        
         date  : {
             type  : Sequelize.DATE
         },
-        worknumber  : {
+        id  : {
             type  : Sequelize.INTEGER,
             primaryKey    : true
         },
-        next_of_kin  : {
+        name  : {
             type  : Sequelize.TEXT
         },
-        emergencycontact  : {
-            type  : Sequelize.TEXT
-        },
-        filename : {
+        surname  : {
             type  : Sequelize.TEXT
         },
         file  : {
             type  : Sequelize.BLOB('long')
-        }   
+        } 
 
 
   });

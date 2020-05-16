@@ -2,20 +2,28 @@ const express = require('express');
 
 const moment = require('moment-timezone');
 
-const upload = require('./multer/upload')
 
-const fs = require('fs');
 
 var stream = require('stream');
 
 const mysql = require('mysql2');
 
+const dbconfig = require('./dbconfig');
+
+
+const peregrineworkers = require('./crudoperations/peregrineworkersoperations');
+const dependancies = require('./crudoperations/dependanciesoperations');
+const disciplinaries = require('./crudoperations/disciplinariesoperations');
+const externalsituations = require('./crudoperations/externalsituationsoperations');
+const performance = require('./crudoperations/performanceoperations');
+const training = require('./crudoperations/trainingoperations');
+
 /////////////////////////////////////////////
   const connection = mysql.createConnection({
-    host : 'localhost',
-    user : 'root',
-    password : 'NetlettiWorld@1',
-    database : 'crudtest',
+    host : dbconfig.host,
+    user : dbconfig.user,
+    password : dbconfig.password,
+    database : dbconfig.database,
     timezone : 'Z'
     //port: '3306'
   });
@@ -26,73 +34,21 @@ function createRouter(db)
   const router = express.Router();
   const owner = '';
 
-//*******************************************************************************
-  router.get('/allmembers' , (req, res, next) => {
-    db.peregrineworkersmodel.findAll({attributes: ['name', 'worknumber','surname', 'qualification','department', 'skills','position', 'nationality','gender', 'house','address', 'comments']})
-      .then(peregrineworkers => {
 
-        res.json(peregrineworkers)
-
-      })
-      .catch(err => console.log(err)
-      );
-
-  });
-//*******************************************************************************
 
 //*******************************************************************************
-router.get('/getperegrineworkerslogs/:id/:table' , (req, res, next) => {
+  router.get('/allmembers' , (req, res, next) => { peregrineworkers.allmembers(req, res, next) } );
 
-  let queryString = `select a.date as date, a.worknumber as worknumber, b.name as name, b.surname as surname, b.qualification as qualification, b.department as department from ${req.params.table} a ,peregrineworkers b where a.worknumber = ${req.params.id} and b.worknumber = ${req.params.id};`;
+  router.get('/getperegrineworkerslogs/:id/:table' , (req, res, next) => { peregrineworkers.getperegrineworkerslogs(req, res, next) } );
 
-  connection.query(queryString, (err,rows,fields) => {
-    if (err) 
-    {
-        console.log('Query Failed with : ' + err)
-        res.end();
-    }
-    else
-    {
-        res.json(rows) //If data does not show use this command in mysql terminal 'ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YourPassword';'
-    }
-    
-  });
+  router.get('/getperegrineworkerslogsdetails/:date/:id' , (req, res, next) => { peregrineworkers.getperegrineworkerslogsdetails(req, res, next) } );
 
-  /*db.peregrineworkerslogsmodel.findAll(
-    {
-      where: {
-        worknumber: req.params.id
-      }
-    }  )
-    .then(peregrineworkers => {
-        
-      res.json(peregrineworkers)
+  router.post('/addmemberdetails', (req,res, next) =>{ peregrineworkers.addmemberdetails(req,res, next, db) } );
 
-    })
-    .catch(err => console.log(err)
-    );*/
+  router.put(`/updateperegrineworkers/:id`, (req, res, next) => { peregrineworkers.updateperegrineworkers(req, res, next, db, connection)  } );
 
-});
-//*******************************************************************************
+  router.put(`/updateperegrineworkerslogs/:date/:id`, (req, res, next) => { peregrineworkers.updateperegrineworkerslogs(req, res, next, db, connection) } );
 
-//*******************************************************************************
-router.get('/getperegrineworkerslogsdetails/:date/:id' , (req, res, next) => {
-  db.peregrineworkerslogsmodel.findAll(
-    {
-      where: {
-        date  : req.params.date,
-        worknumber: req.params.id
-      }
-    }  )
-    .then(peregrineworkers => {
-        
-      res.json(peregrineworkers)
-
-    })
-    .catch(err => console.log(err)
-    );
-
-});
 //*******************************************************************************
 
 
@@ -101,57 +57,16 @@ router.get('/getperegrineworkerslogsdetails/:date/:id' , (req, res, next) => {
 
 
 //*******************************************************************************
-router.get('/getlogs' , (req, res, next) => {
-  db.peregrineworkersmodel.findAll({attributes: ['worknumber', 'name','surname', 'qualification']})
-    .then(peregrineworkers => {
-        
-      res.json(peregrineworkers)
+router.get('/getdependancieslogs/:id/:table' , (req, res, next) => {  dependancies.getdependancieslogs(req, res, next, connection) } );
 
-    })
-    .catch(err => console.log(err)
-    );
+router.get('/getdependancieslogsdetails/:date/:id' , (req, res, next) => { dependancies.getdependancieslogsdetails(req, res, next, connection) } );
 
-});
-//*******************************************************************************
+router.post('/adddependancies', (req,res) =>{ dependancies.adddependancies(req,res,db) } );
 
-//*******************************************************************************
-router.get('/getdependancieslogs/:id/:table' , (req, res, next) => {  
-  
-  let queryString = `select a.date as date, a.worknumber as worknumber, b.name as name, b.surname as surname, b.qualification as qualification, b.department as department from ${req.params.table} a ,peregrineworkers b where a.worknumber = ${req.params.id} and b.worknumber = ${req.params.id};`;
+router.put(`/updatedependancies/:id`, (req, res, next) => { dependancies.updatedependancies(req, res, next, db, connection) } );
 
-  console.log(queryString);  
+router.put(`/updatedependancieslogs/:date/:id`, (req, res, next) => { dependancies.updatedependancieslogs(req, res, next, db, connection) } );
 
-  connection.query(queryString, (err,rows,fields) => {
-    if (err) 
-    {
-        console.log('Query Failed with : ' + err)
-        res.end();
-    }
-    else
-    {
-        res.json(rows) //If data does not show use this command in mysql terminal 'ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YourPassword';'
-    }
-    
-  });
-
-  /*db.dependancieslogmodel.findAll({
-
-    where: {name: 'Ricardo'}, attributes: ['date','worknumber'], 
-    include: [
-      {
-        model:db.peregrineworkersmodel, where: {name: 'Ricardo'}, attributes:['name','surname','qualification','department']
-      }
-    ]
-
-  })
-  .then(courses => {        
-        res.json(courses);
-  })
-  .catch(err => console.log(err)
-  );*/
-  
-
-});
 //*******************************************************************************
 
 
@@ -159,322 +74,12 @@ router.get('/getdependancieslogs/:id/:table' , (req, res, next) => {
 
 
 //*******************************************************************************
-router.get('/getdependancieslogsdetails/:date/:id' , (req, res, next) => {
-  db.dependancieslogmodel.findAll(
-    {
-      where: {
-        date  : req.params.date,
-        worknumber: req.params.id
-      }
-    }  
-  )
-    .then(data => {
-        
-      res.json(data)
+router.get('/getdisciplinarieslogs/:id/:table' , (req, res, next) => { disciplinaries.getdisciplinarieslogs(req, res, next, connection) } );
 
-    })
-    .catch(err => console.log(err)
-    );
+router.get('/getdisciplinarieslogsdetails/:date/:id' , (req, res, next) => {  disciplinaries.getdisciplinarieslogsdetails(req, res, next, connection) } );
 
-});
-//*******************************************************************************
+router.post('/adddisciplinary', (req,res) => { disciplinaries.adddisciplinary(req,res,db) } );
 
-
-
-
-
-
-
-/*mysql.types.setTypeParser(1114, function(stringValue) {
-  return new Date(stringValue.substring(0, 10) + 'T' + stringValue.substring(11) + '.000Z')
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-//*******************************************************************************
-router.post('/addmemberdetails', (req,res, next) =>{
-
-  //console.log('here');
-  
-
-  upload(req, res, (err) => {
-    
-      if(err)
-      {
-        console.log(err);        
-      }
-      else 
-      {
-          //console.log(JSON.stringify(req.body));
-
-          db.peregrineworkersmodel.create({
-
-            date             : req.body.date,//moment().tz("Africa/Johannesburg").format(),//Date.now(),
-            worknumber       : req.body.worknumber,
-            name             : req.body.name,
-            surname          : req.body.surname,
-            qualification    : req.body.qualification,
-            department       : req.body.department,
-            skills           : req.body.skills,
-            position         : req.body.position,
-            nationality      : req.body.nationality,
-            gender           : req.body.gender,
-            house            : req.body.house,
-            address          : req.body.address,
-            comments         : req.body.comments,
-            filename         : req.file.originalname,
-            file             : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename),
-            imgfile          : 'NULL'
-          }).then((file) =>{
-
-
-            db.peregrineworkerslogsmodel.create({
-              
-              date             : req.body.date,//moment().tz("Africa/Johannesburg").format(),//Date.now(),
-              worknumber       : req.body.worknumber,
-              name             : req.body.name,
-              surname          : req.body.surname,
-              qualification    : req.body.qualification,
-              department       : req.body.department,
-              skills           : req.body.skills,
-              position         : req.body.position,
-              nationality      : req.body.nationality,
-              gender           : req.body.gender,
-              house            : req.body.house,
-              address          : req.body.address,
-              comments         : req.body.comments,
-              filename         : req.file.originalname,
-              file             : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename),
-              imgfile          : 'NULL'
-            }).then((file) =>{
-              fs.unlink(__basedir + '/Uploads/' + req.file.filename, (err) => {
-                if (err) throw err;
-                console.log(`${__basedir + '/Uploads/' + req.file.filename} was Removed !`);
-              });
-            })
-            
-            
-            
-
-          })  
-          
-          next(); 
-      }
-  });  
-
-});
-
-//*******************************************************************************
-
-
-
-//*******************************************************************************
-router.post('/adddependancies', (req,res) =>{
-
-  /*var data = req.body;
-  console.log('request received:', data);*/
-
-  upload(req, res, /*next ,*/(err) => {
-    
-      if(err)
-      {
-        console.log(err);
-      }
-      else 
-      {
-        db.dependanciesmodel.create({
-
-            date              : Date.now(),
-            worknumber        : req.body.worknumber,
-            next_of_kin       : req.body.NOK,
-            emergencycontact  : req.body.emergencycontact,
-            filename          : req.file.originalname,
-            file              : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename)
-
-          }).then(() =>{
-
-            db.dependancieslogmodel.create({
-            
-              date              : Date.now(),
-              worknumber        : req.body.worknumber,
-              next_of_kin       : req.body.NOK,
-              emergencycontact  : req.body.emergencycontact,
-              filename          : req.file.originalname,
-              file              : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename)
-
-            }).then((file) =>{
-
-              fs.unlink(__basedir + '/Uploads/' + req.file.filename, (err) => {
-                if (err) throw err;
-                console.log(`${__basedir + '/Uploads/' + req.file.filename} was Removed !`);
-              });
-              
-               
-            });
-            
-          }); 
-          
-          //next(); 
-      }
-  });  
-
-});
-
-//*******************************************************************************
-
-
-
-
-//*******************************************************************************
-router.post('/adddisciplinary', (req,res) => {
-  upload(req, res ,(err) => {
-      
-    if(err)
-    {
-      console.log(err);
-    }
-    else 
-    {
-
-        db.disciplinariesmodel.create({
-
-          date              : Date.now(),
-          worknumber        : req.body.worknumber,
-          MDD               : req.body.MDD,
-          filename          : req.file.originalname,
-          file              : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename),
-          comments          : req.body.comments
-        }).then(() =>{
-
-            db.disciplinarieslogsmodel.create({
-            
-              date              : Date.now(),
-              worknumber        : req.body.worknumber,
-              MDD               : req.body.MDD,
-              filename          : req.file.originalname,
-              file              : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename),
-              comments          : req.body.comments
-
-            }).then((file) =>{
-
-              fs.unlink(__basedir + '/Uploads/' + req.file.filename, (err) => {
-                if (err) throw err;
-                console.log(`${__basedir + '/Uploads/' + req.file.filename} was Removed !`);
-              });
-              
-               
-            });
-          
-        }); 
-        
-        //next(); 
-
-
-    }
-
-  });
-
-});
-//*******************************************************************************
-
-
-
-
-//*******************************************************************************
-router.post('/addexternalsituations', (req,res) =>{
-
-  upload(req, res,/* next ,*/(err) => {
-      
-    if(err)
-    {
-      console.log(err);
-    }
-    else 
-    {
-
-        db.externalsituationsmodel.create({
-
-          date             : Date.now(),
-          worknumber        : req.body.worknumber,
-          responsiblities   : req.body.responsiblities
-          
-        }).then(() =>{
-
-            db.externalsituationslogsmodel.create({
-            
-              date              : Date.now(),
-              worknumber        : req.body.worknumber,
-              responsiblities   : req.body.responsiblities
-
-            })
-          
-        }); 
-
-    }
-
-  });
-
-});
-//*******************************************************************************
-
-
-
-
-//*******************************************************************************
-router.post('/addperformance', (req,res) =>{
-
-  upload(req, res, /*next ,*/(err) => {
-      
-    if(err)
-    {
-      console.log(err);
-    }
-    else 
-    {
-
-        db.performancemodel.create({
-
-          date              : Date.now(),
-          worknumber        : req.body.worknumber,
-          workethic         : req.body.workethic,
-          puntuality        : req.body.puntuality,
-          teamwork          : req.body.teamwork,
-          initiative        : req.body.initiative,
-          positivity        : req.body.positivity,
-          comments          : req.body.comments,
-          
-        }).then(() => {
-
-            db.performancelogsmodel.create({
-            
-              date              : Date.now(),
-              worknumber        : req.body.worknumber,
-              workethic         : req.body.workethic,
-              puntuality        : req.body.puntuality,
-              teamwork          : req.body.teamwork,
-              initiative        : req.body.initiative,
-              positivity        : req.body.positivity,
-              comments          : req.body.comments,
-            })
-          
-        }); 
-
-    }
-
-  });
-
-});
 //*******************************************************************************
 
 
@@ -482,78 +87,26 @@ router.post('/addperformance', (req,res) =>{
 
 
 //*******************************************************************************
-router.post('/addtraining', (req,res) =>{
+router.get('/getexternalsituationslogs/:id/:table' , (req, res, next) => { externalsituations.getexternalsituationslogs(req, res, next, connection) } );
 
-  upload(req, res, /*next ,*/(err) => {
-      
-    if(err)
-    {
-      console.log(err);
-    }
-    else 
-    {
-        db.trainingmodel.create({
+router.get('/getexternalsituationslogsdetails/:date/:id' , (req, res, next) => { externalsituations.getexternalsituationslogsdetails(req, res, next, connection) } );
 
-          date                      : Date.now(),
-          worknumber                : req.body.worknumber,
-          trainingdescription       : req.body.trainingdescription,
-          startdate                 : req.body.startdate,
-          enddate                   : req.body.enddate,
-          filename                  : req.file.originalname,
-          file                      : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename)
+router.post('/addexternalsituations', (req,res) =>{ externalsituations.addexternalsituations(req,res,db) } );
 
-        }).then(() => {
-
-          db.traininglogsmodel.create({
-          
-            date                      : Date.now(),
-            worknumber                : req.body.worknumber,
-            trainingdescription       : req.body.trainingdescription,
-            startdate                 : req.body.startdate,
-            enddate                   : req.body.enddate,
-            filename                  : req.file.originalname,
-            file                      : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename)
-
-          }).then((file) =>{
-
-            fs.unlink(__basedir + '/Uploads/' + req.file.filename, (err) => {
-              if (err) throw err;
-              console.log(`${__basedir + '/Uploads/' + req.file.filename} was Removed !`);
-            });
-            
-             
-          });
-          
-        }); 
-
-    }
-
-  });
-
-});
 //*******************************************************************************
+
 
 
 
 
 
 //*******************************************************************************
-router.post('/addworkleave', (req,res) =>{
+router.get('/getperformancelogs/:id/:table' , (req, res, next) => { performance.getperformancelogs(req, res, next, connection) } );
 
-  upload(req, res, /*next ,*/(err) => {
-      
-    if(err)
-    {
-      console.log(err);
-    }
-    else 
-    {
+router.get('/getperformancelogsdetails/:date/:id' , (req, res, next) => { performance.getperformancelogsdetails(req, res, next, connection) } );
 
-    }
+router.post('/addperformance', (req,res) =>{ performance.addperformance(req,res,db) } );
 
-  });
-
-});
 //*******************************************************************************
 
 
@@ -561,23 +114,22 @@ router.post('/addworkleave', (req,res) =>{
 
 
 
+//*******************************************************************************
+router.get('/gettraininglogs/:id/:table' , (req, res, next) => { training.gettraininglogs(req, res, next, connection) } );
+
+router.get('/gettraininglogsdetails/:date/:id' , (req, res, next) => { training.gettraininglogsdetails(req, res, next, connection) } );
+
+router.post('/addtraining', (req,res) =>{ training.addtraining(req,res,db) } );
+
+//*******************************************************************************
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+//*******************************************************************************
+router.post('/addworkleave', (req,res) =>{ });
+//*******************************************************************************
 
 
 

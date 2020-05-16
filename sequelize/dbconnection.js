@@ -2,6 +2,8 @@ const Sequelize = require('sequelize');
 const mysql = require('mysql2');
 const figlet = require('figlet');
 
+const dbconfig = require('../dbconfig');
+
 const peregrineworkers = require('./models/allmembers/peregrineworkers')
 const peregrineworkerslogs = require('./models/allmembers/peregrineworkerslogs')
 const dependancies = require('./models/dependancies/dependancies')
@@ -19,9 +21,11 @@ const performancelogs = require('./models/performance/performancelogs')
 const training = require('./models/training/training')
 const traininglogs = require('./models/training/traininglogs')
 
-const connection = new Sequelize('crudtest', 'root', 'NetlettiWorld@1', {
+const work = require('./models/workleave/workleave')
 
-  host: 'localhost',
+const connection = new Sequelize(dbconfig.database, dbconfig.user, dbconfig.password, {
+
+  host: dbconfig.host,
   dialect: 'mysql',
   timezone: '+02:00',
   define: {
@@ -38,7 +42,15 @@ const connection = new Sequelize('crudtest', 'root', 'NetlettiWorld@1', {
   },
 
   dialectOptions: {
-    timezone: "local"
+    timezone: "local",
+    /*useUTC: false, //for reading from database
+      dateStrings: true,
+      typeCast: function (field, next) { // for reading from database
+        if (field.type === 'DATETIME') {
+          return field.string()
+        }
+          return next()
+        },*/
   }
 
 });
@@ -73,7 +85,7 @@ const peregrineworkerslogsmodel = peregrineworkerslogs(Sequelize, connection);
 peregrineworkersmodel.hasMany(peregrineworkerslogsmodel, {  
   foreignKey: {name:'worknumber'} , 
   sourceKey: 'worknumber',
-  onDelete: 'NO ACTION', 
+  onDelete: 'CASCADE', 
   onUpdate: 'CASCADE'
 });
 peregrineworkerslogsmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
@@ -206,6 +218,13 @@ trainingmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetK
 
 
 
+
+
+const workmodel = work(Sequelize, connection);
+//const traininglogsmodel = traininglogs(Sequelize, connection);
+
+
+
 connection.sync() 
   .then(() => {
     console.log(`Database & tables created!`)
@@ -233,5 +252,7 @@ module.exports = {
 
   trainingmodel,
   traininglogsmodel,
+
+  workmodel
   
 }

@@ -8,10 +8,7 @@ module.exports = (Sequelize,connection) =>  {
       },      
       worknumber  : {
         type  : Sequelize.INTEGER,
-        primaryKey    : true,
-        // foreignKey  : true,
-        // references: 'peregrineworkers',
-        // referencesKey: 'worknumber'
+        primaryKey    : true
       },
       name  : {
         type  : Sequelize.TEXT

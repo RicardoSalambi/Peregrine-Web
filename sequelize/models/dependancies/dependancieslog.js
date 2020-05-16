@@ -1,6 +1,3 @@
-const Sequelize = require('sequelize');
-const connection = require('../../dbconnection')
-
 module.exports = (Sequelize,connection) =>  {
 
 
@@ -17,7 +14,7 @@ return connection.define('dependancieslog', {
     next_of_kin  : {
         type  : Sequelize.TEXT
     },
-    emergencycontact    : {
+    emergencycontact  : {
         type  : Sequelize.TEXT
     },
     filename : {
@@ -25,7 +22,7 @@ return connection.define('dependancieslog', {
     },
     file  : {
         type  : Sequelize.BLOB('long')
-    }   
+    } 
 
 
   });
