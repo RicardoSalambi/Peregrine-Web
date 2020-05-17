@@ -18,6 +18,10 @@
         </div>
 
         <div>
+            <button mat-raised-button class="currentbutton" type="button" (click)="currentDetails()"> Change Current Details </button>
+        </div>
+
+        <div>
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
                 <!--- Note that these columns can be defined in any order.

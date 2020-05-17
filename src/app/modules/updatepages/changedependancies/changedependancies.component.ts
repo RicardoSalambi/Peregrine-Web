@@ -13,14 +13,17 @@ export class ChangedependanciesComponent implements OnInit {
 
   rform  : FormGroup;
 
-  //key : any;
+  datestring: string;
 
   constructor(private crudService : CrudOperationsService, private fb: FormBuilder) { 
+
+    this.datestring = globdate;
     
     this.rform = this.fb.group({
       worknumber          : new FormControl(),
       NOK                 : new FormControl(),
       emergencycontact    : new FormControl(),
+      filename            : new FormControl(),
       file                : new FormControl()
     })
 
@@ -34,6 +37,7 @@ export class ChangedependanciesComponent implements OnInit {
         worknumber        : data[0].worknumber,
         NOK               : data[0].next_of_kin,
         emergencycontact  : data[0].emergencycontact,
+        filename          : data[0].filename,
         file              : data[0].file
       })
 
@@ -62,7 +66,7 @@ export class ChangedependanciesComponent implements OnInit {
     formData.append('file', this.rform.get('file').value);
 
     
-    this.crudService.addRequest('adddependancies', formData).subscribe();
+    this.crudService.updateRequest(`updatedependancieslogs/${globdate}/${globworknumber1}`, formData).subscribe();
         
   }
 

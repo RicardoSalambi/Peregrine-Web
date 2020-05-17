@@ -4,6 +4,7 @@
 
         <div class="header">
             <h2>Change Team Member Details</h2>
+            <mat-label>{{datestring}}</mat-label>
         </div>
 
         <div class="profile">
@@ -118,7 +119,7 @@
 
             <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
                 <mat-label>Curriculum Vitae Documents</mat-label>
-                <input matInput type="text" id="filename" disabled>
+                <input matInput type="text" id="filename" formControlName="filename">
             </mat-form-field>
         </div>
 
@@ -148,7 +149,7 @@
 
         <div class="wrapper2"> 
             <div>
-                <button mat-raised-button class="submitbutton" type="submit">Submit</button>
+                <button mat-raised-button class="submitbutton" type="submit">Update</button>
             </div>
         </div>
         

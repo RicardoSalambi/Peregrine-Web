@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CrudOperationsService } from 'src/app/services/crud-operations.service'
+import { globdate, globworknumber1 } from 'src/app/modules/logs/logs.component'
 
 @Component({
   selector: 'app-changetraining',
@@ -11,16 +12,38 @@ export class ChangetrainingComponent implements OnInit {
 
   rform  : FormGroup;
 
-  constructor(private crudService : CrudOperationsService, private fb: FormBuilder) { }
+  datestring: string;
 
-  ngOnInit(): void {
+  constructor(private crudService : CrudOperationsService, private fb: FormBuilder) { 
+
+    this.datestring = globdate;
+    
     this.rform = this.fb.group({
       worknumber           : new FormControl(),
       trainingdescription  : new FormControl(),
       startdate            : new FormControl(),
       enddate              : new FormControl(),
+      filename             : new FormControl(),
       file                 : new FormControl()
     })
+
+   }
+
+  ngOnInit(): void {
+
+    this.crudService.getRequest(`gettraininglogsdetails/${globdate}/${globworknumber1}`).subscribe( data => {
+      
+      this.rform.setValue({
+        worknumber           : data[0].worknumber,
+        trainingdescription  : data[0].trainingdescription,
+        startdate            : data[0].startdate,
+        enddate              : data[0].enddate,
+        filename             : data[0].filename,
+        file                 : data[0].file,
+      })
+
+    })
+    
   }
 
   onFileSelected(event){
@@ -44,7 +67,6 @@ export class ChangetrainingComponent implements OnInit {
     formData.append('enddate', this.rform.get('enddate').value);
     formData.append('file', this.rform.get('file').value);
 
-    //console.log(data.file);    
     this.crudService.addRequest('addtraining', formData).subscribe();
         
   }

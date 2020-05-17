@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CrudOperationsService } from '../../services/crud-operations.service'
 
+import * as moment from 'moment-timezone';
+
 @Component({
   selector: 'app-dependancies',
   templateUrl: './dependancies.component.html',
@@ -42,6 +44,8 @@ export class DependanciesComponent implements OnInit {
     formData.append('NOK', this.rform.get('NOK').value);
     formData.append('emergencycontact', this.rform.get('emergencycontact').value);
     formData.append('file', this.rform.get('file').value);
+
+    formData.append('date', moment().tz("Africa/Johannesburg").format());
 
     //console.log(data.file);    
     this.crudService.addRequest('adddependancies', formData).subscribe();

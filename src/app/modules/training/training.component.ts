@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CrudOperationsService } from '../../services/crud-operations.service'
 
+import * as moment from 'moment-timezone';
+
 @Component({
   selector: 'app-training',
   templateUrl: './training.component.html',
@@ -43,6 +45,8 @@ export class TrainingComponent implements OnInit {
     formData.append('startdate', this.rform.get('startdate').value);
     formData.append('enddate', this.rform.get('enddate').value);
     formData.append('file', this.rform.get('file').value);
+
+    formData.append('date', moment().tz("Africa/Johannesburg").format());
 
     //console.log(data.file);    
     this.crudService.addRequest('addtraining', formData).subscribe();

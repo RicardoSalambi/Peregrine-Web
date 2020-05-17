@@ -15,10 +15,14 @@ export class ChangememberinformationComponent implements OnInit {
   imgURL: any;
   public message: string;
 
+  datestring: string;
+
   rform  : FormGroup;
 
   constructor(private crudService : CrudOperationsService, private fb: FormBuilder,private dataserver : CrudOperationsService) {
     this.imgURL = 'assets/img/NoProfile.jpg';
+
+    this.datestring = globdate;
 
     this.rform = this.fb.group({
       worknumber             : new FormControl(),
@@ -31,7 +35,7 @@ export class ChangememberinformationComponent implements OnInit {
       gender                 : new FormControl(),
       department             : new FormControl(),
       house                  : new FormControl(),
-      //filename               : new FormControl(),
+      filename               : new FormControl(/*{disabled: true}*/),
       address                : new FormControl(),
       comments               : new FormControl(),
       file                   : new FormControl()
@@ -41,30 +45,39 @@ export class ChangememberinformationComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //**************************************************************************
-    let url = `getperegrineworkerslogsdetails/${globdate}/${globworknumber1}`;
+    if(globdate == 'null'){/*alert('Null Detected')*/}
+    else{
 
-    this.dataserver.getRequest(url).subscribe( data => {
+      //**************************************************************************
+      let url = `getperegrineworkerslogsdetails/${globdate}/${globworknumber1}`;
 
-      this.rform.setValue({
-      worknumber             : data[0].worknumber,
-      skills                 : data[0].skills,
-      name                   : data[0].name,
-      position               : data[0].position,      
-      surname                : data[0].surname,
-      nationality            : data[0].nationality,
-      qualification          : data[0].qualification,
-      gender                 : data[0].gender,
-      department             : data[0].department,
-      house                  : data[0].house,
-      address                : data[0].address,
-      comments               : data[0].comments,
-      file                   : data[0].file
+      this.dataserver.getRequest(url).subscribe( data => {
+
+        this.rform.setValue({
+        worknumber             : data[0].worknumber,
+        skills                 : data[0].skills,
+        name                   : data[0].name,
+        position               : data[0].position,      
+        surname                : data[0].surname,
+        nationality            : data[0].nationality,
+        qualification          : data[0].qualification,
+        gender                 : data[0].gender,
+        department             : data[0].department,
+        house                  : data[0].house,
+        address                : data[0].address,
+        comments               : data[0].comments,
+        filename               : data[0].filename,
+        file                   : data[0].file
+        })
+        
+
       })
-      
+    //****************************************************************************
 
-    })
-  //****************************************************************************
+    }
+    
+
+    
 
     
 
@@ -136,7 +149,7 @@ export class ChangememberinformationComponent implements OnInit {
 
     //*************************************************************
 
-    this.crudService.addRequest('addmemberdetails', formData).subscribe();
+    this.crudService.updateRequest(`updateperegrineworkerslogs/${globdate}/${globworknumber1}`, formData).subscribe();
 
   }
 

@@ -33,6 +33,12 @@ export class CrudOperationsService {
     return this.http.post(url, data);
   }
 
+  updateRequest(urlextension:string,data:any){
+
+    const url = `${this.url}/${urlextension}`;
+    return this.http.put(url, data);
+  }
+
 //*************************************************************
 
   

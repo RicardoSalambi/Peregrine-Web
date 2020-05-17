@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CrudOperationsService } from '../../services/crud-operations.service'
 
+import * as moment from 'moment-timezone';
+
 @Component({
   selector: 'app-performance',
   templateUrl: './performance.component.html',
@@ -42,6 +44,8 @@ export class PerformanceComponent implements OnInit {
     formData.append('initiative', this.rform.get('initiative').value);
     formData.append('positivity', this.rform.get('positivity').value);
     formData.append('comments', this.rform.get('comments').value);
+
+    formData.append('date', moment().tz("Africa/Johannesburg").format());
 
     //console.log(data.file);    
     this.crudService.addRequest('addperformance', formData).subscribe();

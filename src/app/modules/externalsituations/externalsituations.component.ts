@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CrudOperationsService } from '../../services/crud-operations.service'
 
+import * as moment from 'moment-timezone';
+
 @Component({
   selector: 'app-externalsituations',
   templateUrl: './externalsituations.component.html',
@@ -25,6 +27,8 @@ export class ExternalsituationsComponent implements OnInit {
     const formData = new FormData();
     formData.append('worknumber', this.rform.get('worknumber').value);
     formData.append('responsiblities', this.rform.get('responsiblities').value);
+
+    formData.append('date', moment().tz("Africa/Johannesburg").format());
 
     //console.log(data.file);    
     this.crudService.addRequest('addexternalsituations', formData).subscribe();

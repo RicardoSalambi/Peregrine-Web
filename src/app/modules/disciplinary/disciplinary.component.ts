@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CrudOperationsService } from '../../services/crud-operations.service'
 
+import * as moment from 'moment-timezone';
+
 @Component({
   selector: 'app-disciplinary',
   templateUrl: './disciplinary.component.html',
@@ -42,6 +44,8 @@ export class DisciplinaryComponent implements OnInit {
     formData.append('MDD', this.rform.get('MDD').value);
     formData.append('file', this.rform.get('file').value);
     formData.append('comments', this.rform.get('comments').value);
+
+    formData.append('date', moment().tz("Africa/Johannesburg").format());
 
     //console.log(data.file);    
     this.crudService.addRequest('adddisciplinary', formData).subscribe();

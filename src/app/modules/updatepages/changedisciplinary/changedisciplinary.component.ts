@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CrudOperationsService } from 'src/app/services/crud-operations.service'
+import { globdate, globworknumber1 } from 'src/app/modules/logs/logs.component'
 
 @Component({
   selector: 'app-changedisciplinary',
@@ -11,15 +12,36 @@ export class ChangedisciplinaryComponent implements OnInit {
 
   rform  : FormGroup;
 
-  constructor(private crudService : CrudOperationsService, private fb: FormBuilder) { }
+  datestring: string;
 
-  ngOnInit(): void {
+  constructor(private crudService : CrudOperationsService, private fb: FormBuilder) { 
+
+    this.datestring = globdate;
+    
     this.rform = this.fb.group({
       worknumber          : new FormControl(),
       MDD                 : new FormControl(),
+      filename            : new FormControl(),
       file                : new FormControl(),
       comments            : new FormControl()
     })
+
+   }
+
+  ngOnInit(): void {
+
+    this.crudService.getRequest(`getdisciplinarieslogsdetails/${globdate}/${globworknumber1}`).subscribe( data => {
+      
+      this.rform.setValue({
+        worknumber          : data[0].worknumber,
+        MDD                 : data[0].MDD,
+        filename            : data[0].filename,
+        file                : data[0].file,
+        comments            : data[0].comments,
+      })
+
+    })
+    
   }
 
   onFileSelected(event){

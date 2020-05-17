@@ -56,6 +56,13 @@ export class LogsComponent implements OnInit {
     console.log('Row clicked: ', row);
   }
 
+  currentDetails(){
+
+    globdate = 'null';
+    globworknumber1 = globworknumber;
+    this.router.navigate([`${globpage}`]);
+
+  }
 
   click(date,worknumber)
   {
