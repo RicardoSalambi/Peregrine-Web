@@ -45,36 +45,44 @@ export class ChangememberinformationComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(globdate == 'null'){/*alert('Null Detected')*/}
-    else{
+    let url;
 
-      //**************************************************************************
-      let url = `getperegrineworkerslogsdetails/${globdate}/${globworknumber1}`;
-
-      this.dataserver.getRequest(url).subscribe( data => {
-
-        this.rform.setValue({
-        worknumber             : data[0].worknumber,
-        skills                 : data[0].skills,
-        name                   : data[0].name,
-        position               : data[0].position,      
-        surname                : data[0].surname,
-        nationality            : data[0].nationality,
-        qualification          : data[0].qualification,
-        gender                 : data[0].gender,
-        department             : data[0].department,
-        house                  : data[0].house,
-        address                : data[0].address,
-        comments               : data[0].comments,
-        filename               : data[0].filename,
-        file                   : data[0].file
-        })
-        
-
-      })
-    //****************************************************************************
-
+    if(globdate == 'null'){
+      url = `getlatestperegrineworkers/${globworknumber1}`;
+      this.datestring = `Current Details : `;
     }
+    else{
+      url = `getperegrineworkerslogsdetails/${globdate}/${globworknumber1}`;   
+      this.datestring = ``;
+    }
+
+    //**************************************************************************
+    
+
+    this.dataserver.getRequest(url).subscribe( data => {
+
+      this.datestring = this.datestring + data[0].date;
+
+      this.rform.setValue({
+      worknumber             : data[0].worknumber,
+      skills                 : data[0].skills,
+      name                   : data[0].name,
+      position               : data[0].position,      
+      surname                : data[0].surname,
+      nationality            : data[0].nationality,
+      qualification          : data[0].qualification,
+      gender                 : data[0].gender,
+      department             : data[0].department,
+      house                  : data[0].house,
+      address                : data[0].address,
+      comments               : data[0].comments,
+      filename               : data[0].filename,
+      file                   : data[0].file
+      })
+      
+
+    })
+  //****************************************************************************
     
 
     

@@ -30,7 +30,20 @@ export class ChangedisciplinaryComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.crudService.getRequest(`getdisciplinarieslogsdetails/${globdate}/${globworknumber1}`).subscribe( data => {
+    let url;
+
+    if(globdate == 'null'){
+      url = `getlatestdisciplinaries/${globworknumber1}`;
+      this.datestring = `Current Details : `;
+    }
+    else{
+      url = `getdisciplinarieslogsdetails/${globdate}/${globworknumber1}`
+      this.datestring = ``;
+    }
+
+    this.crudService.getRequest(url).subscribe( data => {
+
+      this.datestring = this.datestring + data[0].date;
       
       this.rform.setValue({
         worknumber          : data[0].worknumber,

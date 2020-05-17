@@ -26,7 +26,20 @@ export class ChangeexternalsituationsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.crudService.getRequest(`getexternalsituationslogsdetails/${globdate}/${globworknumber1}`).subscribe( data => {
+    let url;
+
+    if(globdate == 'null'){
+      url = `getlatestexternalsituations/${globworknumber1}`;
+      this.datestring = `Current Details : `;
+    }
+    else{
+      url = `getexternalsituationslogsdetails/${globdate}/${globworknumber1}`;
+      this.datestring = ``;
+    }
+
+    this.crudService.getRequest(url).subscribe( data => {
+
+      this.datestring = this.datestring + data[0].date;
       
       this.rform.setValue({
         worknumber          : data[0].worknumber,
