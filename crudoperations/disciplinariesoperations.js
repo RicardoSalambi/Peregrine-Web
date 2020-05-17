@@ -6,6 +6,27 @@ const upload = require('../multer/upload')
 const fs = require('fs');
 
 
+getlatestdisciplinaries = (req, res, next, connection) => {
+    
+    let queryString = `select * from ${'disciplinaries'} where worknumber = ${req.params.id};`;
+
+    console.log(queryString);  
+
+    connection.query(queryString, (err,rows,fields) => {
+        if (err) 
+        {
+            console.log('Query Failed with : ' + err)
+            res.end();
+        }
+        else
+        {
+            res.json(rows) //If data does not show use this command in mysql terminal 'ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YourPassword';'
+        }
+        
+    });
+
+}
+
 
 
 getdisciplinarieslogs = (req, res, next, connection) => {
@@ -107,6 +128,8 @@ adddisciplinary = (req, res, db) => {
 
 
 module.exports = {
+
+    getlatestdisciplinaries,
 
     getdisciplinarieslogs,
     getdisciplinarieslogsdetails,

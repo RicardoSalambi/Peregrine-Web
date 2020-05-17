@@ -33,6 +33,26 @@ allmembers = (req, res, next) =>  {
 }
 
 
+getlatestperegrineworkers = (req, res, next) => {
+
+  let queryString = `select * from ${'peregrineworkers'} where worknumber = ${req.params.id};`;
+
+    console.log(queryString);  
+
+    connection.query(queryString, (err,rows,fields) => {
+        if (err) 
+        {
+            console.log('Query Failed with : ' + err)
+            res.end();
+        }
+        else
+        {
+            res.json(rows) //If data does not show use this command in mysql terminal 'ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YourPassword';'
+        }
+      });
+}
+
+
 
 getperegrineworkerslogs = (req, res, next) => {    
 
@@ -325,6 +345,7 @@ updateperegrineworkerslogs = (req, res, next, db, connection) => {
 
 module.exports = {
     allmembers,
+    getlatestperegrineworkers,
     getperegrineworkerslogs,
     getperegrineworkerslogsdetails,
 

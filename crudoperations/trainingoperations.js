@@ -6,6 +6,28 @@ const upload = require('../multer/upload')
 const fs = require('fs');
 
 
+
+getlatesttraining = (req, res, next, connection) => {
+
+  let queryString = `select * from ${'trainings'} where worknumber = ${req.params.id};`;
+
+    console.log(queryString);  
+
+    connection.query(queryString, (err,rows,fields) => {
+        if (err) 
+        {
+            console.log('Query Failed with : ' + err)
+            res.end();
+        }
+        else
+        {
+            res.json(rows) //If data does not show use this command in mysql terminal 'ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YourPassword';'
+        }
+        
+    });
+
+}
+
 gettraininglogs = (req, res, next, connection) => {
 
     let queryString = `select a.date as date, a.worknumber as worknumber, b.name as name, b.surname as surname, b.qualification as qualification, b.department as department from ${req.params.table} a ,peregrineworkers b where a.worknumber = ${req.params.id} and b.worknumber = ${req.params.id};`;
@@ -106,6 +128,8 @@ addtraining = (req, res, db) => {
 
 
 module.exports = {
+
+    getlatesttraining,
 
     gettraininglogs,
     gettraininglogsdetails,
