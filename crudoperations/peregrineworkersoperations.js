@@ -164,7 +164,7 @@ addmemberdetails = (req, res, next, db) => {
             address          : req.body.address,
             comments         : req.body.comments,
             filename         : req.file.originalname,
-            file             : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename),
+            file             : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
             imgfile          : 'NULL'
           }).then((file) =>{
 
@@ -185,13 +185,15 @@ addmemberdetails = (req, res, next, db) => {
               address          : req.body.address,
               comments         : req.body.comments,
               filename         : req.file.originalname,
-              file             : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename),
+              file             : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
               imgfile          : 'NULL'
             }).then((file) =>{
-              fs.unlink(__basedir + '/Uploads/' + req.file.filename, (err) => {
+
+              fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
                 if (err) throw err;
-                console.log(`${__basedir + '/Uploads/' + req.file.filename} was Removed !`);
+                console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
               });
+
             })
             
             
@@ -222,43 +224,89 @@ updateperegrineworkers = (req, res, next, db, connection) => {
     }
     else 
     {
-
+      console.log('Peregrine main table');
+      
       db.peregrineworkersmodel.findByPk(req.params.id )
         .then( member => {
           // Check if record exists in db
 
           if (member) {
 
-            // member.name = 'one';
-            // member.surname = '1';
+            //console.log(member);
             
 
-            // member.date             = req.body.date;
-            member.worknumber       = req.body.worknumber;
-            member.name             = req.body.name;
-            member.surname          = req.body.surname;
-            member.qualification    = req.body.qualification;
-            member.department       = req.body.department;
-            member.skills           = req.body.skills;
-            member.position         = req.body.position;
-            member.nationality      = req.body.nationality;
-            member.gender           = req.body.gender;
-            member.house            = req.body.house;
-            member.address          = req.body.address;
-            member.comments         = req.body.comments;
-            member.filename         = req.file.originalname;
-            member.file             = fs.readFileSync(__basedir + '/Uploads/' + req.file.filename);
-            member.imgfile          = 'NULL';
+            // member.name = 'one';
+            // member.surname = '1';           
 
-            member.save();
+            // member.date             = req.body.date;            
+            // member.worknumber       = req.body.worknumber;
+            // member.name             = req.body.name;
+            // member.surname          = req.body.surname;
+            // member.qualification    = req.body.qualification;
+            // member.department       = req.body.department;
+            // member.skills           = req.body.skills;
+            // member.position         = req.body.position;
+            // member.nationality      = req.body.nationality;
+            // member.gender           = req.body.gender;
+            // member.house            = req.body.house;
+            // member.address          = req.body.address;
+            // member.comments         = req.body.comments;
+            // member.filename         = req.file.originalname;
+            // member.file             = fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename);
+            // member.imgfile          = 'NULL';
 
-              // member.update(
-              //   { name: 'one',
-              //   surname: 'three' }
-              // )
-              // .then(() => {
-              //   res.json(member)
-              // })
+            // member.save();
+
+            member.update({ 
+              date              : req.body.date,
+              worknumber        : req.body.worknumber,
+              name              : req.body.name,
+              surname           : req.body.surname,
+              qualification     : req.body.qualification,
+              department        : req.body.department,
+              skills            : req.body.skills,
+              position          : req.body.position,
+              nationality       : req.body.nationality,
+              gender            : req.body.gender,
+              house             : req.body.house,
+              address           : req.body.address,
+              comments          : req.body.comments,
+              filename          : req.file.originalname,
+              file              : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
+              imgfile           : 'NULL'
+            })
+            .then(() => {
+              //res.json(member)
+              db.peregrineworkerslogsmodel.create({
+              
+                date             : req.body.date,//moment().tz("Africa/Johannesburg").format(),//Date.now(),
+                worknumber       : req.body.worknumber,
+                name             : req.body.name,
+                surname          : req.body.surname,
+                qualification    : req.body.qualification,
+                department       : req.body.department,
+                skills           : req.body.skills,
+                position         : req.body.position,
+                nationality      : req.body.nationality,
+                gender           : req.body.gender,
+                house            : req.body.house,
+                address          : req.body.address,
+                comments         : req.body.comments,
+                filename         : req.file.originalname,
+                file             : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
+                imgfile          : 'NULL'
+                
+              })
+              .then((file) => {
+
+                  fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+                    if (err) throw err;
+                    console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                  });
+
+              });
+
+            })
 
           }  
 
@@ -271,72 +319,88 @@ updateperegrineworkers = (req, res, next, db, connection) => {
 
 updateperegrineworkerslogs = (req, res, next, db, connection) => {
 
-  db.peregrineworkerslogsmodel.findOne({where : {date : req.params.date ,worknumber : req.params.id} })
-    .then( member => {
-      // Check if record exists in db
-      console.log(req.params.date);
+  let h = new Date(req.params.date)
+  let getdate = h.setHours(h.getHours() - 2)
 
-      // member.name = 'one';
-      // member.surname = '1';
-      // member.save();
-      
-      if (member) {
-
-          member.update(
-            { name: '1',
-            surname: '2' }
-          )
-          .then((rows) => {
-            //res.json(member)
-            console.log(rows);
-            member.save()
-            
-          })
-
-      }  
-
-    })
-  
-
-  // upload(req, res, (err) => {
+  upload(req, res, (err) => {
     
-  //   if(err)
-  //   {
-  //     console.log(err);        
-  //   }
-  //   else 
-  //   {
+    if(err)
+    {
+      console.log(err);        
+    }
+    else 
+    {
 
-      // queryString = `UPDATE ${'workleaves'} SET              
-      //       file   = 'LOAD_FILE(${fs.readFileSync(__basedir + '/Uploads/' + req.file.filename)})'
-      //       WHERE id = ${req.params.id};` ;
-      
-      // queryString = `select * from ${'peregrineworkerslogs'} where date = '${req.params.date}' and worknumber = ${req.params.id}`
-      
-      // console.log(queryString);
-      
+      db.peregrineworkerslogsmodel.findOne({where : {date : getdate ,worknumber : req.params.id} })
+        .then( member => {
+          // Check if record exists in db
+          
+          //member.delete();      
+          
+          if (member) {
 
-      // connection.query(queryString, (err,rows,fields) => {
-      //   if (err) 
-      //   {
-      //       console.log('Query Failed with : ' + err)
-      //       res.end();
-      //   }
-      //   else
-      //   {
-      //       //res.json(rows) 
-      //       rows.name = 'one';
-      //       rows.surname = 'two';
-      //       rows.save();
-      //   }
+            member.destroy();
     
-      // });
+            db.peregrineworkerslogsmodel.create({
 
+              date             : getdate,//moment().tz("Africa/Johannesburg").format(),//Date.now(),
+              worknumber       : req.body.worknumber,
+              name             : req.body.name,
+              surname          : req.body.surname,
+              qualification    : req.body.qualification,
+              department       : req.body.department,
+              skills           : req.body.skills,
+              position         : req.body.position,
+              nationality      : req.body.nationality,
+              gender           : req.body.gender,
+              house            : req.body.house,
+              address          : req.body.address,
+              comments         : req.body.comments,
+              filename         : req.file.originalname,
+              file             : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
+              imgfile          : 'NULL'
 
-  //   }
-  // });
+            })
+            .then((rows) => {
+              //res.json(member)
+              // console.log(rows);
+              // member.save()
 
-  // console.log(queryString);
+              fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+                if (err) throw err;
+                console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+              });
+              
+            })
+
+      /*
+              //member.date             = req.body.date;            
+              member.worknumber       = req.body.worknumber;
+              member.name             = req.body.name;
+              member.surname          = req.body.surname;
+              member.qualification    = req.body.qualification;
+              member.department       = req.body.department;
+              member.skills           = req.body.skills;
+              member.position         = req.body.position;
+              member.nationality      = req.body.nationality;
+              member.gender           = req.body.gender;
+              member.house            = req.body.house;
+              member.address          = req.body.address;
+              member.comments         = req.body.comments;
+              member.filename         = req.file.originalname;
+              member.file             = fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename);
+              member.imgfile          = 'NULL';
+
+              member.save({ fields: ['date','worknumber','name','surname','qualification','department','skills','position','nationality','gender','house','address','comments','filename','file','imgfile'] });
+      */
+
+          }
+
+        })
+
+    }
+
+  });
 
 }
 

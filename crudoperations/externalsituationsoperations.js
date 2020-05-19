@@ -107,6 +107,121 @@ addexternalsituations = (req, res, db) => {
 
 
 
+//****************Update Request****************
+
+updateexternalsituations = (req, res, next, db, connection) => {
+
+    upload(req, res, (err) => {
+    
+        if(err)
+        {
+          console.log(err);        
+        }
+        else 
+        {
+    
+          db.externalsituationsmodel.findByPk(req.params.id )
+            .then( member => {
+    
+              if (member) {
+                
+                member.update({ 
+
+                    date              : req.body.date,//Date.now(),
+                    worknumber        : req.body.worknumber,
+                    responsiblities   : req.body.responsiblities
+                  
+                })
+                .then( () => {
+                  db.externalsituationslogsmodel.create({
+                  
+                    date              : req.body.date,//Date.now(),
+                    worknumber        : req.body.worknumber,
+                    responsiblities   : req.body.responsiblities
+                    
+                  })
+                  .then((file) => {
+    
+                    //   fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+                    //     if (err) throw err;
+                    //     console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                    //   });
+    
+                  });
+    
+                })
+
+    
+              }
+
+
+
+
+
+    
+            })
+        }
+      });
+
+}
+
+
+
+
+
+
+
+
+updateexternalsituationslogs = (req, res, next, db, connection) => {
+
+    let h = new Date(req.params.date)
+    let getdate = h.setHours(h.getHours() - 2)
+
+    upload(req, res, (err) => {
+    
+        if(err)
+        {
+          console.log(err);        
+        }
+        else 
+        { 
+    
+                db.externalsituationslogsmodel.findOne({where : {date : getdate ,worknumber : req.params.id} })
+                    .then( member => {
+            
+                        if (member) {
+                            
+                            member.destroy();
+
+                            db.externalsituationslogsmodel.create({
+
+                                date              : getdate,
+                                worknumber        : req.body.worknumber,
+                                responsiblities   : req.body.responsiblities
+                
+                            })
+                            .then((rows) => {
+                
+                            //   fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+                            //     if (err) throw err;
+                            //     console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                            //   });
+                            
+                            })
+                
+                        }  
+            
+                    })
+        }
+      });
+}
+
+
+
+
+
+
+
 
 module.exports = {
 
@@ -116,5 +231,8 @@ module.exports = {
     getexternalsituationslogsdetails,
 
     addexternalsituations,
+
+    updateexternalsituations,
+    updateexternalsituationslogs
 
 }

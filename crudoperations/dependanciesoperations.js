@@ -107,6 +107,12 @@ getdependancieslogsdetails = (req, res, next, connection) => {
 }
 
 
+
+
+
+
+//****************Post Request****************
+
 adddependancies = (req, res, db) => {
 
     upload(req, res, /*next ,*/(err) => {
@@ -124,7 +130,7 @@ adddependancies = (req, res, db) => {
               next_of_kin       : req.body.NOK,
               emergencycontact  : req.body.emergencycontact,
               filename          : req.file.originalname,
-              file              : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename)
+              file              : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename)
   
             }).then(() =>{
   
@@ -135,13 +141,13 @@ adddependancies = (req, res, db) => {
                 next_of_kin       : req.body.NOK,
                 emergencycontact  : req.body.emergencycontact,
                 filename          : req.file.originalname,
-                file              : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename)
+                file              : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename)
   
               }).then((file) =>{
   
-                fs.unlink(__basedir + '/Uploads/' + req.file.filename, (err) => {
+                fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
                   if (err) throw err;
-                  console.log(`${__basedir + '/Uploads/' + req.file.filename} was Removed !`);
+                  console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
                 });
                 
                  
@@ -154,6 +160,10 @@ adddependancies = (req, res, db) => {
     });  
 
 }
+
+
+
+
 
 
 
@@ -176,19 +186,56 @@ updatedependancies = (req, res, next, db, connection) => {
             .then( member => {
               // Check if record exists in db
     
-              if (member) {
-                
-    
+              if (member) {    
                 // member.date             = req.params.date;
-                member.worknumber       = req.body.worknumber;
-                member.next_of_kin      = req.body.next_of_kin;
-                member.emergencycontact = req.body.emergencycontact;
-                member.filename         = req.file.originalname;
-                member.file             = fs.readFileSync(__basedir + '/Uploads/' + req.file.filename);
+                // member.worknumber       = req.body.worknumber;
+                // member.next_of_kin      = req.body.next_of_kin;
+                // member.emergencycontact = req.body.emergencycontact;
+                // member.filename         = req.file.originalname;
+                // member.file             = fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename);
     
-                member.save();
+                // member.save();
+                
+                member.update({ 
+
+                  date                       : req.body.date,
+                  worknumber                 : req.body.worknumber,
+                  next_of_kin                : req.body.NOK,
+                  emergencycontact           : req.body.emergencycontact,
+                  filename                   : req.file.originalname,
+                  file                       : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
+                  
+                })
+                .then( () => {
+                  //res.json(member)
+                  db.dependancieslogmodel.create({
+                  
+                    date                       : req.body.date,
+                    worknumber                 : req.body.worknumber,
+                    next_of_kin                : req.body.NOK,
+                    emergencycontact           : req.body.emergencycontact,
+                    filename                   : req.file.originalname,
+                    file                       : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
+                    
+                  })
+                  .then((file) => {
     
-              }  
+                      fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+                        if (err) throw err;
+                        console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                      });
+    
+                  });
+    
+                })
+
+    
+              }
+
+
+
+
+
     
             })
         }
@@ -198,7 +245,15 @@ updatedependancies = (req, res, next, db, connection) => {
 
 
 
+
+
+
+
+
 updatedependancieslogs = (req, res, next, db, connection) => {
+
+    let h = new Date(req.params.date)
+    let getdate = h.setHours(h.getHours() - 2)
 
     upload(req, res, (err) => {
     
@@ -209,25 +264,44 @@ updatedependancieslogs = (req, res, next, db, connection) => {
         else 
         { 
     
-          db.dependancieslogmodel.findOne({where : {date : req.params.date ,worknumber : req.params.id} })
+          db.dependancieslogmodel.findOne({where : {date : getdate ,worknumber : req.params.id} })
             .then( member => {
               // Check if record exists in db
     
-              
-    
               if (member) {
-    
-                console.log(member);
                 
+                member.destroy();
+
+                db.dependancieslogmodel.create({
+
+                  date                       : getdate,//moment().tz("Africa/Johannesburg").format(),//Date.now(),
+                  worknumber                 : req.body.worknumber,
+                  next_of_kin                : req.body.NOK,
+                  emergencycontact           : req.body.emergencycontact,
+                  filename                   : req.file.originalname,
+                  file                       : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
+    
+                })
+                .then((rows) => {
+                  //res.json(member)
+                  // console.log(rows);
+                  // member.save()
+    
+                  fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+                    if (err) throw err;
+                    console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                  });
+                  
+                })
                 
                 // member.date             = req.params.date;
-                member.worknumber       = req.body.worknumber;
-                member.next_of_kin      = req.body.next_of_kin;
-                member.emergencycontact = req.body.emergencycontact;
-                //member.filename         = req.file.originalname;
-                //member.file             = fs.readFileSync(__basedir + '/Uploads/' + req.file.filename);
+                // member.worknumber       = req.body.worknumber;
+                // member.next_of_kin      = req.body.next_of_kin;
+                // member.emergencycontact = req.body.emergencycontact;
+                // //member.filename         = req.file.originalname;
+                // //member.file             = fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename);
     
-                member.save();
+                // member.save();
     
                 // member.update(
                 //   { worknumber: req.body.worknumber,

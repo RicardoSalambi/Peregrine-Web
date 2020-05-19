@@ -45,7 +45,9 @@ function createRouter(db)
 
   router.get('/getperegrineworkerslogsdetails/:date/:id' , (req, res, next) => { peregrineworkers.getperegrineworkerslogsdetails(req, res, next) } );
 
-  router.post('/addmemberdetails', (req,res, next) =>{ peregrineworkers.addmemberdetails(req,res, next, db) } );
+
+  router.post('/addmemberdetails', (req,res, next) => { peregrineworkers.addmemberdetails(req,res, next, db) } );
+
 
   router.put(`/updateperegrineworkers/:id`, (req, res, next) => { peregrineworkers.updateperegrineworkers(req, res, next, db, connection)  } );
 
@@ -65,7 +67,9 @@ router.get('/getdependancieslogs/:id/:table' , (req, res, next) => {  dependanci
 
 router.get('/getdependancieslogsdetails/:date/:id' , (req, res, next) => { dependancies.getdependancieslogsdetails(req, res, next, connection) } );
 
+
 router.post('/adddependancies', (req,res) =>{ dependancies.adddependancies(req,res,db) } );
+
 
 router.put(`/updatedependancies/:id`, (req, res, next) => { dependancies.updatedependancies(req, res, next, db, connection) } );
 
@@ -84,7 +88,13 @@ router.get('/getdisciplinarieslogs/:id/:table' , (req, res, next) => { disciplin
 
 router.get('/getdisciplinarieslogsdetails/:date/:id' , (req, res, next) => {  disciplinaries.getdisciplinarieslogsdetails(req, res, next, connection) } );
 
+
 router.post('/adddisciplinary', (req,res) => { disciplinaries.adddisciplinary(req,res,db) } );
+
+
+router.put(`/updatedisciplinaries/:id`, (req, res, next) => { disciplinaries.updatedisciplinaries(req, res, next, db, connection) } );
+
+router.put(`/updatedisciplinarieslogs/:date/:id`, (req, res, next) => { disciplinaries.updatedisciplinarieslogs(req, res, next, db, connection) } );
 
 //*******************************************************************************
 
@@ -99,7 +109,13 @@ router.get('/getexternalsituationslogs/:id/:table' , (req, res, next) => { exter
 
 router.get('/getexternalsituationslogsdetails/:date/:id' , (req, res, next) => { externalsituations.getexternalsituationslogsdetails(req, res, next, connection) } );
 
+
 router.post('/addexternalsituations', (req,res) =>{ externalsituations.addexternalsituations(req,res,db) } );
+
+
+router.put(`/updateexternalsituations/:id`, (req, res, next) => { externalsituations.updateexternalsituations(req, res, next, db, connection) } );
+
+router.put(`/updateexternalsituationslogs/:date/:id`, (req, res, next) => { externalsituations.updateexternalsituationslogs(req, res, next, db, connection) } );
 
 //*******************************************************************************
 
@@ -115,7 +131,13 @@ router.get('/getperformancelogs/:id/:table' , (req, res, next) => { performance.
 
 router.get('/getperformancelogsdetails/:date/:id' , (req, res, next) => { performance.getperformancelogsdetails(req, res, next, connection) } );
 
+
 router.post('/addperformance', (req,res) =>{ performance.addperformance(req,res,db) } );
+
+
+router.put(`/updateperformance/:id`, (req, res, next) => { performance.updateperformance(req, res, next, db, connection) } );
+
+router.put(`/updateperformancelogs/:date/:id`, (req, res, next) => { performance.updateperformancelogs(req, res, next, db, connection) } );
 
 //*******************************************************************************
 
@@ -131,7 +153,13 @@ router.get('/gettraininglogs/:id/:table' , (req, res, next) => { training.gettra
 
 router.get('/gettraininglogsdetails/:date/:id' , (req, res, next) => { training.gettraininglogsdetails(req, res, next, connection) } );
 
+
 router.post('/addtraining', (req,res) =>{ training.addtraining(req,res,db) } );
+
+
+router.put(`/updatetraining/:id`, (req, res, next) => { training.updatetraining(req, res, next, db, connection) } );
+
+router.put(`/updatetraininglogs/:date/:id`, (req, res, next) => { training.updatetraininglogs(req, res, next, db, connection) } );
 
 //*******************************************************************************
 

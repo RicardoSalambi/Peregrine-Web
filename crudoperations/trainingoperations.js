@@ -91,7 +91,7 @@ addtraining = (req, res, db) => {
               startdate                 : req.body.startdate,
               enddate                   : req.body.enddate,
               filename                  : req.file.originalname,
-              file                      : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename)
+              file                      : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename)
     
             }).then(() => {
     
@@ -103,13 +103,13 @@ addtraining = (req, res, db) => {
                 startdate                 : req.body.startdate,
                 enddate                   : req.body.enddate,
                 filename                  : req.file.originalname,
-                file                      : fs.readFileSync(__basedir + '/Uploads/' + req.file.filename)
+                file                      : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename)
     
               }).then((file) =>{
     
-                fs.unlink(__basedir + '/Uploads/' + req.file.filename, (err) => {
+                fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
                   if (err) throw err;
-                  console.log(`${__basedir + '/Uploads/' + req.file.filename} was Removed !`);
+                  console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
                 });
                 
                  
@@ -126,6 +126,132 @@ addtraining = (req, res, db) => {
 
 
 
+//****************Update Request****************
+
+updatetraining = (req, res, next, db, connection) => {
+
+  upload(req, res, (err) => {
+  
+      if(err)
+      {
+        console.log(err);        
+      }
+      else 
+      {
+  
+        db.trainingmodel.findByPk(req.params.id )
+          .then( member => {
+            // Check if record exists in db
+  
+            if (member) {                
+              member.update({ 
+
+                  date                      : req.body.date,
+                  worknumber                : req.body.worknumber,
+                  trainingdescription       : req.body.trainingdescription,
+                  startdate                 : req.body.startdate,
+                  enddate                   : req.body.enddate,
+                  filename                  : req.file.originalname,
+                  file                      : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename)
+                
+              })
+              .then( () => {
+                //res.json(member)
+                db.traininglogsmodel.create({
+                
+                  date                      : req.body.date,
+                  worknumber                : req.body.worknumber,
+                  trainingdescription       : req.body.trainingdescription,
+                  startdate                 : req.body.startdate,
+                  enddate                   : req.body.enddate,
+                  filename                  : req.file.originalname,
+                  file                      : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename)
+                  
+                })
+                .then((file) => {
+  
+                    fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+                      if (err) throw err;
+                      console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                    });
+  
+                });
+  
+              })
+
+  
+            }
+
+
+
+
+
+  
+          })
+      }
+    });
+
+}
+
+
+
+
+
+
+
+
+updatetraininglogs = (req, res, next, db, connection) => {
+
+  let h = new Date(req.params.date)
+  let getdate = h.setHours(h.getHours() - 2)
+
+  upload(req, res, (err) => {
+  
+      if(err)
+      {
+        console.log(err);        
+      }
+      else 
+      { 
+  
+        db.traininglogsmodel.findOne({where : {date : getdate ,worknumber : req.params.id} })
+          .then( member => {
+            // Check if record exists in db
+  
+            if (member) {
+              
+              member.destroy();
+
+              db.traininglogsmodel.create({
+
+                  date                      : getdate,
+                  worknumber                : req.body.worknumber,
+                  trainingdescription       : req.body.trainingdescription,
+                  startdate                 : req.body.startdate,
+                  enddate                   : req.body.enddate,
+                  filename                  : req.file.originalname,
+                  file                      : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename)
+  
+              })
+              .then((rows) => {
+  
+                fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+                  if (err) throw err;
+                  console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                });
+                
+              })
+  
+            }  
+  
+          })
+      }
+    });
+}
+
+
+
+
 
 module.exports = {
 
@@ -135,5 +261,8 @@ module.exports = {
     gettraininglogsdetails,
 
     addtraining,
+
+    updatetraining,
+    updatetraininglogs
 
 }
