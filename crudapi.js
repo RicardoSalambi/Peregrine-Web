@@ -6,9 +6,7 @@ const moment = require('moment-timezone');
 
 var stream = require('stream');
 
-const mysql = require('mysql2');
 
-const dbconfig = require('./dbconfig');
 
 
 const peregrineworkers = require('./crudoperations/peregrineworkersoperations');
@@ -18,18 +16,9 @@ const externalsituations = require('./crudoperations/externalsituationsoperation
 const performance = require('./crudoperations/performanceoperations');
 const training = require('./crudoperations/trainingoperations');
 
-/////////////////////////////////////////////
-  const connection = mysql.createConnection({
-    host : dbconfig.host,
-    user : dbconfig.user,
-    password : dbconfig.password,
-    database : dbconfig.database,
-    timezone : 'Z'
-    //port: '3306'
-  });
-/////////////////////////////////////////////
 
-function createRouter(db) 
+
+function createRouter(db,connection) 
 {
   const router = express.Router();
   const owner = '';
