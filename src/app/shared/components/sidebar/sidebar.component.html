@@ -1,0 +1,85 @@
+<div fxFlex fxLayout="column" class="sidebar-color">
+    <ul fxLayout="column" fxLayoutGap="20px">
+        <li>
+            
+            <button mat-flat-button (click)="goToPage('insertdetails')"> 
+                <mat-icon>person</mat-icon> 
+                Add Team Member
+            </button>
+            
+        </li>
+        
+        <li>
+            <button mat-flat-button (click)="goToPage('viewdetails')">
+                <mat-icon>person_outline</mat-icon> 
+                View Members
+            </button>
+        </li>
+
+        <mat-divider></mat-divider>      
+
+        <li>
+        <!--
+            <button mat-flat-button (click)="goToPage('')">
+                <mat-icon>update</mat-icon> 
+                Update Team Member Details
+            </button>
+        -->
+            
+            <mat-expansion-panel mat-flat>
+
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <mat-icon>update</mat-icon> 
+                        Update Team Member Details
+                    </mat-panel-title>                
+                </mat-expansion-panel-header>
+            
+                <button mat-flat-button (click)="goToPage('dependancies')">
+                    <mat-icon>group_add</mat-icon> 
+                    Dependancies
+                </button>
+
+                <button mat-flat-button (click)="goToPage('disciplinary')">
+                    <mat-icon>gavel</mat-icon> 
+                    Disciplinary
+                </button>
+
+                <button mat-flat-button (click)="goToPage('externalsituations')">
+                    <mat-icon>people_outline</mat-icon> 
+                    External Situations
+                </button>
+
+                <button mat-flat-button (click)="goToPage('workleave')">
+                    <mat-icon>work_off_outline</mat-icon> 
+                    Work Leave
+                </button>
+
+                <br>
+                <button mat-flat-button (click)="goToPage('training')">
+                    <mat-icon>fitness_center</mat-icon> 
+                    Training
+                </button>
+                <br>
+
+                <button mat-flat-button (click)="goToPage('performance')">
+                    <mat-icon>show_chart</mat-icon> 
+                    Performance
+                </button>
+            
+            </mat-expansion-panel>
+        </li>
+
+        <mat-divider></mat-divider>
+
+        <li>
+            <button mat-flat-button (click)="goToPage('dashboard')">
+                <mat-icon>insert_chart</mat-icon> 
+                View Charts
+            </button>
+        </li>
+        
+
+
+    </ul>
+</div>

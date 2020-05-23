@@ -1,0 +1,35 @@
+<form [formGroup]="rform" (ngSubmit)="submit()" enctype="multipart/form-data">
+
+    <div class="wrapper">
+
+        <div class="header">
+            <h2>Change Member Responsibilites</h2>
+            <mat-label>{{datestring}}</mat-label>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Work Number</mat-label>
+                <input matInput required formControlName="worknumber">
+            </mat-form-field>
+        </div>
+
+
+        <div class="Comments">
+            <mat-form-field appearance="outline" floatLabel="auto" style="width: 70%;">
+                <mat-label>Member External Responsiblities</mat-label>
+                <textarea matInput rows="5" cols="2" formControlName="responsiblities"></textarea>
+                <mat-hint align="end">Insert details about this Team Members Responsibilities</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="wrapper2"> 
+
+            <div>
+                <button mat-raised-button class="submitbutton" type="submit">Update</button>
+            </div>
+        </div>
+
+    </div>
+
+</form>

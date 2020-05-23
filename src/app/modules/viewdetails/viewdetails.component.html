@@ -1,0 +1,89 @@
+<div class="wrapper">
+<!--
+    <div>
+
+        <div class="flex-spacer"></div>
+
+        <button mat-icon-button>
+            <mat-icon>list</mat-icon>
+        </button>
+
+        <button mat-icon-button>
+            <mat-icon>view_module</mat-icon>
+        </button>
+
+    </div>
+-->
+    
+    <div class="searchbar">
+    
+        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+            <mat-label>
+                Search 
+            </mat-label>
+            <input matInput value="" [matAutocomplete]="auto" [formControl]="myControl">
+
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayfn">
+                <mat-option *ngFor="let item of filteredWorkers | async" [value]="item">
+                    {{item.name}}
+                </mat-option>
+            </mat-autocomplete>
+
+
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    
+    </div>
+
+    <div class="grid">
+
+        <mat-card *ngFor="let item of filteredWorkers | async">
+            <mat-card-header >
+                <div mat-card-avatar></div>
+                <mat-card-title>{{item.name}} {{item.surname}}</mat-card-title>
+                <mat-card-subtitle>{{item.qualification}} {{item.worknumber}}</mat-card-subtitle>
+                <mat-card-actions>
+                    <div class="flex-spacer"></div>
+                    <button mat-button color="primary" [matMenuTriggerFor]="menu" ><mat-icon>menu</mat-icon></button>
+                    
+                    
+                </mat-card-actions>
+            </mat-card-header>
+
+            <input hidden type="text" #textInput value="{{item.worknumber}}">
+
+            <img mat-card-image src="assets/img/86518.png">
+
+            <!--<mat-card-content>
+                <p>Ricardo is the best , the millinonaire , the billionaire, and the the most intelligent person in the world</p>
+            </mat-card-content>-->
+
+            <mat-menu #menu="matMenu" yPosition="below">
+                <button mat-menu-item>View Performance</button>
+                <button mat-menu-item [matMenuTriggerFor]="chooseupdates">Change Details</button>
+            </mat-menu>
+
+            <mat-menu #chooseupdates="matMenu">
+                <button mat-menu-item (click)="goToPage( 'peregrineworkerslogs' , textInput.value , 'changememberinformation' )">Member Information</button>
+                <button mat-menu-item (click)="goToPage( 'dependancieslogs' , textInput.value , 'changedependancies' )">Dependancies</button>
+                <button mat-menu-item (click)="goToPage( 'disciplinarieslogs' , textInput.value , 'changedisciplinary' )">Disciplinary</button>
+                <button mat-menu-item (click)="goToPage( 'externalsituationslogs' , textInput.value , 'changeexternalsituations' )">External Situations</button>
+                <button mat-menu-item (click)="goToPage( 'performancelogs' , textInput.value , 'changeperformance' )">Performance</button>
+                <button mat-menu-item (click)="goToPage( 'changeworkleave' , textInput.value , 'changeworkleave' )">Work Leave</button>
+                <button mat-menu-item (click)="goToPage( 'traininglogs' , textInput.value , 'changetraining' )">Training</button>
+            </mat-menu>
+
+        </mat-card>
+
+        
+
+    </div>
+
+    <div class="ender">
+        <mat-label >
+            No More Results
+        </mat-label>
+    </div>
+    
+</div>
+

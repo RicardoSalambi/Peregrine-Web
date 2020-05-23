@@ -1,0 +1,60 @@
+<form [formGroup]="rform" (ngSubmit)="submit()" enctype="multipart/form-data">
+    
+    <div class="wrapper">
+        <div>
+            <h2>Change Member Disciplinaries</h2>
+            <mat-label>{{datestring}}</mat-label>
+        </div>
+        
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Work Number</mat-label>
+                <input matInput required formControlName="worknumber">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Memeber Disciplinary Description</mat-label>
+                <input matInput required formControlName="MDD">
+            </mat-form-field>
+        </div>
+
+        <div> 
+            <!--
+            <input type="file" (change)="onFileSelected($event)">
+            -->
+
+            <button type="button" mat-raised-button (click)="fileInput.click()" class="uploadbutton">Upload Member Forms</button>
+            <input hidden type="file" (change)="onFileSelected($event)" #fileInput  name="file">
+
+            <br/><br/>
+
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Member Forms</mat-label>
+                <input matInput type="text" id="filename" disabled formControlName="filename">
+            </mat-form-field>
+        </div>
+
+        <div class="Comments">
+            <mat-form-field appearance="outline" floatLabel="auto" style="width: 70%;">
+                <mat-label>Comments</mat-label>
+                <textarea matInput rows="5" cols="2" formControlName="comments"></textarea>
+                <mat-hint align="end">Insert Additional details about this Team Member</mat-hint>
+            </mat-form-field>
+        </div>
+
+        
+
+        <div class="wrapper2"> 
+
+            <div>
+                <button mat-raised-button class="submitbutton" type="submit">Update</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</form>
