@@ -246,6 +246,43 @@ updateperformancelogs = (req, res, next, db, connection) => {
 
 
 
+
+//******************Delete Request************* 
+terminateperformancelogs = (req, res, next, db, connection) => {
+
+  let h = new Date(req.params.date)
+  let getdate = h.setHours(h.getHours() - 2)
+
+  upload(req, res, (err) => {
+    
+    if(err)
+    {
+      console.log(err);        
+    }
+    else 
+    {
+
+      db.performancelogsmodel.findOne({where : {date : getdate ,worknumber : req.params.id} })
+        .then( member => {
+          // Check if record exists in db  
+          
+          if (member) {
+
+            member.destroy();  
+            
+          }
+
+        })
+
+    }
+
+  });
+
+}
+
+
+
+
 module.exports = {
 
     getlatestperformance,
@@ -256,6 +293,8 @@ module.exports = {
     addperformance,
 
     updateperformance,
-    updateperformancelogs
+    updateperformancelogs,
+
+    terminateperformancelogs
 
 }

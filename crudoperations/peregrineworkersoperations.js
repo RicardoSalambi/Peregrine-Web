@@ -406,6 +406,42 @@ updateperegrineworkerslogs = (req, res, next, db, connection) => {
 
 
 
+//******************Delete Request************* 
+terminateperegrineworkerslogs = (req, res, next, db, connection) => {
+
+  let h = new Date(req.params.date)
+  let getdate = h.setHours(h.getHours() - 2)
+
+  upload(req, res, (err) => {
+    
+    if(err)
+    {
+      console.log(err);        
+    }
+    else 
+    {
+
+      db.peregrineworkerslogsmodel.findOne({where : {date : getdate ,worknumber : req.params.id} })
+        .then( member => {
+          // Check if record exists in db  
+          
+          if (member) {
+
+            member.destroy();  
+            
+          }
+
+        })
+
+    }
+
+  });
+
+}
+
+
+
+
 
 module.exports = {
     allmembers,
@@ -416,5 +452,7 @@ module.exports = {
     addmemberdetails,
 
     updateperegrineworkers,
-    updateperegrineworkerslogs
+    updateperegrineworkerslogs,
+
+    terminateperegrineworkerslogs
 }

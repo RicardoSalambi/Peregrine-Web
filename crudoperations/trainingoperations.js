@@ -252,6 +252,42 @@ updatetraininglogs = (req, res, next, db, connection) => {
 
 
 
+//******************Delete Request************* 
+terminatetraininglogs = (req, res, next, db, connection) => {
+
+  let h = new Date(req.params.date)
+  let getdate = h.setHours(h.getHours() - 2)
+
+  upload(req, res, (err) => {
+    
+    if(err)
+    {
+      console.log(err);        
+    }
+    else 
+    {
+
+      db.traininglogsmodel.findOne({where : {date : getdate ,worknumber : req.params.id} })
+        .then( member => {
+          // Check if record exists in db  
+          
+          if (member) {
+
+            member.destroy();  
+            
+          }
+
+        })
+
+    }
+
+  });
+
+}
+
+
+
+
 
 module.exports = {
 
@@ -263,6 +299,8 @@ module.exports = {
     addtraining,
 
     updatetraining,
-    updatetraininglogs
+    updatetraininglogs,
+
+    terminatetraininglogs
 
 }
