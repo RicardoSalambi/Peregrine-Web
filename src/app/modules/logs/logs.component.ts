@@ -64,12 +64,23 @@ export class LogsComponent implements OnInit {
 
   }
 
-  click(date,worknumber)
+  changedetails(date,worknumber)
   {
     globdate = date;
     globworknumber1 = worknumber;
 
     this.router.navigate([`${globpage}`]);
+  }
+
+  viewperformance(date,worknumber)
+  {
+
+  }
+
+  terminate(date,worknumber)
+  {
+    //this.dataSource = this.dataSource.filter(data => data.date !== date)
+    this.dataserver.deleteRequest(`terminate${globtable}/${date}/${worknumber}`/*, formData*/).subscribe();
   }
 
 }

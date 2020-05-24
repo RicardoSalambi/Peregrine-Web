@@ -237,7 +237,8 @@ export class InsertdetailsComponent implements OnInit {
       house                  : new FormControl(),
       address                : new FormControl(),
       comments               : new FormControl(),
-      file                   : new FormControl()
+      file                   : new FormControl(),
+      imgfile                : new FormControl()
     })
 
   }
@@ -263,8 +264,10 @@ export class InsertdetailsComponent implements OnInit {
     this.imagePath = files;
     reader.readAsDataURL(files[0]); 
     reader.onload = (_event) => { 
-      this.imgURL = reader.result; 
+      this.imgURL = reader.result; //Preview image
     } 
+
+    this.rform.get('imgfile').patchValue(files[0]);
     
   }
 
@@ -298,6 +301,7 @@ export class InsertdetailsComponent implements OnInit {
     formData.append('address', this.rform.get('address').value);
     formData.append('comments', this.rform.get('comments').value);
     formData.append('file', this.rform.get('file').value);
+    formData.append('imgfile', this.rform.get('imgfile').value);
     
     formData.append('date', moment().tz("Africa/Johannesburg").format());
 

@@ -76,9 +76,9 @@
                         <input hidden type="text" #textInput2 value="{{element.worknumber}}">
 
                         <mat-menu #menu="matMenu" yPosition="below">
-                            <button mat-menu-item (click)="click(textInput1.value,textInput2.value)">Change Details</button>
-                            <button mat-menu-item (click)="click(textInput1.value,textInput2.value)">View Performance</button>
-                            <button mat-menu-item (click)="click(textInput1.value,textInput2.value)">Terminate</button>
+                            <button mat-menu-item (click)="changedetails(textInput1.value,textInput2.value)">Change Details</button>
+                            <button mat-menu-item (click)="viewperformance(textInput1.value,textInput2.value)">View Performance</button>
+                            <button mat-menu-item (click)="terminate(textInput1.value,textInput2.value)">Terminate</button>
                         </mat-menu>
 
                     </td>

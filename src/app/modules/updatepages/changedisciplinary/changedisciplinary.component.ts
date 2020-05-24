@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CrudOperationsService } from 'src/app/services/crud-operations.service'
 import { globdate, globworknumber1 } from 'src/app/modules/logs/logs.component'
 
+import * as moment from 'moment-timezone';
+
 @Component({
   selector: 'app-changedisciplinary',
   templateUrl: './changedisciplinary.component.html',
@@ -30,7 +32,20 @@ export class ChangedisciplinaryComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.crudService.getRequest(`getdisciplinarieslogsdetails/${globdate}/${globworknumber1}`).subscribe( data => {
+    let url;
+
+    if(globdate == 'null'){
+      url = `getlatestdisciplinaries/${globworknumber1}`;
+      this.datestring = `Current Details : `;
+    }
+    else{
+      url = `getdisciplinarieslogsdetails/${globdate}/${globworknumber1}`
+      this.datestring = ``;
+    }
+
+    this.crudService.getRequest(url).subscribe( data => {
+
+      this.datestring = this.datestring + data[0].date;
       
       this.rform.setValue({
         worknumber          : data[0].worknumber,
@@ -62,8 +77,15 @@ export class ChangedisciplinaryComponent implements OnInit {
     formData.append('file', this.rform.get('file').value);
     formData.append('comments', this.rform.get('comments').value);
 
-    //console.log(data.file);    
-    this.crudService.addRequest('adddisciplinary', formData).subscribe();
+    formData.append('date', moment().tz("Africa/Johannesburg").format());
+ 
+    if(globdate == 'null'){
+
+      this.crudService.updateRequest(`updatedisciplinaries/${globworknumber1}`, formData).subscribe();
+    }
+    else{
+      this.crudService.updateRequest(`updatedisciplinarieslogs/${globdate}/${globworknumber1}`, formData).subscribe();
+    }
 
   }
 
