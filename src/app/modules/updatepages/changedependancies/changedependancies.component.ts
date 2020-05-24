@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CrudOperationsService } from 'src/app/services/crud-operations.service'
 import { globdate, globworknumber1 } from 'src/app/modules/logs/logs.component'
 
+import * as moment from 'moment-timezone';
+
 @Component({
   selector: 'app-changedependancies',
   templateUrl: './changedependancies.component.html',
@@ -78,8 +80,17 @@ export class ChangedependanciesComponent implements OnInit {
     formData.append('emergencycontact', this.rform.get('emergencycontact').value);
     formData.append('file', this.rform.get('file').value);
 
+    formData.append('date', moment().tz("Africa/Johannesburg").format());
+
     
-    this.crudService.updateRequest(`updatedependancieslogs/${globdate}/${globworknumber1}`, formData).subscribe();
+    //this.crudService.updateRequest(`updatedependancieslogs/${globdate}/${globworknumber1}`, formData).subscribe();
+    if(globdate == 'null'){
+
+      this.crudService.updateRequest(`updatedependancies/${globworknumber1}`, formData).subscribe();
+    }
+    else{
+      this.crudService.updateRequest(`updatedependancieslogs/${globdate}/${globworknumber1}`, formData).subscribe();
+    }
         
   }
 

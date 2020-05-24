@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CrudOperationsService } from 'src/app/services/crud-operations.service'
 import { globdate, globworknumber1 } from 'src/app/modules/logs/logs.component'
 
+import * as moment from 'moment-timezone';
+
 @Component({
   selector: 'app-changetraining',
   templateUrl: './changetraining.component.html',
@@ -80,7 +82,16 @@ export class ChangetrainingComponent implements OnInit {
     formData.append('enddate', this.rform.get('enddate').value);
     formData.append('file', this.rform.get('file').value);
 
-    this.crudService.addRequest('addtraining', formData).subscribe();
+    formData.append('date', moment().tz("Africa/Johannesburg").format());
+ 
+    if(globdate == 'null'){
+
+      this.crudService.updateRequest(`updatetraining/${globworknumber1}`, formData).subscribe();
+    }
+    else{
+      this.crudService.updateRequest(`updatetraininglogs/${globdate}/${globworknumber1}`, formData).subscribe();
+    }
+    
         
   }
 

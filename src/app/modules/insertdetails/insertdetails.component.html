@@ -12,7 +12,7 @@
             
         <div class="uploadImgbtn">
             <button mat-raised-button type="button" (click)="ImgInput.click()">Upload image</button>
-            <input hidden type="file" (change)="onImgSelected(ImgInput.files)" #ImgInput>
+            <input hidden type="file" (change)="onImgSelected(ImgInput.files)" #ImgInput name="imgfile">
         </div>
         
         <div class="texts">

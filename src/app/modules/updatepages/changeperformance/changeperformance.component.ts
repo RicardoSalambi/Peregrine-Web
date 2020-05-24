@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CrudOperationsService } from 'src/app/services/crud-operations.service'
 import { globdate, globworknumber1 } from 'src/app/modules/logs/logs.component'
 
+import * as moment from 'moment-timezone';
+
 @Component({
   selector: 'app-changeperformance',
   templateUrl: './changeperformance.component.html',
@@ -79,7 +81,15 @@ export class ChangeperformanceComponent implements OnInit {
     formData.append('positivity', this.rform.get('positivity').value);
     formData.append('comments', this.rform.get('comments').value);
 
-    this.crudService.addRequest('addperformance', formData).subscribe();
+    formData.append('date', moment().tz("Africa/Johannesburg").format());
+ 
+    if(globdate == 'null'){
+
+      this.crudService.updateRequest(`updateperformance/${globworknumber1}`, formData).subscribe();
+    }
+    else{
+      this.crudService.updateRequest(`updateperformancelogs/${globdate}/${globworknumber1}`, formData).subscribe();
+    }
         
   }
 

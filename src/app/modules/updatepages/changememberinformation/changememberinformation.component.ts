@@ -3,6 +3,8 @@ import { CrudOperationsService } from 'src/app/services/crud-operations.service'
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { globdate, globworknumber1 } from 'src/app/modules/logs/logs.component'
 
+import * as moment from 'moment-timezone';
+
 @Component({
   selector: 'app-changememberinformation',
   templateUrl: './changememberinformation.component.html',
@@ -35,7 +37,7 @@ export class ChangememberinformationComponent implements OnInit {
       gender                 : new FormControl(),
       department             : new FormControl(),
       house                  : new FormControl(),
-      filename               : new FormControl(/*{disabled: true}*/),
+      filename               : new FormControl(),
       address                : new FormControl(),
       comments               : new FormControl(),
       file                   : new FormControl()
@@ -135,7 +137,9 @@ export class ChangememberinformationComponent implements OnInit {
 
   submit()
   {
+
     const formData = new FormData();
+
     formData.append('worknumber', this.rform.get('worknumber').value);
     formData.append('skills', this.rform.get('skills').value);
     formData.append('name', this.rform.get('name').value);
@@ -148,16 +152,22 @@ export class ChangememberinformationComponent implements OnInit {
 
     formData.append('department', this.rform.get('department').value);
     formData.append('house', this.rform.get('house').value);
-    //formData.append('filename', this.rform.get('filename').value);
+    formData.append('filename', this.rform.get('filename').value);
     formData.append('address', this.rform.get('address').value);
     formData.append('comments', this.rform.get('comments').value);
     formData.append('file', this.rform.get('file').value);
     
+    formData.append('date', moment().tz("Africa/Johannesburg").format());
 
 
     //*************************************************************
-
-    this.crudService.updateRequest(`updateperegrineworkerslogs/${globdate}/${globworknumber1}`, formData).subscribe();
+    if(globdate == 'null'){
+      this.crudService.updateRequest(`updateperegrineworkers/${globworknumber1}`, formData).subscribe();
+    }
+    else{
+      this.crudService.updateRequest(`updateperegrineworkerslogs/${globdate}/${globworknumber1}`, formData).subscribe();
+    }
+    
 
   }
 

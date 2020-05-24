@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CrudOperationsService } from 'src/app/services/crud-operations.service'
 import { globdate, globworknumber1 } from 'src/app/modules/logs/logs.component'
 
+import * as moment from 'moment-timezone';
+
 @Component({
   selector: 'app-changeexternalsituations',
   templateUrl: './changeexternalsituations.component.html',
@@ -56,8 +58,15 @@ export class ChangeexternalsituationsComponent implements OnInit {
     formData.append('worknumber', this.rform.get('worknumber').value);
     formData.append('responsiblities', this.rform.get('responsiblities').value);
 
-    
-    this.crudService.addRequest('addexternalsituations', formData).subscribe();
+    formData.append('date', moment().tz("Africa/Johannesburg").format());
+ 
+    if(globdate == 'null'){
+
+      this.crudService.updateRequest(`updateexternalsituations/${globworknumber1}`, formData).subscribe();
+    }
+    else{
+      this.crudService.updateRequest(`updateexternalsituationslogs/${globdate}/${globworknumber1}`, formData).subscribe();
+    }
         
   }
 

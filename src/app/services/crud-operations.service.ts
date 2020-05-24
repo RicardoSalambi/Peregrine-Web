@@ -39,6 +39,12 @@ export class CrudOperationsService {
     return this.http.put(url, data);
   }
 
+  deleteRequest(urlextension:string/*,data:any*/){
+
+    const url = `${this.url}/${urlextension}`;
+    return this.http.delete(url/*, data*/);
+  }
+
 //*************************************************************
 
   
@@ -53,10 +59,10 @@ export class CrudOperationsService {
     return this.http.post(url, data);
   }*/
 
-  deleteRequest(){
+  /*deleteRequest(){
 
-    return this.http.delete(this.url/*, httpOptions*/);
-  }
+    return this.http.delete(this.url);
+  }*/
 
 
   getfile(extension:String){
