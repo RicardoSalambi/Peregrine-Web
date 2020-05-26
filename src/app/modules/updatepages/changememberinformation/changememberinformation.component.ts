@@ -22,7 +22,7 @@ export class ChangememberinformationComponent implements OnInit {
 
   rform  : FormGroup;
 
-  constructor(private crudService : CrudOperationsService, private fb: FormBuilder,private dataserver : CrudOperationsService,protected sanitizer: DomSanitizer) {
+  constructor(private crudService : CrudOperationsService, private fb: FormBuilder,private dataserver : CrudOperationsService,protected domSanitizer: DomSanitizer) {
     this.imgURL = 'assets/img/NoProfile.jpg';
 
     this.datestring = globdate;
@@ -76,7 +76,7 @@ export class ChangememberinformationComponent implements OnInit {
       
       let base64String = btoa(STRING_CHAR);
 
-      this.imgURL = this.sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + base64String);
+      this.imgURL = this.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + base64String);
 
       //************************************************
 

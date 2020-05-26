@@ -22,7 +22,7 @@ export class ViewdetailsComponent implements OnInit {
 
   imgURL: any;
 
-  constructor(private router : Router, private service : ServiceService, private dataserver : CrudOperationsService,protected sanitizer: DomSanitizer) { }
+  constructor(private router : Router, private service : ServiceService, private dataserver : CrudOperationsService,protected domSanitizer: DomSanitizer) { }
 
   ngOnInit() {    
 
@@ -61,10 +61,10 @@ export class ViewdetailsComponent implements OnInit {
 
   getImg(worknumber:any):any
   {   
-      console.log(worknumber);
+      
     
       //************************************************
-      let TYPED_ARRAY = new Uint8Array(/*data[2].imgfile.data*/worknumber);
+      let TYPED_ARRAY = new Uint8Array(/*data[2].imgfile.data*/this.workers[this.workers.findIndex(x => x.worknumber == worknumber)].imgfile.data);
       //const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
 
       //*********For out of range Error use******
@@ -74,7 +74,7 @@ export class ViewdetailsComponent implements OnInit {
       
       let base64String = btoa(STRING_CHAR);
 
-      /*this.imgURL =*/return this.sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + base64String);
+      /*this.imgURL =*/return this.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + base64String);
 
       //************************************************
   }
