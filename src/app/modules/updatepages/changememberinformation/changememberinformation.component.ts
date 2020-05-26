@@ -40,7 +40,8 @@ export class ChangememberinformationComponent implements OnInit {
       filename               : new FormControl(),
       address                : new FormControl(),
       comments               : new FormControl(),
-      file                   : new FormControl()
+      file                   : new FormControl(),
+      imgfile                : new FormControl()
     })
 
    }
@@ -79,7 +80,8 @@ export class ChangememberinformationComponent implements OnInit {
       address                : data[0].address,
       comments               : data[0].comments,
       filename               : data[0].filename,
-      file                   : data[0].file
+      file                   : data[0].file,
+      imgfile                : data[0].imgfile
       })
       
 
@@ -117,7 +119,7 @@ export class ChangememberinformationComponent implements OnInit {
       this.imgURL = reader.result; 
     }
 
-    //this.rform.get('imgfile').patchValue(files[0]);
+    this.rform.get('imgfile').patchValue(files[0]);
   
     
   }
@@ -156,6 +158,7 @@ export class ChangememberinformationComponent implements OnInit {
     formData.append('address', this.rform.get('address').value);
     formData.append('comments', this.rform.get('comments').value);
     formData.append('file', this.rform.get('file').value);
+    formData.append('imgfile', this.rform.get('imgfile').value);
     
     formData.append('date', moment().tz("Africa/Johannesburg").format());
 
