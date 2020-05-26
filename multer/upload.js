@@ -1,21 +1,15 @@
 const multer = require('multer');
-const /*{ filestorage, imgstorage }*/storage = require('./storage');
+const {filestorage} = require('./storage');
 
 
 
-/*const filesingle*/ module.exports = multer ({
-    storage : storage
-}).single('file');
+/*const filesingle*/module.exports = multer ({
+    storage : filestorage
+}).fields([
+    {   name: 'file', maxCount: 1   }, 
+    {   name: 'imgfile', maxCount: 1  }
+]);//.single('file');
 
-
-
-const imgsingle = multer ({
-    storage : imgstorage
-}).single('imgfile');
-
-
-
-/*module.exports = {
-    filesingle,
-    imgsingle
-}*/
+// module.exports = {
+//     filesingle
+// }

@@ -115,6 +115,8 @@ getdependancieslogsdetails = (req, res, next, connection) => {
 
 adddependancies = (req, res, db) => {
 
+    let filepath = `${__basedir}/Uploads/files/`;
+
     upload(req, res, /*next ,*/(err) => {
     
         if(err)
@@ -129,8 +131,8 @@ adddependancies = (req, res, db) => {
               worknumber        : req.body.worknumber,
               next_of_kin       : req.body.NOK,
               emergencycontact  : req.body.emergencycontact,
-              filename          : req.file.originalname,
-              file              : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename)
+              filename          : req.files.file[0].originalname,
+              file              : fs.readFileSync(filepath + req.files.file[0].filename),
   
             }).then(() =>{
   
@@ -140,14 +142,14 @@ adddependancies = (req, res, db) => {
                 worknumber        : req.body.worknumber,
                 next_of_kin       : req.body.NOK,
                 emergencycontact  : req.body.emergencycontact,
-                filename          : req.file.originalname,
-                file              : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename)
+                filename          : req.files.file[0].originalname,
+                file              : fs.readFileSync(filepath + req.files.file[0].filename),
   
               }).then((file) =>{
   
-                fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+                fs.unlink(filepath + req.files.file[0].filename, (err) => {
                   if (err) throw err;
-                  console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                  console.log(`${filepath + req.files.file[0].filename} was Removed !`);
                 });
                 
                  
@@ -172,6 +174,8 @@ adddependancies = (req, res, db) => {
 //****************Update Request****************
 
 updatedependancies = (req, res, next, db, connection) => {
+
+    let filepath = `${__basedir}/Uploads/files/`;
 
     upload(req, res, (err) => {
     
@@ -202,8 +206,8 @@ updatedependancies = (req, res, next, db, connection) => {
                   worknumber                 : req.body.worknumber,
                   next_of_kin                : req.body.NOK,
                   emergencycontact           : req.body.emergencycontact,
-                  filename                   : req.file.originalname,
-                  file                       : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
+                  filename                   : req.files.file[0].originalname,
+                  file                       : fs.readFileSync(filepath + req.files.file[0].filename),
                   
                 })
                 .then( () => {
@@ -214,16 +218,16 @@ updatedependancies = (req, res, next, db, connection) => {
                     worknumber                 : req.body.worknumber,
                     next_of_kin                : req.body.NOK,
                     emergencycontact           : req.body.emergencycontact,
-                    filename                   : req.file.originalname,
-                    file                       : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
+                    filename                   : req.files.file[0].originalname,
+                    file                       : fs.readFileSync(filepath + req.files.file[0].filename),
                     
                   })
                   .then((file) => {
     
-                      fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
-                        if (err) throw err;
-                        console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
-                      });
+                    fs.unlink(filepath + req.files.file[0].filename, (err) => {
+                      if (err) throw err;
+                      console.log(`${filepath + req.files.file[0].filename} was Removed !`);
+                    });
     
                   });
     
@@ -252,6 +256,8 @@ updatedependancies = (req, res, next, db, connection) => {
 
 updatedependancieslogs = (req, res, next, db, connection) => {
 
+    let filepath = `${__basedir}/Uploads/files/`;
+
     let h = new Date(req.params.date)
     let getdate = h.setHours(h.getHours() - 2)
 
@@ -278,8 +284,8 @@ updatedependancieslogs = (req, res, next, db, connection) => {
                   worknumber                 : req.body.worknumber,
                   next_of_kin                : req.body.NOK,
                   emergencycontact           : req.body.emergencycontact,
-                  filename                   : req.file.originalname,
-                  file                       : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
+                  filename                   : req.files.file[0].originalname,
+                  file                       : fs.readFileSync(filepath + req.files.file[0].filename),
     
                 })
                 .then((rows) => {
@@ -287,9 +293,9 @@ updatedependancieslogs = (req, res, next, db, connection) => {
                   // console.log(rows);
                   // member.save()
     
-                  fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+                  fs.unlink(filepath + req.files.file[0].filename, (err) => {
                     if (err) throw err;
-                    console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                    console.log(`${filepath + req.files.file[0].filename} was Removed !`);
                   });
                   
                 })

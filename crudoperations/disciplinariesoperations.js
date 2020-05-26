@@ -75,6 +75,8 @@ getdisciplinarieslogsdetails = (req, res, next, connection) => {
 
 adddisciplinary = (req, res, db) => {
 
+    let filepath = `${__basedir}/Uploads/files/`;
+
     upload(req, res ,(err) => {
       
         if(err)
@@ -89,8 +91,8 @@ adddisciplinary = (req, res, db) => {
                 date              : req.body.date,//Date.now(),
                 worknumber        : req.body.worknumber,
                 MDD               : req.body.MDD,
-                filename          : req.file.originalname,
-                file              : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
+                filename          : req.files.file[0].originalname,
+                file              : fs.readFileSync(filepath + req.files.file[0].filename),
                 comments          : req.body.comments
             }).then(() =>{
 
@@ -99,15 +101,15 @@ adddisciplinary = (req, res, db) => {
                     date              : req.body.date,//Date.now(),
                     worknumber        : req.body.worknumber,
                     MDD               : req.body.MDD,
-                    filename          : req.file.originalname,
-                    file              : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
+                    filename          : req.files.file[0].originalname,
+                    file              : fs.readFileSync(filepath + req.files.file[0].filename),
                     comments          : req.body.comments
 
                 }).then((file) =>{
 
-                    fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
-                    if (err) throw err;
-                    console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                    fs.unlink(filepath + req.files.file[0].filename, (err) => {
+                      if (err) throw err;
+                      console.log(`${filepath + req.files.file[0].filename} was Removed !`);
                     });
                     
                     
@@ -133,6 +135,8 @@ adddisciplinary = (req, res, db) => {
 
 updatedisciplinaries = (req, res, next, db, connection) => {
 
+    let filepath = `${__basedir}/Uploads/files/`;
+
     upload(req, res, (err) => {
     
         if(err)
@@ -152,8 +156,8 @@ updatedisciplinaries = (req, res, next, db, connection) => {
                     date              : req.body.date,//Date.now(),
                     worknumber        : req.body.worknumber,
                     MDD               : req.body.MDD,
-                    filename          : req.file.originalname,
-                    file              : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
+                    filename          : req.files.file[0].originalname,
+                    file              : fs.readFileSync(filepath + req.files.file[0].filename),
                     comments          : req.body.comments
                   
                 })
@@ -163,16 +167,16 @@ updatedisciplinaries = (req, res, next, db, connection) => {
                     date              : req.body.date,//Date.now(),
                     worknumber        : req.body.worknumber,
                     MDD               : req.body.MDD,
-                    filename          : req.file.originalname,
-                    file              : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
+                    filename          : req.files.file[0].originalname,
+                    file              : fs.readFileSync(filepath + req.files.file[0].filename),
                     comments          : req.body.comments
                     
                   })
                   .then((file) => {
     
-                      fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+                      fs.unlink(filepath + req.files.file[0].filename, (err) => {
                         if (err) throw err;
-                        console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                        console.log(`${filepath + req.files.file[0].filename} was Removed !`);
                       });
     
                   });
@@ -202,6 +206,8 @@ updatedisciplinaries = (req, res, next, db, connection) => {
 
 updatedisciplinarieslogs = (req, res, next, db, connection) => {
 
+    let filepath = `${__basedir}/Uploads/files/`;
+
     let h = new Date(req.params.date)
     let getdate = h.setHours(h.getHours() - 2)
 
@@ -226,16 +232,16 @@ updatedisciplinarieslogs = (req, res, next, db, connection) => {
                     date              : getdate,
                     worknumber        : req.body.worknumber,
                     MDD               : req.body.MDD,
-                    filename          : req.file.originalname,
-                    file              : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
+                    filename          : req.files.file[0].originalname,
+                    file              : fs.readFileSync(filepath + req.files.file[0].filename),
                     comments          : req.body.comments
     
                 })
                 .then((rows) => {
     
-                  fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+                  fs.unlink(filepath + req.files.file[0].filename, (err) => {
                     if (err) throw err;
-                    console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                    console.log(`${filepath + req.files.file[0].filename} was Removed !`);
                   });
                   
                 })

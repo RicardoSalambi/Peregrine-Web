@@ -5,6 +5,7 @@ const dbconfig = require('../dbconfig');
 const upload = require('../multer/upload')
 const fs = require('fs');
 
+
 /////////////////////////////////////////////
 const connection = mysql.createConnection({
     host : dbconfig.host,
@@ -136,7 +137,9 @@ getperegrineworkerslogsdetails = (req, res, next) => {
 
 //****************Post Request****************
 
-addmemberdetails = (req, res, next, db) => {
+addmemberdetails = (req, res, next, db) => { 
+  
+  let filepath = `${__basedir}/Uploads/files/`;
 
   upload(req, res, (err) => {
     
@@ -146,8 +149,8 @@ addmemberdetails = (req, res, next, db) => {
       }
       else 
       {
-          //console.log(JSON.stringify(req.body));
-
+          console.log(req.files.file[0].filename);
+          
           db.peregrineworkersmodel.create({
 
             date             : req.body.date,//moment().tz("Africa/Johannesburg").format(),//Date.now(),
@@ -163,9 +166,9 @@ addmemberdetails = (req, res, next, db) => {
             house            : req.body.house,
             address          : req.body.address,
             comments         : req.body.comments,
-            filename         : req.file.originalname,
-            file             : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
-            imgfile          : 'NULL'
+            filename         : req.files.file[0].originalname,
+            file             : fs.readFileSync(filepath + req.files.file[0].filename),
+            imgfile          : fs.readFileSync(filepath + req.files.imgfile[0].filename)
           }).then((file) =>{
 
 
@@ -184,15 +187,20 @@ addmemberdetails = (req, res, next, db) => {
               house            : req.body.house,
               address          : req.body.address,
               comments         : req.body.comments,
-              filename         : req.file.originalname,
-              file             : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
-              imgfile          : 'NULL'
+              filename         : req.files.file[0].originalname,
+              file             : fs.readFileSync(filepath + req.files.file[0].filename),
+              imgfile          : fs.readFileSync(filepath + req.files.imgfile[0].filename)
             }).then((file) =>{
 
-              fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
-                if (err) throw err;
-                console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
-              });
+                fs.unlink(filepath + req.files.file[0].filename, (err) => {
+                  if (err) throw err;
+                  console.log(`${filepath + req.files.file[0].filename} was Removed !`);
+                });
+
+                fs.unlink(filepath + req.files.imgfile[0].filename, (err) => {
+                  if (err) throw err;
+                  console.log(`${filepath + req.files.imgfile[0].filename} was Removed !`);
+                });
 
             })
             
@@ -201,9 +209,9 @@ addmemberdetails = (req, res, next, db) => {
 
           })  
           
-          next(); 
+          //next(); 
       }
-  });  
+  });   
 
 
 }
@@ -215,6 +223,8 @@ addmemberdetails = (req, res, next, db) => {
 //****************Update Request****************
 
 updateperegrineworkers = (req, res, next, db, connection) => {
+
+  let filepath = `${__basedir}/Uploads/files/`;
 
   upload(req, res, (err) => {
     
@@ -252,7 +262,7 @@ updateperegrineworkers = (req, res, next, db, connection) => {
             // member.address          = req.body.address;
             // member.comments         = req.body.comments;
             // member.filename         = req.file.originalname;
-            // member.file             = fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename);
+            // member.file             = fs.readFileSync(filepath + req.file.filename);
             // member.imgfile          = 'NULL';
 
             // member.save();
@@ -271,9 +281,9 @@ updateperegrineworkers = (req, res, next, db, connection) => {
               house             : req.body.house,
               address           : req.body.address,
               comments          : req.body.comments,
-              filename          : req.file.originalname,
-              file              : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
-              imgfile           : 'NULL'
+              filename          : req.files.file[0].originalname,
+              file              : fs.readFileSync(filepath + req.files.file[0].filename),
+              imgfile           : fs.readFileSync(filepath + req.files.imgfile[0].filename)
             })
             .then(() => {
               //res.json(member)
@@ -292,16 +302,21 @@ updateperegrineworkers = (req, res, next, db, connection) => {
                 house            : req.body.house,
                 address          : req.body.address,
                 comments         : req.body.comments,
-                filename         : req.file.originalname,
-                file             : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
-                imgfile          : 'NULL'
+                filename         : req.files.file[0].originalname,
+                file             : fs.readFileSync(filepath + req.files.file[0].filename),
+                imgfile          : fs.readFileSync(filepath + req.files.imgfile[0].filename)
                 
               })
               .then((file) => {
 
-                  fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+                  fs.unlink(filepath + req.files.file[0].filename, (err) => {
                     if (err) throw err;
-                    console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                    console.log(`${filepath + req.files.file[0].filename} was Removed !`);
+                  });
+
+                  fs.unlink(filepath + req.files.imgfile[0].filename, (err) => {
+                    if (err) throw err;
+                    console.log(`${filepath + req.files.imgfile[0].filename} was Removed !`);
                   });
 
               });
@@ -318,6 +333,8 @@ updateperegrineworkers = (req, res, next, db, connection) => {
 
 
 updateperegrineworkerslogs = (req, res, next, db, connection) => {
+
+  let filepath = `${__basedir}/Uploads/files/`;
 
   let h = new Date(req.params.date)
   let getdate = h.setHours(h.getHours() - 2)
@@ -356,19 +373,21 @@ updateperegrineworkerslogs = (req, res, next, db, connection) => {
               house            : req.body.house,
               address          : req.body.address,
               comments         : req.body.comments,
-              filename         : req.file.originalname,
-              file             : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename),
-              imgfile          : 'NULL'
+              filename         : req.files.file[0].originalname,
+              file             : fs.readFileSync(filepath + req.files.file[0].filename),
+              imgfile          : fs.readFileSync(filepath + req.files.imgfile[0].filename)
 
             })
             .then((rows) => {
-              //res.json(member)
-              // console.log(rows);
-              // member.save()
-
-              fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+              
+              fs.unlink(filepath + req.files.file[0].filename, (err) => {
                 if (err) throw err;
-                console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                console.log(`${filepath + req.files.file[0].filename} was Removed !`);
+              });
+
+              fs.unlink(filepath + req.files.imgfile[0].filename, (err) => {
+                if (err) throw err;
+                console.log(`${filepath + req.files.imgfile[0].filename} was Removed !`);
               });
               
             })
@@ -388,7 +407,7 @@ updateperegrineworkerslogs = (req, res, next, db, connection) => {
               member.address          = req.body.address;
               member.comments         = req.body.comments;
               member.filename         = req.file.originalname;
-              member.file             = fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename);
+              member.file             = fs.readFileSync(filepath + req.file.filename);
               member.imgfile          = 'NULL';
 
               member.save({ fields: ['date','worknumber','name','surname','qualification','department','skills','position','nationality','gender','house','address','comments','filename','file','imgfile'] });

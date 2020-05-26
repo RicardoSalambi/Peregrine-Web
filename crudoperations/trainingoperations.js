@@ -75,6 +75,8 @@ gettraininglogsdetails = (req, res, next, connection) => {
 
 addtraining = (req, res, db) => {
 
+    let filepath = `${__basedir}/Uploads/files/`;
+
     upload(req, res, /*next ,*/(err) => {
       
         if(err)
@@ -90,8 +92,8 @@ addtraining = (req, res, db) => {
               trainingdescription       : req.body.trainingdescription,
               startdate                 : req.body.startdate,
               enddate                   : req.body.enddate,
-              filename                  : req.file.originalname,
-              file                      : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename)
+              filename                  : req.files.file[0].originalname,
+              file                      : fs.readFileSync(filepath + req.files.file[0].filename),
     
             }).then(() => {
     
@@ -102,14 +104,14 @@ addtraining = (req, res, db) => {
                 trainingdescription       : req.body.trainingdescription,
                 startdate                 : req.body.startdate,
                 enddate                   : req.body.enddate,
-                filename                  : req.file.originalname,
-                file                      : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename)
+                filename                  : req.files.file[0].originalname,
+                file                      : fs.readFileSync(filepath + req.files.file[0].filename),
     
               }).then((file) =>{
     
-                fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+                fs.unlink(filepath + req.files.file[0].filename, (err) => {
                   if (err) throw err;
-                  console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                  console.log(`${filepath + req.files.file[0].filename} was Removed !`);
                 });
                 
                  
@@ -129,6 +131,8 @@ addtraining = (req, res, db) => {
 //****************Update Request****************
 
 updatetraining = (req, res, next, db, connection) => {
+
+  let filepath = `${__basedir}/Uploads/files/`;
 
   upload(req, res, (err) => {
   
@@ -151,8 +155,8 @@ updatetraining = (req, res, next, db, connection) => {
                   trainingdescription       : req.body.trainingdescription,
                   startdate                 : req.body.startdate,
                   enddate                   : req.body.enddate,
-                  filename                  : req.file.originalname,
-                  file                      : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename)
+                  filename                  : req.files.file[0].originalname,
+                  file                      : fs.readFileSync(filepath + req.files.file[0].filename),
                 
               })
               .then( () => {
@@ -164,16 +168,16 @@ updatetraining = (req, res, next, db, connection) => {
                   trainingdescription       : req.body.trainingdescription,
                   startdate                 : req.body.startdate,
                   enddate                   : req.body.enddate,
-                  filename                  : req.file.originalname,
-                  file                      : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename)
+                  filename                  : req.files.file[0].originalname,
+                  file                      : fs.readFileSync(filepath + req.files.file[0].filename),
                   
                 })
                 .then((file) => {
   
-                    fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
-                      if (err) throw err;
-                      console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
-                    });
+                  fs.unlink(filepath + req.files.file[0].filename, (err) => {
+                    if (err) throw err;
+                    console.log(`${filepath + req.files.file[0].filename} was Removed !`);
+                  });
   
                 });
   
@@ -202,6 +206,8 @@ updatetraining = (req, res, next, db, connection) => {
 
 updatetraininglogs = (req, res, next, db, connection) => {
 
+  let filepath = `${__basedir}/Uploads/files/`;
+
   let h = new Date(req.params.date)
   let getdate = h.setHours(h.getHours() - 2)
 
@@ -229,15 +235,15 @@ updatetraininglogs = (req, res, next, db, connection) => {
                   trainingdescription       : req.body.trainingdescription,
                   startdate                 : req.body.startdate,
                   enddate                   : req.body.enddate,
-                  filename                  : req.file.originalname,
-                  file                      : fs.readFileSync(__basedir + '/Uploads/files/' + req.file.filename)
+                  filename                  : req.files.file[0].originalname,
+                  file                      : fs.readFileSync(filepath + req.files.file[0].filename),
   
               })
               .then((rows) => {
   
-                fs.unlink(__basedir + '/Uploads/files/' + req.file.filename, (err) => {
+                fs.unlink(filepath + req.files.file[0].filename, (err) => {
                   if (err) throw err;
-                  console.log(`${__basedir + '/Uploads/files/' + req.file.filename} was Removed !`);
+                  console.log(`${filepath + req.files.file[0].filename} was Removed !`);
                 });
                 
               })
