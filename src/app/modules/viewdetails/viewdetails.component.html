@@ -52,7 +52,7 @@
 
             <input hidden type="text" #textInput value="{{item.worknumber}}">
 
-            <img mat-card-image src="assets/img/86518.png">
+            <img mat-card-image [src]="getImg(textInput.value)">
 
             <!--<mat-card-content>
                 <p>Ricardo is the best , the millinonaire , the billionaire, and the the most intelligent person in the world</p>

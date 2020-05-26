@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrudOperationsService } from 'src/app/services/crud-operations.service'
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { globdate, globworknumber1 } from 'src/app/modules/logs/logs.component'
+import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
 
 import * as moment from 'moment-timezone';
 
@@ -21,7 +22,7 @@ export class ChangememberinformationComponent implements OnInit {
 
   rform  : FormGroup;
 
-  constructor(private crudService : CrudOperationsService, private fb: FormBuilder,private dataserver : CrudOperationsService) {
+  constructor(private crudService : CrudOperationsService, private fb: FormBuilder,private dataserver : CrudOperationsService,protected sanitizer: DomSanitizer) {
     this.imgURL = 'assets/img/NoProfile.jpg';
 
     this.datestring = globdate;
@@ -62,7 +63,22 @@ export class ChangememberinformationComponent implements OnInit {
     //**************************************************************************
     
 
-    this.dataserver.getRequest(url).subscribe( data => {
+    this.dataserver.getRequest(url).subscribe( data => {      
+
+      //************************************************
+      let TYPED_ARRAY = new Uint8Array(data[0].imgfile.data);
+      //const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
+
+      //*********For out of range Error use******
+      const STRING_CHAR = TYPED_ARRAY.reduce((data, byte)=> {
+        return data + String.fromCharCode(byte);
+        }, '')//);
+      
+      let base64String = btoa(STRING_CHAR);
+
+      this.imgURL = this.sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + base64String);
+
+      //************************************************
 
       this.datestring = this.datestring + data[0].date;
 
@@ -87,13 +103,10 @@ export class ChangememberinformationComponent implements OnInit {
 
     })
   //****************************************************************************
-    
-
-    
-
-    
 
   }
+
+
 
   onImgSelected(files)
   {    
