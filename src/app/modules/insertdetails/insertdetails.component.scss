@@ -40,8 +40,8 @@ div{
     display: grid;
     grid-template-columns: repeat(1 , 1fr);
     align-items: center;
-    grid-column: 1/3;
-    height: 20vh;                                      /*This might the problem to the scroll problem*/
+    grid-column: 1/3;   
+    height: 20vh;                                   /*This might the problem to the scroll problem*/
     padding-bottom: 10vh;
 }
 

@@ -247,6 +247,8 @@ export class InsertdetailsComponent implements OnInit {
 
   onImgSelected(files)
   {   
+
+    console.log(files);
     
     if (files.length === 0)
       return;
@@ -273,6 +275,9 @@ export class InsertdetailsComponent implements OnInit {
 
   onFileSelected(event)
   {
+
+    console.log(event);
+
     const inputNode: any = document.querySelector('#filename');
     inputNode.value = <File>event.target.files[0].name;
 

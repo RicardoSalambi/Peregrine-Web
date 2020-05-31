@@ -21,6 +21,10 @@
             <mat-label>
                 Search 
             </mat-label>
+
+            <input matInput (keyup)="applyFilter($event)">
+
+        <!--
             <input matInput value="" [matAutocomplete]="auto" [formControl]="myControl">
 
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayfn">
@@ -28,6 +32,7 @@
                     {{item.name}}
                 </mat-option>
             </mat-autocomplete>
+        -->
 
 
             <mat-icon matSuffix>search</mat-icon>
@@ -35,6 +40,17 @@
     
     </div>
 
+    <div class="imageviewer">
+        
+        <img mat-card-image [src]="imgURL">
+        <br>
+        <mat-label>
+            Worknumber
+        </mat-label>
+        
+    </div>
+    
+<!--
     <div class="grid">
 
         <mat-card *ngFor="let item of filteredWorkers | async">
@@ -54,9 +70,7 @@
 
             <img mat-card-image [src]="getImg(textInput.value)">
 
-            <!--<mat-card-content>
-                <p>Ricardo is the best , the millinonaire , the billionaire, and the the most intelligent person in the world</p>
-            </mat-card-content>-->
+            
 
             <mat-menu #menu="matMenu" yPosition="below">
                 <button mat-menu-item>View Performance</button>
@@ -76,6 +90,98 @@
         </mat-card>
 
         
+
+    </div>
+-->
+
+    <div>
+        <table mat-table [dataSource]="workers" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+        <!--
+            <ng-container matColumnDef="pic">
+                <th mat-header-cell *matHeaderCellDef> Pic </th>                
+                <td mat-cell *matCellDef="let element"> 
+                    <input hidden type="text" #textInput value="{{element.worknumber}}">
+                    <img mat-card-image [src]="getImg(textInput.value)">
+                </td>
+            </ng-container>
+        -->
+        
+            <!-- Position Column -->
+            <ng-container matColumnDef="worknumber">
+            <th mat-header-cell *matHeaderCellDef> Work Number </th>
+            <td mat-cell *matCellDef="let element"> {{element.worknumber}} </td>
+            </ng-container>
+        
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+        
+            <!-- Weight Column -->
+            <ng-container matColumnDef="surname">
+            <th mat-header-cell *matHeaderCellDef> Surname </th>
+            <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
+            </ng-container>
+        
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="qualification">
+            <th mat-header-cell *matHeaderCellDef> Qualification </th>
+            <td mat-cell *matCellDef="let element"> {{element.qualification}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="department">
+                <th mat-header-cell *matHeaderCellDef> Department </th>
+                <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+            </ng-container>
+
+
+
+            <ng-container matColumnDef="Buttons">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+
+                    <button mat-button color="primary" [matMenuTriggerFor]="menu">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                    
+                    <input hidden type="text" #textInput1 value="{{element.date}}">
+                    <input hidden type="text" #textInput2 value="{{element.worknumber}}">
+
+                    <mat-menu #menu="matMenu" yPosition="below">
+                        <button mat-menu-item (click)="profilepic(textInput2.value)">View Profile Picture</button>
+                        <button mat-menu-item (click)="viewperf(textInput2.value)">View Performance</button>
+                        <button mat-menu-item [matMenuTriggerFor]="chooseupdates">Change Details</button>
+                        <button mat-menu-item (click)="terminate('peregrineworkerslogsID',textInput2.value)">
+                            Terminate Member
+                        </button>
+                    </mat-menu>
+
+                    <mat-menu #chooseupdates="matMenu">
+                        <button mat-menu-item (click)="goToPage( 'peregrineworkerslogs' , textInput2.value , 'changememberinformation' )">Member Information</button>
+                        <button mat-menu-item (click)="goToPage( 'dependancieslogs' , textInput2.value , 'changedependancies' )">Dependancies</button>
+                        <button mat-menu-item (click)="goToPage( 'disciplinarieslogs' , textInput2.value , 'changedisciplinary' )">Disciplinary</button>
+                        <button mat-menu-item (click)="goToPage( 'externalsituationslogs' , textInput2.value , 'changeexternalsituations' )">External Situations</button>
+                        <button mat-menu-item (click)="goToPage( 'performancelogs' , textInput2.value , 'changeperformance' )">Performance</button>
+                        <button mat-menu-item (click)="goToPage( 'workleavelogs' , textInput2.value , 'changeworkleave' )">Work Leave</button>
+                        <button mat-menu-item (click)="goToPage( 'traininglogs' , textInput2.value , 'changetraining' )">Training</button>
+                    </mat-menu>
+
+                </td>
+            </ng-container>
+
+            
+            
+            
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>  <!--(click)="onRowClicked(row)"-->
+
+        </table>
 
     </div>
 

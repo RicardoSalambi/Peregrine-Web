@@ -19,7 +19,7 @@ import { ChangeperformanceComponent } from 'src/app/modules/updatepages/changepe
 import { ChangeworkleaveComponent } from 'src/app/modules/updatepages/changeworkleave/changeworkleave.component';
 import { ChangetrainingComponent } from 'src/app/modules/updatepages/changetraining/changetraining.component';
 import { LogsComponent } from 'src/app/modules/logs/logs.component';
-
+import { ViewprofileComponent } from 'src/app/modules/viewprofile/viewprofile.component';
 
 
 const routes: Routes = [
@@ -96,6 +96,10 @@ const routes: Routes = [
     {
       path : 'logs',
       component : LogsComponent
+    },
+    {
+      path : 'memberprofile',
+      component : ViewprofileComponent
     },
   ]
 

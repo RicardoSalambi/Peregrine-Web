@@ -1,0 +1,93 @@
+<div class="wrapper">
+
+    <div class="profilepic">
+        <img [src]="imgUrl">
+    </div>
+
+    <div class="memberdetails">
+
+        <ul >
+            <li>
+                First Name  :       
+            </li>
+
+            <li>
+                {{ name }}
+            </li>
+<!--*************************************-->
+            <li>
+                Last Name   :
+            </li>
+
+            <li>
+                {{ surname }}
+            </li>
+<!--*************************************-->
+            <li>
+                Date of Birth  :          
+            </li>
+
+            <li>
+                {{ dateofbirth }}
+            </li>
+<!--*************************************-->
+            <li>
+                Gender   :         
+            </li>
+
+            <li>
+                {{ gender }}
+            </li>
+<!--*************************************-->
+            <li>
+                Email   :         
+            </li>
+
+            <li>
+                {{ email }}
+            </li>
+<!--*************************************-->
+            <li>
+                Mobile   :         
+            </li>
+
+            <li>
+                {{ mobile }}
+            </li>
+<!--*************************************-->
+            <li>
+                Address :          
+            </li>
+
+            <li>
+                {{ address }}
+            </li>
+<!--*************************************-->
+        </ul>
+
+    </div>
+
+    <div class="chart">
+
+        <highcharts-chart
+            [Highcharts]="Highcharts"
+            [options]="chartOptions"
+
+            style="width: 90%; height: 400px; display: block;">
+        </highcharts-chart>        
+        
+    </div>
+
+    <div>   Overall Percentage : </div>
+
+    <div> {{ overallpercent }} %</div>
+
+    <div class="button">
+
+        <button mat-raised-button class="download">Download Member Documents</button>
+
+    </div>
+
+
+
+</div>

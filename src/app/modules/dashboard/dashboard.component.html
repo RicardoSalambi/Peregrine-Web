@@ -12,9 +12,9 @@
     
     </div>
 
-    <div>
+    <div *ngIf="data">
         
-        <highcharts-chart
+        <highcharts-chart 
         [Highcharts]="Highcharts"
         [options]="chartOptions"
 

@@ -63,22 +63,17 @@ export class ChangememberinformationComponent implements OnInit {
     //**************************************************************************
     
 
-    this.dataserver.getRequest(url).subscribe( data => {      
-
-      //************************************************
-      let TYPED_ARRAY = new Uint8Array(data[0].imgfile.data);
-      //const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
-
-      //*********For out of range Error use******
-      const STRING_CHAR = TYPED_ARRAY.reduce((data, byte)=> {
-        return data + String.fromCharCode(byte);
-        }, '')//);
+    this.dataserver.getRequest(url).subscribe( data => {   
       
-      let base64String = btoa(STRING_CHAR);
 
-      this.imgURL = this.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + base64String);
+      let filearray = new Uint8Array(data[0].file.data);
+      let fileblob = new Blob([filearray]);
 
-      //************************************************
+      let filename = `${data[0].filename}`;      
+
+      let imgarray = new Uint8Array(data[0].imgfile.data);
+      let imgblob = new Blob([imgarray]);
+      
 
       this.datestring = this.datestring + data[0].date;
 
@@ -95,11 +90,27 @@ export class ChangememberinformationComponent implements OnInit {
       house                  : data[0].house,
       address                : data[0].address,
       comments               : data[0].comments,
-      filename               : data[0].filename,
-      file                   : data[0].file,
-      imgfile                : data[0].imgfile
+      filename               : filename,
+      file                   : fileblob,
+      imgfile                : imgblob
       })
+
+      //console.log(data[0].file);
+
+      //************************************************
+      let TYPED_ARRAY = new Uint8Array(data[0].imgfile.data);
+      //const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
+
+      //*********For out of range Error use******
+      const STRING_CHAR = TYPED_ARRAY.reduce((data, byte)=> {
+        return data + String.fromCharCode(byte);
+        }, '')//);
       
+      let base64String = btoa(STRING_CHAR);
+
+      this.imgURL = this.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + base64String);
+
+      //************************************************
 
     })
   //****************************************************************************

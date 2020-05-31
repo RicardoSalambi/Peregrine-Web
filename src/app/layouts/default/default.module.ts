@@ -20,6 +20,7 @@ import { ChangeperformanceComponent } from 'src/app/modules/updatepages/changepe
 import { ChangeworkleaveComponent } from 'src/app/modules/updatepages/changeworkleave/changeworkleave.component';
 import { ChangetrainingComponent } from 'src/app/modules/updatepages/changetraining/changetraining.component';
 import { LogsComponent } from 'src/app/modules/logs/logs.component';
+import { ViewprofileComponent } from 'src/app/modules/viewprofile/viewprofile.component';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -41,6 +42,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
+
+import { ChartsModule } from 'ng2-charts';
 //import { MatTableDataSource } from '@angular/material/table';
 
 
@@ -66,7 +69,8 @@ import { MatTableModule } from '@angular/material/table';
     ChangeperformanceComponent,
     ChangeworkleaveComponent,
     ChangetrainingComponent,
-    LogsComponent
+    LogsComponent,    
+    ViewprofileComponent,
   ],
   imports: [
     CommonModule,
@@ -90,8 +94,8 @@ import { MatTableModule } from '@angular/material/table';
     MatFormFieldModule,
     MatCheckboxModule,
     MatAutocompleteModule,
-    MatTableModule,
-    //MatTableDataSource
+    MatTableModule,    
+    ChartsModule
   ]
 })
 export class DefaultModule { }
