@@ -5,7 +5,7 @@ const dbconfig = require('../dbconfig');
 const upload = require('../multer/upload')
 
 
-
+//****************GET Request****************
 getlatestperformance = (req, res, next, connection) => {
 
     let queryString = `select * from ${'performances'} where worknumber = ${req.params.id};`;
@@ -48,6 +48,27 @@ getperformancelogs = (req, res, next, connection) => {
 
 }
 
+getperformancelogsdetailsID = (req, res, next, connection) => {
+
+  let queryString = `select * from ${'performancelogs'} where worknumber = ${req.params.id};`;
+
+  console.log(queryString);  
+
+  connection.query(queryString, (err,rows,fields) => {
+      if (err) 
+      {
+          console.log('Query Failed with : ' + err)
+          res.end();
+      }
+      else
+      {
+          res.json(rows) //If data does not show use this command in mysql terminal 'ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YourPassword';'
+      }
+      
+  });
+
+}
+
 
 getperformancelogsdetails = (req, res, next, connection) => {
 
@@ -71,6 +92,32 @@ getperformancelogsdetails = (req, res, next, connection) => {
 }
 
 
+getperformancelogsdetailsIDpresentandpast = (req, res, next, connection) => {
+
+  let queryString = `select * from ${'performancelogs'} where worknumber = ${req.params.id} and year(date) = ${req.params.year} UNION SELECT * FROM ${'performances'} order by ${'date'} desc`;
+
+  console.log(queryString);  
+
+  connection.query(queryString, (err,rows,fields) => {
+      if (err) 
+      {
+          console.log('Query Failed with : ' + err)
+          res.end();
+      }
+      else
+      {
+          res.json(rows) //If data does not show use this command in mysql terminal 'ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YourPassword';'
+      }
+      
+  });
+
+}
+
+
+
+
+
+//****************POST Request****************
 addperformance = (req, res, db) => {
 
     upload(req, res, /*next ,*/(err) => {
@@ -114,6 +161,9 @@ addperformance = (req, res, db) => {
       });
 
 }
+
+
+
 
 
 //****************Update Request****************
@@ -289,6 +339,8 @@ module.exports = {
 
     getperformancelogs,
     getperformancelogsdetails,
+    getperformancelogsdetailsID,
+    getperformancelogsdetailsIDpresentandpast,
 
     addperformance,
 

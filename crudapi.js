@@ -34,6 +34,8 @@ function createRouter(db,connection)
 
   router.get('/getperegrineworkerslogsdetails/:date/:id' , (req, res, next) => { peregrineworkers.getperegrineworkerslogsdetails(req, res, next) } );
 
+  router.get('/memberdistribution' , (req, res, next) => { peregrineworkers.memberdistribution(req, res, next) } );
+
 
   router.post('/addmemberdetails', (req,res, next) => { peregrineworkers.addmemberdetails(req,res, next, db) } );
 
@@ -42,6 +44,8 @@ function createRouter(db,connection)
 
   router.put(`/updateperegrineworkerslogs/:date/:id`, (req, res, next) => { peregrineworkers.updateperegrineworkerslogs(req, res, next, db, connection) } );
 
+  
+  router.delete(`/terminateperegrineworkerslogsID/:id`, (req, res, next) => { peregrineworkers.terminateperegrineworkerslogsID(req, res, next, db, connection) } );
 
   router.delete(`/terminateperegrineworkerslogs/:date/:id`, (req, res, next) => { peregrineworkers.terminateperegrineworkerslogs(req, res, next, db, connection) } );
 
@@ -131,6 +135,12 @@ function createRouter(db,connection)
   router.get('/getperformancelogs/:id/:table' , (req, res, next) => { performance.getperformancelogs(req, res, next, connection) } );
 
   router.get('/getperformancelogsdetails/:date/:id' , (req, res, next) => { performance.getperformancelogsdetails(req, res, next, connection) } );
+
+  router.get('/getperformancelogsdetailsID/:id' , (req, res, next) => { performance.getperformancelogsdetailsID(req, res, next, connection) } );
+
+  router.get('/getperformancelogsdetailsIDpresentandpast/:id/:year' , (req, res, next) => { performance.getperformancelogsdetailsIDpresentandpast(req, res, next, connection) } );
+  
+  
 
 
   router.post('/addperformance', (req,res) =>{ performance.addperformance(req,res,db) } );

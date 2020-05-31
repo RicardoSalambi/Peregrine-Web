@@ -102,16 +102,16 @@ const dependancieslogmodel = dependancieslog(Sequelize, connection);
 dependanciesmodel.hasMany(dependancieslogmodel, {  
   foreignKey: {name:'worknumber'} , 
   sourceKey: 'worknumber',
-  onDelete: 'NO ACTION', 
+  onDelete: 'CASCADE', 
   onUpdate: 'CASCADE'
 });
 dependancieslogmodel.belongsTo(dependanciesmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
 
 
-peregrineworkersmodel.hasMany(dependanciesmodel, {  
+peregrineworkersmodel.hasOne(dependanciesmodel, {  
   foreignKey: {name:'worknumber'} , 
   sourceKey: 'worknumber',
-  onDelete: 'NO ACTION', 
+  onDelete: 'CASCADE', 
   onUpdate: 'CASCADE'
 });
 dependanciesmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
@@ -128,7 +128,7 @@ const disciplinarieslogsmodel = disciplinarieslogs(Sequelize, connection);
 disciplinariesmodel.hasMany(disciplinarieslogsmodel, {  
   foreignKey: {name:'worknumber'} , 
   sourceKey: 'worknumber',
-  onDelete: 'NO ACTION', 
+  onDelete: 'CASCADE', 
   onUpdate: 'CASCADE'
 });
 disciplinarieslogsmodel.belongsTo(disciplinariesmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
@@ -136,7 +136,7 @@ disciplinarieslogsmodel.belongsTo(disciplinariesmodel, {foreignKey: 'worknumber'
 peregrineworkersmodel.hasMany(disciplinariesmodel, {  
   foreignKey: {name:'worknumber'} , 
   sourceKey: 'worknumber',
-  onDelete: 'NO ACTION', 
+  onDelete: 'CASCADE', 
   onUpdate: 'CASCADE'
 });
 disciplinariesmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
@@ -152,7 +152,7 @@ const externalsituationslogsmodel = externalsituationslogs(Sequelize, connection
 externalsituationsmodel.hasMany(externalsituationslogsmodel, {  
   foreignKey: {name:'worknumber'} , 
   sourceKey: 'worknumber',
-  onDelete: 'NO ACTION', 
+  onDelete: 'CASCADE', 
   onUpdate: 'CASCADE'
 });
 externalsituationslogsmodel.belongsTo(externalsituationsmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
@@ -160,7 +160,7 @@ externalsituationslogsmodel.belongsTo(externalsituationsmodel, {foreignKey: 'wor
 peregrineworkersmodel.hasMany(externalsituationsmodel, {  
   foreignKey: {name:'worknumber'} , 
   sourceKey: 'worknumber',
-  onDelete: 'NO ACTION', 
+  onDelete: 'CASCADE', 
   onUpdate: 'CASCADE'
 });
 externalsituationsmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
@@ -177,7 +177,7 @@ const performancelogsmodel = performancelogs(Sequelize, connection);
 performancemodel.hasMany(performancelogsmodel, {  
   foreignKey: {name:'worknumber'} , 
   sourceKey: 'worknumber',
-  onDelete: 'NO ACTION', 
+  onDelete: 'CASCADE', 
   onUpdate: 'CASCADE'
 });
 performancelogsmodel.belongsTo(performancemodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
@@ -185,7 +185,7 @@ performancelogsmodel.belongsTo(performancemodel, {foreignKey: 'worknumber',targe
 peregrineworkersmodel.hasMany(performancemodel, {  
   foreignKey: {name:'worknumber'} , 
   sourceKey: 'worknumber',
-  onDelete: 'NO ACTION', 
+  onDelete: 'CASCADE', 
   onUpdate: 'CASCADE'
 });
 performancemodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
@@ -201,7 +201,7 @@ const traininglogsmodel = traininglogs(Sequelize, connection);
 trainingmodel.hasMany(traininglogsmodel, {  
   foreignKey: {name:'worknumber'} , 
   sourceKey: 'worknumber',
-  onDelete: 'NO ACTION', 
+  onDelete: 'CASCADE', 
   onUpdate: 'CASCADE'
 });
 traininglogsmodel.belongsTo(trainingmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
@@ -209,7 +209,7 @@ traininglogsmodel.belongsTo(trainingmodel, {foreignKey: 'worknumber',targetKey: 
 peregrineworkersmodel.hasMany(trainingmodel, {  
   foreignKey: {name:'worknumber'} , 
   sourceKey: 'worknumber',
-  onDelete: 'NO ACTION', 
+  onDelete: 'CASCADE', 
   onUpdate: 'CASCADE'
 });
 trainingmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});

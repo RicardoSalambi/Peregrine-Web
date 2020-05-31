@@ -22,7 +22,7 @@ const connection = mysql.createConnection({
 
 allmembers = (req, res, next) =>  {    
 
-    db.peregrineworkersmodel.findAll({attributes: ['name', 'worknumber','surname', 'qualification','department', 'skills','position', 'nationality','gender', 'house','address', 'comments']})
+    db.peregrineworkersmodel.findAll({attributes: ['name', 'worknumber','surname', 'qualification','department', 'skills','position', 'nationality','gender', 'house','address', 'comments','imgfile']})
       .then(peregrineworkers => {
 
         res.json(peregrineworkers)
@@ -129,7 +129,25 @@ getperegrineworkerslogsdetails = (req, res, next) => {
 
 
 
+memberdistribution = (req, res, next) =>  {    
 
+  let queryString = `select ${'department'} ,count(*) as count from ${'peregrineworkers'} group by ${'department'};`;
+
+    console.log(queryString);  
+
+    connection.query(queryString, (err,rows,fields) => {
+        if (err) 
+        {
+            console.log('Query Failed with : ' + err)
+            res.end();
+        }
+        else
+        {
+            res.json(rows) //If data does not show use this command in mysql terminal 'ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YourPassword';'
+        }
+      });
+
+}
 
 
 
@@ -149,7 +167,6 @@ addmemberdetails = (req, res, next, db) => {
       }
       else 
       {
-          console.log(req.files.file[0].filename);
           
           db.peregrineworkersmodel.create({
 
@@ -426,6 +443,43 @@ updateperegrineworkerslogs = (req, res, next, db, connection) => {
 
 
 //******************Delete Request************* 
+terminateperegrineworkerslogsID = (req, res, next, db, connection) => {
+
+  upload(req, res, (err) => {
+    
+    if(err)
+    {
+      console.log(err);        
+    }
+    else 
+    {
+
+      db.peregrineworkersmodel.findByPk(req.params.id)
+        .then( member => {
+          // Check if record exists in db  
+          
+          if (member) {
+
+            member.destroy();  
+            
+          }
+
+        })
+
+    }
+
+  });
+
+}
+
+
+
+
+
+
+
+
+
 terminateperegrineworkerslogs = (req, res, next, db, connection) => {
 
   let h = new Date(req.params.date)
@@ -467,11 +521,13 @@ module.exports = {
     getlatestperegrineworkers,
     getperegrineworkerslogs,
     getperegrineworkerslogsdetails,
+    memberdistribution,
 
     addmemberdetails,
 
     updateperegrineworkers,
     updateperegrineworkerslogs,
 
+    terminateperegrineworkerslogsID,
     terminateperegrineworkerslogs
 }
