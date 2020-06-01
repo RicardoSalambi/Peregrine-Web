@@ -5,9 +5,9 @@ import { globworknumber/*, workethic, puntuality, teamwork, initiative, positivi
 
 import * as moment from 'moment-timezone';
 
-
-
 import * as Highcharts from 'highcharts';
+import HC_exporting from 'highcharts/modules/exporting';
+
 
 @Component({
   selector: 'app-viewprofile',
@@ -141,7 +141,12 @@ export class ViewprofileComponent implements OnInit {
                 shared: true,
                 pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f}pts</b><br/>'
             },
-
+            credits: {
+                enabled: false
+            },
+            exporting: {
+                enabled: true
+            },
             legend: {
                 align: 'right',
                 verticalAlign: 'middle',
@@ -177,6 +182,7 @@ export class ViewprofileComponent implements OnInit {
             }
             
           }
+          HC_exporting(Highcharts);
         });
   }
 

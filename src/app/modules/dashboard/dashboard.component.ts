@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrudOperationsService } from 'src/app/services/crud-operations.service';
 
 import * as Highcharts from 'highcharts';
+import HC_exporting from 'highcharts/modules/exporting';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,8 +16,10 @@ export class DashboardComponent implements OnInit {
 
   data = [];
 
-  constructor(private dataserver : CrudOperationsService) 
-  {
+  constructor(private dataserver : CrudOperationsService) { }
+
+  ngOnInit(): void {
+
     this.dataserver.getRequest(`memberdistribution`).subscribe( (data) => {
 
         data = new Array(data);
@@ -48,6 +51,12 @@ export class DashboardComponent implements OnInit {
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },
+            credits: {
+                enabled: false
+            },
+            exporting: {
+                enabled: true
+            },
             accessibility: {
                 point: {
                     valueSuffix: '%'
@@ -64,20 +73,17 @@ export class DashboardComponent implements OnInit {
                 }
             },
             series: [{
-                name: 'Departments',
+                name: 'Members',
                 colorByPoint: true,
                 data: this.data
             }]
         };
 
+        HC_exporting(Highcharts);
+
         
 
     });
-  }
-
-  ngOnInit(): void {
-
-    
 
 
   }
