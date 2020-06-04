@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -7,8 +7,11 @@ import { ServiceService } from './service.service';
 import { CrudOperationsService } from 'src/app/services/crud-operations.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 //import * as moment from 'moment-timezone';
+
+let vars = false;
 
 @Component({
   selector: 'app-viewdetails',
@@ -26,7 +29,19 @@ export class ViewdetailsComponent implements OnInit {
 
   displayedColumns: any[] = ['worknumber', 'name', 'surname','department','Buttons'];
 
-  constructor(private router : Router, private service : ServiceService, private dataserver : CrudOperationsService,protected domSanitizer: DomSanitizer) { }
+  alerts = []; 
+  alertsStorage = [
+    {
+      type: 'success',
+      message: 'Successful transaction',
+    },
+    {
+      type: 'danger',
+      message: 'Oops !! something went wrong',
+    }
+  ]
+
+  constructor(private router : Router, private service : ServiceService, private dataserver : CrudOperationsService,protected domSanitizer: DomSanitizer,public dialog: MatDialog) { }
 
   ngOnInit() {    
 
@@ -127,9 +142,34 @@ export class ViewdetailsComponent implements OnInit {
 
   terminate(table:string,id:any)
   {
-    console.log('Terminate Clicked!');
-    this.dataserver.deleteRequest(`terminate${table}/${id}`/*, formData*/).subscribe();    
+    const dialogRef =this.dialog.open(TerminateMemberDialog, {
+      data: {table: table, id: id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log(`table :${table}  id :${id}`);
+      if(vars)
+      {
+        console.log('Terminate activated !');
+        this.dataserver.deleteRequest(`terminate${table}/${id}`).subscribe();
+
+        this.alerts[0] = this.alertsStorage[0];
+
+      }
+    });
+
+        
   }
+
+
+  closealert(alert: any) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
+  }
+
+  // terminatedialog()
+  // {
+  //   this.dialog.open(TerminateMemberDialog);
+  // }
 
 }
 
@@ -143,3 +183,40 @@ export let globpage: string='null'
 // export let teamwork;
 // export let initiative;
 // export let positivity;
+
+@Component({
+  selector: 'terminatemember-dialog',
+  templateUrl: './dialog/terminatemember-dialog.html',
+  styleUrls: ['./dialog/terminatemember-dialog.scss']
+})
+export class TerminateMemberDialog {
+
+  constructor(private dataserver : CrudOperationsService,
+    public dialogRef: MatDialogRef<TerminateMemberDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+    
+  }
+
+  onYesClick(): void {
+    
+    
+    // this.dataserver.deleteRequest(`terminate${this.data.table}/${this.data.id}`/*, formData*/).subscribe(); 
+
+    // console.log(this.data.table);
+    vars = true;
+    this.dialogRef.close();
+
+    // this.dialogRef.afterClosed().subscribe(result => {
+    //   //console.log(`table :${table}  id :${id}`);
+    //   if(result)
+    //   {
+    //     console.log('Terminate activated !');        
+    //   }
+    // });
+       
+  }
+
+}

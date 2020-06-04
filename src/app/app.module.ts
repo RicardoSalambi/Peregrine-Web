@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { DefaultModule } from './layouts/default/default.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -25,6 +26,7 @@ import { DefaultModule } from './layouts/default/default.module';
     DefaultModule,
     MatButtonModule,
     MatInputModule,
+    MatDialogModule
     
   ],
   providers: [],

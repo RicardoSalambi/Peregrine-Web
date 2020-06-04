@@ -12,9 +12,11 @@ import HC_exporting from 'highcharts/modules/exporting';
 export class DashboardComponent implements OnInit {
 
   chartOptions: {};
+  growthchartOptions: {};
   Highcharts = Highcharts;
 
   data = [];
+  growthdata = [];
 
   constructor(private dataserver : CrudOperationsService) { }
 

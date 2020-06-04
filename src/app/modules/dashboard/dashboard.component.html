@@ -18,7 +18,18 @@
         [Highcharts]="Highcharts"
         [options]="chartOptions"
 
-        style="width: 78vw; height: 400px; display: grid;">
+        style="width: 75vw; height: 400px; display: grid;">
+        </highcharts-chart>
+
+    </div>
+
+    <div *ngIf="growthdata">
+        
+        <highcharts-chart 
+        [Highcharts]="Highcharts"
+        [options]="growthchartOptions"
+
+        style="width: 75vw; height: 400px; display: grid;">
         </highcharts-chart>
 
     </div>

@@ -49,6 +49,12 @@
         </mat-label>
         
     </div>
+
+    <div>
+        <p *ngFor="let alert of alerts">
+            <ngb-alert [type]="alert.type" (close)="closealert(alert)">{{ alert.message }}</ngb-alert>
+        </p>
+    </div>
     
 <!--
     <div class="grid">

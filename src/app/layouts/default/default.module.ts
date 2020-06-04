@@ -44,7 +44,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 
 import { ChartsModule } from 'ng2-charts';
-//import { MatTableDataSource } from '@angular/material/table';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -95,7 +97,9 @@ import { ChartsModule } from 'ng2-charts';
     MatCheckboxModule,
     MatAutocompleteModule,
     MatTableModule,    
-    ChartsModule
+    ChartsModule,
+    NgbModule,
+    MatDialogModule,
   ]
 })
 export class DefaultModule { }

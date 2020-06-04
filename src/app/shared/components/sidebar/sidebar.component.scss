@@ -12,3 +12,8 @@ ul li {
     background-color: rgb(61, 65, 61);
     overflow: hidden;*/
 }
+
+button:focus {
+    outline: none;
+    box-shadow: none;
+  }
