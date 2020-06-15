@@ -20,7 +20,17 @@ export class InsertdetailsComponent implements OnInit {
 
   nationalities: any;
 
-  
+  alerts = []; 
+  alertsStorage = [
+    {
+      type: 'success',
+      message: 'Successful transaction',
+    },
+    {
+      type: 'danger',
+      message: 'Oops !! something went wrong',
+    }
+  ]
 
   constructor(private crudService : CrudOperationsService, private fb: FormBuilder) {
     this.imgURL = 'assets/img/NoProfile.jpg';
@@ -225,22 +235,87 @@ export class InsertdetailsComponent implements OnInit {
   ngOnInit(): void {
 
     this.rform = this.fb.group({
-      worknumber             : new FormControl(),
+
+      worknumber             : ['',[ Validators.required, Validators.minLength(5), Validators.pattern(/^-?(0|[1-9]\d*)?$/)] ],
       skills                 : new FormControl(),
-      name                   : new FormControl(),
-      position               : new FormControl(),      
-      surname                : new FormControl(),
-      nationality            : new FormControl(),
-      qualification          : new FormControl(),
-      gender                 : new FormControl(),
-      department             : new FormControl(),
-      house                  : new FormControl(),
-      address                : new FormControl(),
+      name                   : ['',[ Validators.required]],
+      position               : ['',[ Validators.required]],      
+      surname                : ['',[ Validators.required]],
+      nationality            : ['',[ Validators.required]],
+      qualification          : ['',[ Validators.required]],
+      gender                 : ['',[ Validators.required]],
+      department             : ['',[ Validators.required]],
+      joiningdate            : ['',[ Validators.required]],
+      address                : ['',[ Validators.required]],
       comments               : new FormControl(),
-      file                   : new FormControl(),
-      imgfile                : new FormControl()
+      filename               : new FormControl({value: '', disabled: true}, Validators.required),
+      file                   : ['',[ Validators.required]],
+      imgfile                : ['',[ Validators.required]],
+      mobile                 : ['',[ Validators.required]],
+      email                  : ['',[ Validators.required,Validators.pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/)]]
+      
     })
 
+  }
+
+  //**********************Getters*******************************
+  get worknumber(){
+    return this.rform.get('worknumber');
+  }
+  get skills(){
+    return this.rform.get('skills');
+  }
+  get name(){
+    return this.rform.get('name');
+  }
+  get position(){
+    return this.rform.get('position');
+  }
+  get surname(){
+    return this.rform.get('surname');
+  }
+  get nationality(){
+    return this.rform.get('nationality');
+  }
+  get qualification(){
+    return this.rform.get('qualification');
+  }
+  get gender(){
+    return this.rform.get('gender');
+  }
+  get department(){
+    return this.rform.get('department');
+  }
+  get joiningdate(){
+    return this.rform.get('joiningdate');
+  }
+  get address(){
+    return this.rform.get('address');
+  }
+  get comments(){
+    return this.rform.get('comments');
+  }
+  get filename(){
+    return this.rform.get('filename');
+  }
+  get file(){
+    return this.rform.get('file');
+  }
+  get imgfile(){
+    return this.rform.get('imgfile');
+  }
+  get mobile(){
+    return this.rform.get('mobile');
+  }
+  get email(){
+    return this.rform.get('email');
+  }
+  //**********************Getters*******************************
+
+
+
+  closealert(alert: any) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
   }
 
   
@@ -248,7 +323,7 @@ export class InsertdetailsComponent implements OnInit {
   onImgSelected(files)
   {   
 
-    console.log(files);
+    //console.log(files);
     
     if (files.length === 0)
       return;
@@ -276,10 +351,12 @@ export class InsertdetailsComponent implements OnInit {
   onFileSelected(event)
   {
 
-    console.log(event);
+    //console.log(event);
 
-    const inputNode: any = document.querySelector('#filename');
-    inputNode.value = <File>event.target.files[0].name;
+    /*const inputNode: any = document.querySelector('#filename');
+    inputNode.value = <File>event.target.files[0].name;*/
+
+    this.rform.get('filename').patchValue(<File>event.target.files[0].name);
 
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -290,7 +367,9 @@ export class InsertdetailsComponent implements OnInit {
 
   submit()
   {
+
     const formData = new FormData();
+
     formData.append('worknumber', this.rform.get('worknumber').value);
     formData.append('skills', this.rform.get('skills').value);
     formData.append('name', this.rform.get('name').value);
@@ -302,11 +381,15 @@ export class InsertdetailsComponent implements OnInit {
     formData.append('gender', this.rform.get('gender').value);
 
     formData.append('department', this.rform.get('department').value);
-    formData.append('house', this.rform.get('house').value);
+    formData.append('joiningdate', this.rform.get('joiningdate').value);
     formData.append('address', this.rform.get('address').value);
     formData.append('comments', this.rform.get('comments').value);
+    formData.append('filename', this.rform.get('filename').value);
     formData.append('file', this.rform.get('file').value);
     formData.append('imgfile', this.rform.get('imgfile').value);
+
+    formData.append('mobile', this.rform.get('mobile').value);
+    formData.append('email', this.rform.get('email').value);
     
     formData.append('date', moment().tz("Africa/Johannesburg").format());
 
@@ -314,6 +397,8 @@ export class InsertdetailsComponent implements OnInit {
     //*************************************************************
 
     this.crudService.addRequest('addmemberdetails', formData).subscribe();
+
+    this.alerts[0] = this.alertsStorage[0];
 
   }
 

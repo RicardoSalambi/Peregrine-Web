@@ -22,27 +22,43 @@ export class ChangememberinformationComponent implements OnInit {
 
   rform  : FormGroup;
 
+  alerts = []; 
+  alertsStorage = [
+    {
+      type: 'success',
+      message: 'Successful transaction',
+    },
+    {
+      type: 'danger',
+      message: 'Oops !! something went wrong',
+    }
+  ]
+
   constructor(private crudService : CrudOperationsService, private fb: FormBuilder,private dataserver : CrudOperationsService,protected domSanitizer: DomSanitizer) {
     this.imgURL = 'assets/img/NoProfile.jpg';
 
     this.datestring = globdate;
 
     this.rform = this.fb.group({
-      worknumber             : new FormControl(),
+
+      worknumber             : ['',[ Validators.required, Validators.minLength(5), Validators.pattern(/^-?(0|[1-9]\d*)?$/)] ],
       skills                 : new FormControl(),
-      name                   : new FormControl(),
-      position               : new FormControl(),      
-      surname                : new FormControl(),
-      nationality            : new FormControl(),
-      qualification          : new FormControl(),
-      gender                 : new FormControl(),
-      department             : new FormControl(),
-      house                  : new FormControl(),
-      filename               : new FormControl(),
-      address                : new FormControl(),
+      name                   : ['',[ Validators.required]],
+      position               : ['',[ Validators.required]],      
+      surname                : ['',[ Validators.required]],
+      nationality            : ['',[ Validators.required]],
+      qualification          : ['',[ Validators.required]],
+      gender                 : ['',[ Validators.required]],
+      department             : ['',[ Validators.required]],
+      joiningdate            : ['',[ Validators.required]],
+      address                : ['',[ Validators.required]],
       comments               : new FormControl(),
-      file                   : new FormControl(),
-      imgfile                : new FormControl()
+      filename               : new FormControl({value: '', disabled: true}, Validators.required),
+      file                   : ['',[ Validators.required]],
+      imgfile                : ['',[ Validators.required]],
+      mobile                 : ['',[ Validators.required]],
+      email                  : ['',[ Validators.required,Validators.pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/)]]
+
     })
 
    }
@@ -87,12 +103,14 @@ export class ChangememberinformationComponent implements OnInit {
       qualification          : data[0].qualification,
       gender                 : data[0].gender,
       department             : data[0].department,
-      house                  : data[0].house,
+      joiningdate            : data[0].joiningdate,
       address                : data[0].address,
       comments               : data[0].comments,
-      filename               : filename,
+      filename               : data[0].filename,
       file                   : fileblob,
-      imgfile                : imgblob
+      imgfile                : imgblob,
+      mobile                 : data[0].mobile,
+      email                  : data[0].email,
       })
 
       //console.log(data[0].file);
@@ -115,6 +133,64 @@ export class ChangememberinformationComponent implements OnInit {
     })
   //****************************************************************************
 
+  }
+
+  //**********************Getters*******************************
+  get worknumber(){
+    return this.rform.get('worknumber');
+  }
+  get skills(){
+    return this.rform.get('skills');
+  }
+  get name(){
+    return this.rform.get('name');
+  }
+  get position(){
+    return this.rform.get('position');
+  }
+  get surname(){
+    return this.rform.get('surname');
+  }
+  get nationality(){
+    return this.rform.get('nationality');
+  }
+  get qualification(){
+    return this.rform.get('qualification');
+  }
+  get gender(){
+    return this.rform.get('gender');
+  }
+  get department(){
+    return this.rform.get('department');
+  }
+  get joiningdate(){
+    return this.rform.get('joiningdate');
+  }
+  get address(){
+    return this.rform.get('address');
+  }
+  get comments(){
+    return this.rform.get('comments');
+  }
+  get filename(){
+    return this.rform.get('filename');
+  }
+  get file(){
+    return this.rform.get('file');
+  }
+  get imgfile(){
+    return this.rform.get('imgfile');
+  }
+  get mobile(){
+    return this.rform.get('mobile');
+  }
+  get email(){
+    return this.rform.get('email');
+  }
+  //**********************Getters*******************************
+
+  closealert(alert: any) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
   }
 
 
@@ -150,9 +226,12 @@ export class ChangememberinformationComponent implements OnInit {
 
   onFileSelected(event)
   {
-    console.log(event);
-    const inputNode: any = document.querySelector('#filename');
-    inputNode.value = <File>event.target.files[0].name;
+    //console.log(event);
+
+    /*const inputNode: any = document.querySelector('#filename');
+    inputNode.value = <File>event.target.files[0].name;*/
+
+    this.rform.get('filename').patchValue(<File>event.target.files[0].name);
 
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -177,12 +256,15 @@ export class ChangememberinformationComponent implements OnInit {
     formData.append('gender', this.rform.get('gender').value);
 
     formData.append('department', this.rform.get('department').value);
-    formData.append('house', this.rform.get('house').value);
+    formData.append('joiningdate', this.rform.get('joiningdate').value);
     formData.append('filename', this.rform.get('filename').value);
     formData.append('address', this.rform.get('address').value);
     formData.append('comments', this.rform.get('comments').value);
     formData.append('file', this.rform.get('file').value);
     formData.append('imgfile', this.rform.get('imgfile').value);
+
+    formData.append('mobile', this.rform.get('mobile').value);
+    formData.append('email', this.rform.get('email').value);
     
     formData.append('date', moment().tz("Africa/Johannesburg").format());
 
@@ -190,9 +272,11 @@ export class ChangememberinformationComponent implements OnInit {
     //*************************************************************
     if(globdate == 'null'){
       this.crudService.updateRequest(`updateperegrineworkers/${globworknumber1}`, formData).subscribe();
+      this.alerts[0] = this.alertsStorage[0];
     }
     else{
       this.crudService.updateRequest(`updateperegrineworkerslogs/${globdate}/${globworknumber1}`, formData).subscribe();
+      this.alerts[0] = this.alertsStorage[0];
     }
     
 

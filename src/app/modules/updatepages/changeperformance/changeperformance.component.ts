@@ -17,6 +17,18 @@ export class ChangeperformanceComponent implements OnInit {
 
   datestring: string;
 
+  alerts = []; 
+  alertsStorage = [
+    {
+      type: 'success',
+      message: 'Successful transaction',
+    },
+    {
+      type: 'danger',
+      message: 'Oops !! something went wrong',
+    }
+  ]
+
   constructor(private crudService : CrudOperationsService, private fb: FormBuilder) { 
 
     this.datestring = globdate;
@@ -27,12 +39,12 @@ export class ChangeperformanceComponent implements OnInit {
     ];
 
     this.rform = this.fb.group({
-      worknumber          : new FormControl(),
-      workethic           : new FormControl(),
-      puntuality          : new FormControl(),
-      teamwork            : new FormControl(),
-      initiative          : new FormControl(),
-      positivity          : new FormControl(),
+      worknumber          : ['',[ Validators.required, Validators.minLength(5), Validators.pattern(/^-?(0|[1-9]\d*)?$/)] ],
+      workethic           : ['',[ Validators.required]],
+      puntuality          : ['',[ Validators.required]],
+      teamwork            : ['',[ Validators.required]],
+      initiative          : ['',[ Validators.required]],
+      positivity          : ['',[ Validators.required]],
       comments            : new FormControl(),
     })
 
@@ -70,6 +82,34 @@ export class ChangeperformanceComponent implements OnInit {
 
   }
 
+  //********************Getters************************************
+  get worknumber(){
+    return this.rform.get('worknumber');
+  }
+  get workethic(){
+    return this.rform.get('workethic');
+  }
+  get puntuality(){
+    return this.rform.get('puntuality');
+  }
+  get teamwork(){
+    return this.rform.get('teamwork');
+  }
+  get initiative(){
+    return this.rform.get('initiative');
+  }
+  get positivity(){
+    return this.rform.get('positivity');
+  }
+  get comments(){
+    return this.rform.get('comments');
+  }
+  //********************Getters*************************************
+
+  closealert(alert: any) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
+  }
+
   submit()
   {
     const formData = new FormData();
@@ -86,9 +126,11 @@ export class ChangeperformanceComponent implements OnInit {
     if(globdate == 'null'){
 
       this.crudService.updateRequest(`updateperformance/${globworknumber1}`, formData).subscribe();
+      this.alerts[0] = this.alertsStorage[0];
     }
     else{
       this.crudService.updateRequest(`updateperformancelogs/${globdate}/${globworknumber1}`, formData).subscribe();
+      this.alerts[0] = this.alertsStorage[0];
     }
         
   }

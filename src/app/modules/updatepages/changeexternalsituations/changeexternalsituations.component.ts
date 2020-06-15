@@ -16,13 +16,25 @@ export class ChangeexternalsituationsComponent implements OnInit {
 
   datestring: string;
 
+  alerts = []; 
+  alertsStorage = [
+    {
+      type: 'success',
+      message: 'Successful transaction',
+    },
+    {
+      type: 'danger',
+      message: 'Oops !! something went wrong',
+    }
+  ]
+
   constructor(private crudService : CrudOperationsService, private fb: FormBuilder) { 
     
     this.datestring = globdate;
 
     this.rform = this.fb.group({
-      worknumber          : new FormControl(),
-      responsiblities     : new FormControl()
+      worknumber          : ['',[ Validators.required, Validators.minLength(5), Validators.pattern(/^-?(0|[1-9]\d*)?$/)] ],
+      responsiblities     : ['',[ Validators.required]]
     })
   }
 
@@ -52,6 +64,19 @@ export class ChangeexternalsituationsComponent implements OnInit {
     
   }
 
+  //********************Getters************************************
+  get worknumber(){
+    return this.rform.get('worknumber');
+  }
+  get responsiblities(){
+    return this.rform.get('responsiblities');
+  }
+  //********************Getters************************************
+
+  closealert(alert: any) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
+  }
+
   submit()
   {
     const formData = new FormData();
@@ -63,9 +88,11 @@ export class ChangeexternalsituationsComponent implements OnInit {
     if(globdate == 'null'){
 
       this.crudService.updateRequest(`updateexternalsituations/${globworknumber1}`, formData).subscribe();
+      this.alerts[0] = this.alertsStorage[0];
     }
     else{
       this.crudService.updateRequest(`updateexternalsituationslogs/${globdate}/${globworknumber1}`, formData).subscribe();
+      this.alerts[0] = this.alertsStorage[0];
     }
         
   }

@@ -21,6 +21,8 @@ export class ViewprofileComponent implements OnInit {
 
   data = [];
 
+  filedata;
+
   name:any;
   surname:any;
   dateofbirth:any;
@@ -32,7 +34,11 @@ export class ViewprofileComponent implements OnInit {
   chartOptions: {};
   Highcharts = Highcharts;
 
-
+  saveAsBlob(){
+    var blob = new Blob([this.filedata]);
+    var url= window.URL.createObjectURL(blob);
+    window.open(url);
+  }
 
   constructor(private dataserver : CrudOperationsService,protected domSanitizer: DomSanitizer) 
   { 
@@ -56,6 +62,10 @@ export class ViewprofileComponent implements OnInit {
         this.email = 'ricardo@gmail.com';
         this.mobile = '123456789';
         this.address = data[0].address;
+
+        let filearray = new Uint8Array(data[0].file.data);
+        let fileblob = new Blob([filearray]);
+        this.filedata = fileblob;
 
         //************************************************
         let TYPED_ARRAY = new Uint8Array(data[0].imgfile.data);

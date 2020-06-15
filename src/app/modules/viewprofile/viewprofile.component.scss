@@ -32,12 +32,21 @@
     grid-row: 1/4;
     text-align: start;
 
-    ul {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-row-gap: 5%;
-        list-style: none;
-    }
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 35vw;
+      }
+    
+      td, th {
+        border: 1px solid #eeecec;
+        text-align: center;
+        padding: 8px;
+      }
+    
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
     
 }
 

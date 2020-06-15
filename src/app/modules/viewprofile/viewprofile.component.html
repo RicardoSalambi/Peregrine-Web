@@ -5,66 +5,60 @@
     </div>
 
     <div class="memberdetails">
-
-        <ul >
-            <li>
-                First Name  :       
-            </li>
-
-            <li>
+        <table>
+            <!--
+            <tr>
+            <th></th>
+            <th></th>
+            </tr>
+            -->
+            <tr>
+            <td>First Name</td>
+            <td>
                 {{ name }}
-            </li>
-<!--*************************************-->
-            <li>
-                Last Name   :
-            </li>
-
-            <li>
+            </td>
+            </tr>
+            <tr>
+            <td>Last Name</td>
+            <td>
                 {{ surname }}
-            </li>
-<!--*************************************-->
-            <li>
-                Date of Birth  :          
-            </li>
-
-            <li>
+            </td>
+            </tr>
+            <tr>
+            <td>Date of Birth</td>
+            <td>
                 {{ dateofbirth }}
-            </li>
-<!--*************************************-->
-            <li>
-                Gender   :         
-            </li>
-
-            <li>
+            </td>
+            </tr>
+            <tr>
+            <td>Gender</td>
+            <td>                
                 {{ gender }}
-            </li>
-<!--*************************************-->
-            <li>
-                Email   :         
-            </li>
+            </td>
+            </tr>
 
-            <li>
-                {{ email }}
-            </li>
-<!--*************************************-->
-            <li>
-                Mobile   :         
-            </li>
+            <tr>
+                <td>Email</td>
+                <td>
+                    {{ email }}
+                </td>
+            </tr>
 
-            <li>
-                {{ mobile }}
-            </li>
-<!--*************************************-->
-            <li>
-                Address :          
-            </li>
+            <tr>
+                <td>Mobile</td>
+                <td>
+                    {{ mobile }}
+                </td>
+            </tr>
 
-            <li>
-                {{ address }}
-            </li>
-<!--*************************************-->
-        </ul>
+            <tr>
+                <td>Address</td>
+                <td>
+                    {{ address }}
+                </td>
+            </tr>
 
+        </table>
     </div>
 
     <div class="chart">
@@ -84,7 +78,7 @@
 
     <div class="button">
 
-        <button mat-raised-button class="download">Download Member Documents</button>
+        <button mat-raised-button class="download" (click)="saveAsBlob()">Download Member Documents</button>
 
     </div>
 
