@@ -34,8 +34,8 @@ module.exports = (Sequelize,connection) =>  {
     gender  : {
       type  : Sequelize.TEXT
     },
-    house  : {
-      type  : Sequelize.TEXT
+    joiningdate  : {
+      type  : Sequelize.DATEONLY
     },
     address  : {
       type  : Sequelize.TEXT
@@ -51,6 +51,12 @@ module.exports = (Sequelize,connection) =>  {
     },
     imgfile : {
       type  : Sequelize.BLOB('long')
+    },
+    mobile  : {
+      type  : Sequelize.TEXT
+    },
+    email : {
+      type  : Sequelize.TEXT
     },
     
     

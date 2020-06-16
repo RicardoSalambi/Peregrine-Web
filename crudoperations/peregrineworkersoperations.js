@@ -22,7 +22,7 @@ const connection = mysql.createConnection({
 
 allmembers = (req, res, next) =>  {    
 
-    db.peregrineworkersmodel.findAll({attributes: ['name', 'worknumber','surname', 'qualification','department', 'skills','position', 'nationality','gender', 'house','address', 'comments','imgfile']})
+    db.peregrineworkersmodel.findAll({attributes: ['name', 'worknumber','surname', 'qualification','department', 'skills','position', 'nationality','gender', 'joiningdate','address', 'comments','imgfile','mobile','email']})
       .then(peregrineworkers => {
 
         res.json(peregrineworkers)
@@ -150,6 +150,25 @@ memberdistribution = (req, res, next) =>  {
 }
 
 
+membergrowth = (req, res, next) =>  {    
+
+  let queryString = `SELECT monthname(${'date'}) ,count(*) FROM ${'peregrineworkers'} group by month(${'date'});`;
+
+    console.log(queryString);  
+
+    connection.query(queryString, (err,rows,fields) => {
+        if (err) 
+        {
+            console.log('Query Failed with : ' + err)
+            res.end();
+        }
+        else
+        {
+            res.json(rows) //If data does not show use this command in mysql terminal 'ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YourPassword';'
+        }
+      });
+
+}
 
 
 
@@ -180,9 +199,11 @@ addmemberdetails = (req, res, next, db) => {
             position         : req.body.position,
             nationality      : req.body.nationality,
             gender           : req.body.gender,
-            house            : req.body.house,
+            joiningdate      : req.body.joiningdate,
             address          : req.body.address,
             comments         : req.body.comments,
+            mobile           : req.body.mobile,
+            email            : req.body.email,
             filename         : req.files.file[0].originalname,
             file             : fs.readFileSync(filepath + req.files.file[0].filename),
             imgfile          : fs.readFileSync(filepath + req.files.imgfile[0].filename)
@@ -201,9 +222,11 @@ addmemberdetails = (req, res, next, db) => {
               position         : req.body.position,
               nationality      : req.body.nationality,
               gender           : req.body.gender,
-              house            : req.body.house,
+              joiningdate      : req.body.joiningdate,
               address          : req.body.address,
               comments         : req.body.comments,
+              mobile           : req.body.mobile,
+              email            : req.body.email,
               filename         : req.files.file[0].originalname,
               file             : fs.readFileSync(filepath + req.files.file[0].filename),
               imgfile          : fs.readFileSync(filepath + req.files.imgfile[0].filename)
@@ -275,7 +298,7 @@ updateperegrineworkers = (req, res, next, db, connection) => {
             // member.position         = req.body.position;
             // member.nationality      = req.body.nationality;
             // member.gender           = req.body.gender;
-            // member.house            = req.body.house;
+            // member.joiningdate            = req.body.joiningdate;
             // member.address          = req.body.address;
             // member.comments         = req.body.comments;
             // member.filename         = req.file.originalname;
@@ -295,9 +318,11 @@ updateperegrineworkers = (req, res, next, db, connection) => {
               position          : req.body.position,
               nationality       : req.body.nationality,
               gender            : req.body.gender,
-              house             : req.body.house,
+              joiningdate       : req.body.joiningdate,
               address           : req.body.address,
               comments          : req.body.comments,
+              mobile            : req.body.mobile,
+              email             : req.body.email,
               filename          : req.files.file[0].originalname,
               file              : fs.readFileSync(filepath + req.files.file[0].filename),
               imgfile           : fs.readFileSync(filepath + req.files.imgfile[0].filename)
@@ -316,9 +341,11 @@ updateperegrineworkers = (req, res, next, db, connection) => {
                 position         : req.body.position,
                 nationality      : req.body.nationality,
                 gender           : req.body.gender,
-                house            : req.body.house,
+                joiningdate      : req.body.joiningdate,
                 address          : req.body.address,
                 comments         : req.body.comments,
+                mobile           : req.body.mobile,
+                email            : req.body.email,
                 filename         : req.files.file[0].originalname,
                 file             : fs.readFileSync(filepath + req.files.file[0].filename),
                 imgfile          : fs.readFileSync(filepath + req.files.imgfile[0].filename)
@@ -387,9 +414,11 @@ updateperegrineworkerslogs = (req, res, next, db, connection) => {
               position         : req.body.position,
               nationality      : req.body.nationality,
               gender           : req.body.gender,
-              house            : req.body.house,
+              joiningdate      : req.body.joiningdate,
               address          : req.body.address,
               comments         : req.body.comments,
+              mobile           : req.body.mobile,
+              email            : req.body.email,
               filename         : req.files.file[0].originalname,
               file             : fs.readFileSync(filepath + req.files.file[0].filename),
               imgfile          : fs.readFileSync(filepath + req.files.imgfile[0].filename)
@@ -420,14 +449,14 @@ updateperegrineworkerslogs = (req, res, next, db, connection) => {
               member.position         = req.body.position;
               member.nationality      = req.body.nationality;
               member.gender           = req.body.gender;
-              member.house            = req.body.house;
+              member.joiningdate            = req.body.joiningdate;
               member.address          = req.body.address;
               member.comments         = req.body.comments;
               member.filename         = req.file.originalname;
               member.file             = fs.readFileSync(filepath + req.file.filename);
               member.imgfile          = 'NULL';
 
-              member.save({ fields: ['date','worknumber','name','surname','qualification','department','skills','position','nationality','gender','house','address','comments','filename','file','imgfile'] });
+              member.save({ fields: ['date','worknumber','name','surname','qualification','department','skills','position','nationality','gender','joiningdate','address','comments','filename','file','imgfile'] });
       */
 
           }
@@ -522,6 +551,7 @@ module.exports = {
     getperegrineworkerslogs,
     getperegrineworkerslogsdetails,
     memberdistribution,
+    membergrowth,
 
     addmemberdetails,
 

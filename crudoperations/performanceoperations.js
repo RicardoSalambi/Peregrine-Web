@@ -94,7 +94,7 @@ getperformancelogsdetails = (req, res, next, connection) => {
 
 getperformancelogsdetailsIDpresentandpast = (req, res, next, connection) => {
 
-  let queryString = `select * from ${'performancelogs'} where worknumber = ${req.params.id} and year(date) = ${req.params.year} UNION SELECT * FROM ${'performances'} order by ${'date'} desc`;
+  let queryString = `select * from ${'performancelogs'} where worknumber = ${req.params.id} and year(date) = ${req.params.year} UNION SELECT * FROM ${'performances'} where worknumber = ${req.params.id} order by ${'date'} desc`;
 
   console.log(queryString);  
 

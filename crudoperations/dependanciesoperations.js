@@ -131,7 +131,7 @@ adddependancies = (req, res, db) => {
               worknumber        : req.body.worknumber,
               next_of_kin       : req.body.NOK,
               emergencycontact  : req.body.emergencycontact,
-              filename          : req.files.file[0].originalname,
+              filename          : req.body.filename,
               file              : fs.readFileSync(filepath + req.files.file[0].filename),
   
             }).then(() =>{
@@ -142,7 +142,7 @@ adddependancies = (req, res, db) => {
                 worknumber        : req.body.worknumber,
                 next_of_kin       : req.body.NOK,
                 emergencycontact  : req.body.emergencycontact,
-                filename          : req.files.file[0].originalname,
+                filename          : req.body.filename,
                 file              : fs.readFileSync(filepath + req.files.file[0].filename),
   
               }).then((file) =>{
@@ -206,7 +206,7 @@ updatedependancies = (req, res, next, db, connection) => {
                   worknumber                 : req.body.worknumber,
                   next_of_kin                : req.body.NOK,
                   emergencycontact           : req.body.emergencycontact,
-                  filename                   : req.files.file[0].originalname,
+                  filename                   : req.body.filename,
                   file                       : fs.readFileSync(filepath + req.files.file[0].filename),
                   
                 })
@@ -284,7 +284,7 @@ updatedependancieslogs = (req, res, next, db, connection) => {
                   worknumber                 : req.body.worknumber,
                   next_of_kin                : req.body.NOK,
                   emergencycontact           : req.body.emergencycontact,
-                  filename                   : req.files.file[0].originalname,
+                  filename                   : req.body.filename,
                   file                       : fs.readFileSync(filepath + req.files.file[0].filename),
     
                 })
