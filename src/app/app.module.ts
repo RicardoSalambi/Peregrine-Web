@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { DefaultModule } from './layouts/default/default.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -27,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatInputModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatPaginatorModule
     
   ],
   providers: [],

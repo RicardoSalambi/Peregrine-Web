@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CrudOperationsService } from 'src/app/services/crud-operations.service';
 import { Router } from '@angular/router'
 
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 //import { ServiceService , globtable , globworknumber } from '../viewdetails/service.service';
 import { globtable , globworknumber, globpage } from '../viewdetails/viewdetails.component';
 
@@ -26,7 +27,8 @@ export class LogsComponent implements OnInit {
   dataSource: any; //= new MatTableDataSource(this.getData());
   data: any;
   
-
+  //@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  
 
   constructor(private dataserver : CrudOperationsService,private router : Router) { }
  
@@ -40,6 +42,7 @@ export class LogsComponent implements OnInit {
       this.dataserver.getRequest(url).subscribe( (data: {date: Date, worknumber: number, name: string, surname: string, qualification: string, department: string }[]) => { 
         
         this.dataSource = new MatTableDataSource(data)
+        //this.dataSource.paginator = this.paginator;
 
       })
     //****************************************************************************
