@@ -27,25 +27,27 @@ export class LogsComponent implements OnInit {
   dataSource: any; //= new MatTableDataSource(this.getData());
   data: any;
   
-  //@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  //@ViewChild(MatPaginator) paginator: MatPaginator;
   
 
-  constructor(private dataserver : CrudOperationsService,private router : Router) { }
- 
-
-  ngOnInit(): void {
-
+  constructor(private dataserver : CrudOperationsService,private router : Router) 
+  { 
     let url = `get${globtable}/${globworknumber}/${globtable}`;
-    
-
     //****************************************************************************
       this.dataserver.getRequest(url).subscribe( (data: {date: Date, worknumber: number, name: string, surname: string, qualification: string, department: string }[]) => { 
         
         this.dataSource = new MatTableDataSource(data)
-        //this.dataSource.paginator = this.paginator;
+        
 
       })
     //****************************************************************************
+  }
+ 
+
+  ngOnInit(): void {    
+    
+
+    //this.dataSource.paginator = this.paginator;
 
   }
 

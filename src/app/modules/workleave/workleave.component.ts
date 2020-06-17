@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CrudOperationsService } from 'src/app/services/crud-operations.service';
 
+import * as moment from 'moment-timezone';
+
 @Component({
   selector: 'app-workleave',
   templateUrl: './workleave.component.html',
@@ -31,7 +33,7 @@ export class WorkleaveComponent implements OnInit {
 
     this.rform = this.formBuilder.group({
       worknumber          : ['',[ Validators.required, Validators.minLength(5), Validators.pattern(/^-?(0|[1-9]\d*)?$/)] ],
-      description         : ['',[ Validators.required]],
+      description         : new FormControl(),
       startdate           : ['',[ Validators.required]],
       enddate             : ['',[ Validators.required]],
       filename            : new FormControl({value: 'Optional Doctors Certificate', disabled: true}),
@@ -86,6 +88,8 @@ export class WorkleaveComponent implements OnInit {
 
     formData.append('filename', this.rform.get('filename').value);
     formData.append('file', this.rform.get('file').value);
+
+    formData.append('date', moment().tz("Africa/Johannesburg").format());
 
 
     //*************************************************************

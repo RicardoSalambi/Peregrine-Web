@@ -20,6 +20,7 @@ import { ChangeworkleaveComponent } from 'src/app/modules/updatepages/changework
 import { ChangetrainingComponent } from 'src/app/modules/updatepages/changetraining/changetraining.component';
 import { LogsComponent } from 'src/app/modules/logs/logs.component';
 import { ViewprofileComponent } from 'src/app/modules/viewprofile/viewprofile.component';
+import { TestComponent } from './modules/test/test.component';
 
 
 const routes: Routes = [
@@ -100,6 +101,12 @@ const routes: Routes = [
     {
       path : 'memberprofile',
       component : ViewprofileComponent
+    },
+
+
+    {
+      path : 'test',
+      component : TestComponent
     },
   ]
 
