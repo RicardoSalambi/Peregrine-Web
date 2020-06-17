@@ -6,6 +6,7 @@ const upload = require('../multer/upload')
 const fs = require('fs');
 
 
+//****************GET Request****************
 
 getlatesttraining = (req, res, next, connection) => {
 
@@ -72,6 +73,8 @@ gettraininglogsdetails = (req, res, next, connection) => {
 }
 
 
+
+//****************Post Request****************
 
 addtraining = (req, res, db) => {
 

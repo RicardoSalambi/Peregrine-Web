@@ -1,10 +1,11 @@
 module.exports = (Sequelize,connection) =>  {
 
 
-    return connection.define('workleave', {
+    return connection.define('workleavelogs', {
         
         date  : {
-            type  : Sequelize.DATE
+            type  : Sequelize.DATE,
+            primaryKey    : true
         },
         worknumber  : {
             type  : Sequelize.INTEGER,

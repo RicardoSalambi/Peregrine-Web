@@ -6,6 +6,7 @@ const dbconfig = require('../dbconfig');
 
 const peregrineworkers = require('./models/allmembers/peregrineworkers')
 const peregrineworkerslogs = require('./models/allmembers/peregrineworkerslogs')
+
 const dependancies = require('./models/dependancies/dependancies')
 const dependancieslog = require('./models/dependancies/dependancieslog')
 
@@ -21,7 +22,8 @@ const performancelogs = require('./models/performance/performancelogs')
 const training = require('./models/training/training')
 const traininglogs = require('./models/training/traininglogs')
 
-const work = require('./models/workleave/workleave')
+const workleave = require('./models/workleave/workleave')
+const workleavelogs = require('./models/workleave/workleavelogs')
 
 const connection = new Sequelize(dbconfig.database, dbconfig.user, dbconfig.password, {
 
@@ -217,11 +219,30 @@ trainingmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetK
 //***************************************************************************************************************************************
 
 
+//***************************************************************************************************************************************
+
+const workleavemodel = workleave(Sequelize, connection);
+const workleavelogsmodel = workleavelogs(Sequelize, connection);
+
+workleavemodel.hasMany(workleavelogsmodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'CASCADE', 
+  onUpdate: 'CASCADE'
+});
+workleavelogsmodel.belongsTo(workleavemodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+peregrineworkersmodel.hasMany(workleavemodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'CASCADE', 
+  onUpdate: 'CASCADE'
+});
+workleavemodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+//***************************************************************************************************************************************
 
 
-
-const workmodel = work(Sequelize, connection);
-//const traininglogsmodel = traininglogs(Sequelize, connection);
 
 
 
@@ -253,6 +274,7 @@ module.exports = {
   trainingmodel,
   traininglogsmodel,
 
-  workmodel
+  workleavemodel,
+  workleavelogsmodel,
   
 }

@@ -1,6 +1,6 @@
 const host      = 'localhost';
 const user      = 'root';
-const password  = 'NetlettiWorld@1';
+const password  = 'admin';
 const database  = 'crudtest';
 
 module.exports = {
