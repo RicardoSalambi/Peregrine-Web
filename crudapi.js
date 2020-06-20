@@ -15,6 +15,7 @@ const disciplinaries = require('./crudoperations/disciplinariesoperations');
 const externalsituations = require('./crudoperations/externalsituationsoperations');
 const performance = require('./crudoperations/performanceoperations');
 const training = require('./crudoperations/trainingoperations');
+const workleave = require('./crudoperations/workleaveoperations');
 
 
 
@@ -185,7 +186,22 @@ function createRouter(db,connection)
 
 
 //*******************************************************************************
-  router.post('/addworkleave', (req,res) =>{ });
+  router.get('/getlatestworkleave/:id' , (req, res, next) => { workleave.getlatestworkleave(req, res, next, connection) } );
+
+  router.get('/getworkleavelogs/:id/:table' , (req, res, next) => { workleave.getworkleavelogs(req, res, next, connection) } );
+
+  router.get('/getworkleavelogsdetails/:date/:id' , (req, res, next) => { workleave.getworkleavelogsdetails(req, res, next, connection) } );
+
+
+  router.post('/addworkleave/:id', (req, res, next) => { workleave.addworkleave(req, res, next, connection) } );
+  
+
+  router.put(`/updateworkleave/:id`, (req, res, next) => { workleave.updateworkleave(req, res, next, db, connection) } );
+
+  router.put(`/updateworkleavelogs/:date/:id`, (req, res, next) => { workleave.updateworkleavelogs(req, res, next, db, connection) } );
+
+
+  router.delete(`/terminateworkleavelogs/:date/:id`, (req, res, next) => { workleave.terminateworkleavelogs(req, res, next, db, connection) } );
 //*******************************************************************************
 
 

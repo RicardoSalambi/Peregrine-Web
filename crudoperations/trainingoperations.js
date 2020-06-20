@@ -7,6 +7,8 @@ const fs = require('fs');
 
 
 
+//****************GET Request****************
+
 getlatesttraining = (req, res, next, connection) => {
 
   let queryString = `select * from ${'trainings'} where worknumber = ${req.params.id};`;
@@ -72,7 +74,7 @@ gettraininglogsdetails = (req, res, next, connection) => {
 }
 
 
-
+//****************Post Request****************
 addtraining = (req, res, db) => {
 
     let filepath = `${__basedir}/Uploads/files/`;

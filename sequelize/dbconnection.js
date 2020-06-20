@@ -22,6 +22,7 @@ const training = require('./models/training/training')
 const traininglogs = require('./models/training/traininglogs')
 
 const work = require('./models/workleave/workleave')
+const worklogs = require('./models/workleave/workleavelogs')
 
 const connection = new Sequelize(dbconfig.database, dbconfig.user, dbconfig.password, {
 
@@ -220,8 +221,28 @@ trainingmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetK
 
 
 
+//***************************************************************************************************************************************
+
 const workmodel = work(Sequelize, connection);
-//const traininglogsmodel = traininglogs(Sequelize, connection);
+const worklogsmodel = worklogs(Sequelize, connection);
+
+workmodel.hasMany(worklogsmodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'CASCADE', 
+  onUpdate: 'CASCADE'
+});
+worklogsmodel.belongsTo(workmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+peregrineworkersmodel.hasMany(workmodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'CASCADE', 
+  onUpdate: 'CASCADE'
+});
+workmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+//***************************************************************************************************************************************
 
 
 
@@ -253,6 +274,7 @@ module.exports = {
   trainingmodel,
   traininglogsmodel,
 
-  workmodel
+  workmodel,
+  worklogsmodel
   
 }
