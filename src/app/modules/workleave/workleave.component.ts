@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { CrudOperationsService } from 'src/app/services/crud-operations.service';
 
+import * as moment from 'moment-timezone';
+
 @Component({
   selector: 'app-workleave',
   templateUrl: './workleave.component.html',
@@ -87,9 +89,11 @@ export class WorkleaveComponent implements OnInit {
     formData.append('filename', this.rform.get('filename').value);
     formData.append('file', this.rform.get('file').value);
 
+    formData.append('date', moment().tz("Africa/Johannesburg").format());
+
 
     //*************************************************************
-    this.crudService.addRequest('add', formData).subscribe();
+    this.crudService.addRequest('addworkleave', formData).subscribe();
     this.alerts[0] = this.alertsStorage[0];
   }
 
