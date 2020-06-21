@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudOperationsService } from 'src/app/services/crud-operations.service';
 
+
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 
@@ -18,7 +19,7 @@ export class DashboardComponent implements OnInit {
   data = [];
   growthdata = [];
 
-  constructor(private dataserver : CrudOperationsService) { }
+  constructor(private dataserver : CrudOperationsService) {  }
 
   ngOnInit(): void {
 
