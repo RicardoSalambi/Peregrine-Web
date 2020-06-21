@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class CrudOperationsService {
 
-  url = 'https://peregrine-back.herokuapp.com'//'http://localhost:5000';
+  url = 'https://cors-anywhere.herokuapp.com/https://peregrine-back.herokuapp.com'//'http://localhost:5000';
   getExtension = '/event';
   postExtension = '/eventplace';
 
