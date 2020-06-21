@@ -221,24 +221,24 @@ trainingmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetK
 
 //***************************************************************************************************************************************
 
-const workleavemodel = workleave(Sequelize, connection);
-const workleavelogsmodel = workleavelogs(Sequelize, connection);
+// const workleavemodel = workleave(Sequelize, connection);
+// const workleavelogsmodel = workleavelogs(Sequelize, connection);
 
-workleavemodel.hasMany(workleavelogsmodel, {  
-  foreignKey: {name:'worknumber'} , 
-  sourceKey: 'worknumber',
-  onDelete: 'CASCADE', 
-  onUpdate: 'CASCADE'
-});
-workleavelogsmodel.belongsTo(workleavemodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+// workleavemodel.hasMany(workleavelogsmodel, {  
+//   foreignKey: {name:'worknumber'} , 
+//   sourceKey: 'worknumber',
+//   onDelete: 'CASCADE', 
+//   onUpdate: 'CASCADE'
+// });
+// workleavelogsmodel.belongsTo(workleavemodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
 
-peregrineworkersmodel.hasMany(workleavemodel, {  
-  foreignKey: {name:'worknumber'} , 
-  sourceKey: 'worknumber',
-  onDelete: 'CASCADE', 
-  onUpdate: 'CASCADE'
-});
-workleavemodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+// peregrineworkersmodel.hasMany(workleavemodel, {  
+//   foreignKey: {name:'worknumber'} , 
+//   sourceKey: 'worknumber',
+//   onDelete: 'CASCADE', 
+//   onUpdate: 'CASCADE'
+// });
+// workleavemodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
 
 //***************************************************************************************************************************************
 
