@@ -15,7 +15,7 @@ export class ChangetrainingComponent implements OnInit {
   rform  : FormGroup;
 
   datestring: string;
-
+  
   alerts = []; 
   alertsStorage = [
     {

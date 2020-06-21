@@ -33,7 +33,7 @@ export class WorkleaveComponent implements OnInit {
 
     this.rform = this.formBuilder.group({
       worknumber          : ['',[ Validators.required, Validators.minLength(5), Validators.pattern(/^-?(0|[1-9]\d*)?$/)] ],
-      description         : ['',[ Validators.required]],
+      description         : new FormControl(),
       startdate           : ['',[ Validators.required]],
       enddate             : ['',[ Validators.required]],
       filename            : new FormControl({value: 'Optional Doctors Certificate', disabled: true}),
