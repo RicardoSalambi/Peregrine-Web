@@ -1,3 +1,10 @@
+const db = require('../sequelize/dbconnection.js');
+const mysql = require('mysql2');
+const dbconfig = require('../dbconfig');
+
+const upload = require('../multer/upload')
+const fs = require('fs');
+
 
 
 //****************GET Request****************

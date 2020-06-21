@@ -24,7 +24,7 @@ module.exports = (Sequelize,connection) =>  {
         },
         file  : {
             type  : Sequelize.BLOB('long')
-        } 
+        }
 
 
   });

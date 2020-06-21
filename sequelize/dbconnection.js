@@ -6,6 +6,7 @@ const dbconfig = require('../dbconfig');
 
 const peregrineworkers = require('./models/allmembers/peregrineworkers')
 const peregrineworkerslogs = require('./models/allmembers/peregrineworkerslogs')
+
 const dependancies = require('./models/dependancies/dependancies')
 const dependancieslog = require('./models/dependancies/dependancieslog')
 
@@ -218,7 +219,28 @@ trainingmodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetK
 //***************************************************************************************************************************************
 
 
+//***************************************************************************************************************************************
 
+const workleavemodel = workleave(Sequelize, connection);
+const workleavelogsmodel = workleavelogs(Sequelize, connection);
+
+workleavemodel.hasMany(workleavelogsmodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'CASCADE', 
+  onUpdate: 'CASCADE'
+});
+workleavelogsmodel.belongsTo(workleavemodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+peregrineworkersmodel.hasMany(workleavemodel, {  
+  foreignKey: {name:'worknumber'} , 
+  sourceKey: 'worknumber',
+  onDelete: 'CASCADE', 
+  onUpdate: 'CASCADE'
+});
+workleavemodel.belongsTo(peregrineworkersmodel, {foreignKey: 'worknumber',targetKey: 'worknumber', constraints: false});
+
+//***************************************************************************************************************************************
 
 
 //***************************************************************************************************************************************
