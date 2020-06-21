@@ -20,14 +20,19 @@ import { ChangeworkleaveComponent } from 'src/app/modules/updatepages/changework
 import { ChangetrainingComponent } from 'src/app/modules/updatepages/changetraining/changetraining.component';
 import { LogsComponent } from 'src/app/modules/logs/logs.component';
 import { ViewprofileComponent } from 'src/app/modules/viewprofile/viewprofile.component';
+import { WelcomesplashpageComponent } from 'src/app/modules/welcomesplashpage/welcomesplashpage.component';
 
 
 const routes: Routes = [
-{ path : 'signinup', component : SigninupComponent },
+{ path : '', component : SigninupComponent },
 {
-  path : '',
+  path : 'init',
   component : DefaultComponent,
   children : [
+    {
+      path : 'welcome',
+      component : WelcomesplashpageComponent
+    },
     {
       path : 'dashboard',
       component : DashboardComponent

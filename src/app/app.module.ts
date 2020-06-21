@@ -10,6 +10,7 @@ import { DefaultModule } from './layouts/default/default.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { WelcomesplashpageComponent } from './modules/welcomesplashpage/welcomesplashpage.component';
 
 
 
@@ -19,6 +20,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
+    WelcomesplashpageComponent,
   ],
   imports: [
     BrowserModule,

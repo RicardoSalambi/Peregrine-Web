@@ -16,7 +16,7 @@ export class SigninupComponent implements OnInit {
   goToPage(page:String):void
   {        
     //console.log(`${page}`);
-    this.router.navigate([`${page}`]);
+    this.router.navigate([`init/${page}`]);
   }
 
 }
