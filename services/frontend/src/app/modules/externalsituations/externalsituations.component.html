@@ -1,0 +1,50 @@
+<form [formGroup]="rform" (ngSubmit)="submit()" enctype="multipart/form-data">
+
+    <div class="wrapper">
+
+        <div class="header">
+            <h2>Update Member Responsibilites</h2>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Work Number</mat-label>
+                <input matInput formControlName="worknumber">
+
+                <mat-error *ngIf="worknumber.invalid">
+                    Please Ensure Number has no letters and correct length 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+
+        <div class="Comments">
+            <mat-form-field appearance="outline" floatLabel="auto" style="width: 70%;">
+                <mat-label>Member External Responsiblities</mat-label>
+                <textarea matInput rows="5" cols="2" formControlName="responsiblities"></textarea>
+                <mat-hint align="end">Insert details about this Team Members Responsibilities</mat-hint>
+
+                <mat-error *ngIf="responsiblities.invalid">
+                    Please Enter Member Responsibilities 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div class="alert">
+            <p *ngFor="let alert of alerts">
+                <ngb-alert [type]="alert.type" (close)="closealert(alert)">{{ alert.message }}</ngb-alert>
+            </p>
+        </div>
+        
+        <div class="wrapper2"> 
+
+            <div>
+                <button mat-raised-button class="submitbutton" type="submit" [disabled]="rform.invalid">Submit</button>
+            </div>
+        </div>
+
+    </div>
+
+</form>

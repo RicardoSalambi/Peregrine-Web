@@ -1,0 +1,82 @@
+<form [formGroup]="rform" (ngSubmit)="submit()" enctype="multipart/form-data">
+
+    <div class="wrapper">
+        <div>
+            <h2>Change Member Dependancies</h2>
+            <mat-label>{{datestring}}</mat-label>
+        </div>
+        
+        
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Work Number</mat-label>
+                <input matInput  formControlName="worknumber">
+
+                <mat-error *ngIf="worknumber.invalid">
+                    Please Ensure Number has no letters and correct length 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Next of Kin</mat-label>
+                <input matInput  formControlName="NOK">
+
+                <mat-error *ngIf="NOK.invalid">
+                    Please Ensure Next of kin Info 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Emergency Contact</mat-label>
+                <input matInput  formControlName="emergencycontact">
+
+                <mat-error *ngIf="emergencycontact.invalid">
+                    Please Enter details
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div> 
+            <!--
+            <input type="file" (change)="onFileSelected($event)">
+            -->
+
+            <button type="button" mat-raised-button (click)="fileInput.click()" class="uploadbutton">Upload Beneficiary Forms</button>
+            <input hidden type="file" (change)="onFileSelected($event)" #fileInput  name="file"  >
+
+            <br/><br/>
+
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Beneficiary Forms</mat-label>
+                <input matInput type="text" formControlName="filename" >
+            </mat-form-field>
+            
+        </div>
+
+        <div class="alert">
+            <p *ngFor="let alert of alerts">
+                <ngb-alert [type]="alert.type" (close)="closealert(alert)">{{ alert.message }}</ngb-alert>
+            </p>
+        </div>
+
+        <div class="wrapper2"> 
+
+            <div>
+                <button mat-raised-button class="submitbutton" type="submit" [disabled]="rform.invalid">Update</button>
+            </div>
+
+        </div>
+
+       
+        
+
+    </div>
+    
+ </form>

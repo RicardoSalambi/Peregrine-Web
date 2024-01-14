@@ -1,0 +1,28 @@
+.wrapper{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 0.1%;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow: auto;
+  text-align: center;
+    
+}
+
+.currentbutton{
+  background-color: lightyellow;
+}
+
+table {
+  width: 95%;
+
+  th{
+    text-align: center;
+  }
+  
+}
+
+.space{
+    height: 20vh;
+    padding-bottom: 1vh;
+}

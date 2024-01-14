@@ -1,0 +1,37 @@
+<div class="wrapper">
+
+    <div class="searchbar">
+    
+        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+            <mat-label>
+                Search 
+            </mat-label>
+            <input matInput value="">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    
+    </div>
+
+    <div *ngIf="data">
+        
+        <highcharts-chart 
+        [Highcharts]="Highcharts"
+        [options]="chartOptions"
+
+        style="width: 75vw; height: 400px; display: grid;">
+        </highcharts-chart>
+
+    </div>
+
+    <div *ngIf="growthdata">
+        
+        <highcharts-chart 
+        [Highcharts]="Highcharts"
+        [options]="growthchartOptions"
+
+        style="width: 75vw; height: 400px; display: grid;">
+        </highcharts-chart>
+
+    </div>
+    
+</div>

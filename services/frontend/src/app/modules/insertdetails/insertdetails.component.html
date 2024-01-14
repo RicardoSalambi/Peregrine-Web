@@ -1,0 +1,248 @@
+<form [formGroup]="rform" (ngSubmit)="submit()" enctype="multipart/form-data">
+
+    <div class="wrapper">
+        
+        <div class="header">
+            <mat-label>
+                <h2>Team Member Details</h2>
+            </mat-label>
+            
+        </div>
+
+        <div class="profile">
+            <img class="profileImg" accept='image/*' [src]="imgURL" id="profile" *ngIf="imgURL">            
+        </div>
+            
+        <div class="uploadImgbtn">
+            <button mat-raised-button type="button" (click)="ImgInput.click()">Upload image</button>
+            <input hidden type="file" (change)="onImgSelected(ImgInput.files)" #ImgInput name="imgfile">
+        </div>
+        
+        <div class="texts">
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Work Number</mat-label>
+                <input matInput formControlName="worknumber">
+                <mat-hint align="end">Assigned by Peregrine</mat-hint>
+
+                <mat-error *ngIf="worknumber.invalid">
+                    Please Ensure Number has no letters and correct length 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Skills</mat-label>
+                <input matInput  formControlName="skills">
+            </mat-form-field>
+        </div>
+
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Name</mat-label>
+                <input matInput  formControlName="name">
+
+                <mat-error *ngIf="name.invalid">
+                    Please Enter Name 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Position</mat-label>
+                <input matInput  formControlName="position">
+
+                <mat-error *ngIf="position.invalid">
+                    Please Enter Position 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Surname</mat-label>
+                <input matInput  formControlName="surname">
+
+                <mat-error *ngIf="surname.invalid">
+                    Please Enter Surname 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Qualification</mat-label>
+                <input matInput  formControlName="qualification">
+
+                <mat-error *ngIf="qualification.invalid">
+                    Please Enter Qualification 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Mobile</mat-label>
+                <input matInput formControlName="mobile" >
+
+                <mat-error *ngIf="mobile.invalid">
+                    Please Enter Mobile 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" >
+
+                <mat-error *ngIf="email.invalid">
+                    Please Enter Email 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Nationality</mat-label>
+                <!--<input matInput  formControlName="nationality">-->
+                <select matNativeControl  formControlName="nationality">
+                    <option value=""></option>
+                    <option value="{{nation.nation}}" *ngFor="let nation of nationalities" >{{nation.nation}}</option>
+                </select>  
+
+                <mat-error *ngIf="nationality.invalid">
+                    Please Choose Nationality 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+
+        
+
+
+        <div>
+            <mat-form-field appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Gender</mat-label>
+                <select matNativeControl  formControlName="gender">
+                <option value=""></option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Other">Other</option>
+                </select>
+
+                <mat-error *ngIf="gender.invalid">
+                    Please Choose Gender 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Departments</mat-label>
+                <select matNativeControl  formControlName="department">
+                <option value=""></option>
+                <option value="IT">IT</option>
+                <option value="Bakery">Bakery</option>
+                <option value="Finance">Finance</option>
+                </select>         
+                
+                <mat-error *ngIf="department.invalid">
+                    Please Choose Department 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Joining Date</mat-label>
+                <input matInput [matDatepicker]="picker2" formControlName="joiningdate">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <!--<button matSuffix [matDatepickerToggle]="picker"></button>-->
+                <mat-datepicker #picker2></mat-datepicker>
+
+                <mat-error *ngIf="joiningdate.invalid">
+                    Please Select Date of Employment 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div class="Comments"> 
+            <!--
+            <input type="file" (change)="onFileSelected($event)">
+            -->
+
+            <button type="button" mat-raised-button (click)="fileInput.click()" class="uploadbutton">Upload CV</button>
+            <input hidden type="file" (change)="onFileSelected($event)" #fileInput name="file">
+
+            <br/><br/>
+
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Curriculum Vitae Documents</mat-label>
+                <input matInput type="text" formControlName="filename">
+            </mat-form-field>
+        </div>
+
+
+        <div class="Comments">
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 70%;">
+                <mat-label>Address</mat-label>
+                <textarea matInput rows="5" cols="2"  formControlName="address"></textarea>
+
+                <mat-error *ngIf="address.invalid">
+                    Please Enter Address 
+                </mat-error>
+                
+            </mat-form-field>
+        </div>
+
+    <!--
+        <div>
+            <button mat-raised-button disabled>Upload CV</button>
+        </div>
+    -->
+
+        
+
+        <div class="Comments">
+            <mat-form-field appearance="outline" floatLabel="auto" style="width: 70%;">
+                <mat-label>Comments</mat-label>
+                <textarea matInput rows="5" cols="2" formControlName="comments"></textarea>
+                <mat-hint align="end">Insert Additional details about this Team Member</mat-hint>
+            </mat-form-field>
+        </div>
+        
+        <div class="alert">
+            <p *ngFor="let alert of alerts">
+                <ngb-alert [type]="alert.type" (close)="closealert(alert)">{{ alert.message }}</ngb-alert>
+            </p>
+        </div>
+
+        <div class="wrapper2"> 
+            <div>
+                <button mat-raised-button class="submitbutton" type="submit" [disabled]="rform.invalid">Submit</button>
+            </div>
+        </div>
+        
+    </div>
+
+
+</form>

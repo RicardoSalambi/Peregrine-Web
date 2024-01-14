@@ -1,0 +1,106 @@
+<form [formGroup]="rform" (ngSubmit)="submit()" enctype="multipart/form-data">
+
+    <div class="wrapper">
+
+        <div class="header">
+            <h2>Change Training Details</h2>
+            <mat-label>{{datestring}}</mat-label>
+        </div>
+        
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Work Number</mat-label>
+                <input matInput  formControlName="worknumber">
+
+                <mat-error *ngIf="worknumber.invalid">
+                    Please Ensure Number has no letters and correct length 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Training Description</mat-label>
+                <input matInput  formControlName="trainingdescription">
+
+                <mat-error *ngIf="trainingdescription.invalid">
+                    Please Enter a description of the training
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div>
+        <!--
+            <mat-form-field>
+                <input matInput [matDatePicker]="myDatePicker">
+                <mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #myDatePicker></mat-datepicker>
+            </mat-form-field>
+        -->
+
+        <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="picker"  formControlName="startdate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <!--<button matSuffix [matDatepickerToggle]="picker"></button>-->
+            <mat-datepicker #picker></mat-datepicker>
+
+            <mat-error *ngIf="startdate.invalid">
+                Please Enter start date of the training
+            </mat-error>
+
+        </mat-form-field>
+        
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>End Date</mat-label>
+                <input matInput [matDatepicker]="picker2"  formControlName="enddate">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <!--<button matSuffix [matDatepickerToggle]="picker"></button>-->
+                <mat-datepicker #picker2></mat-datepicker>
+
+                <mat-error *ngIf="enddate.invalid">
+                    Please Enter end date of the training
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div class="wrapper2"> 
+            <!--
+            <input type="file" (change)="onFileSelected($event)">
+            -->
+
+            <button type="button" mat-raised-button (click)="fileInput.click()" class="uploadbutton">Upload Training Certificates</button>
+            <input hidden type="file" (change)="onFileSelected($event)" #fileInput  name="file">
+
+            <br/><br/>
+
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Training Certificates</mat-label>
+                <input matInput type="text" formControlName="filename">
+            </mat-form-field>
+        </div>
+
+        <div class="alert">
+            <p *ngFor="let alert of alerts">
+                <ngb-alert [type]="alert.type" (close)="closealert(alert)">{{ alert.message }}</ngb-alert>
+            </p>
+        </div>
+
+        <div class="wrapper2"> 
+
+            <div>
+                <button mat-raised-button class="submitbutton" type="submit" [disabled]="rform.invalid">Update</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</form>

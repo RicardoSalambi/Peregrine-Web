@@ -1,0 +1,116 @@
+<form [formGroup]="rform" (ngSubmit)="submit()" enctype="multipart/form-data">
+
+    <div class="wrapper">
+
+        <div class="header">
+            <h2>Change Team Member Performance Details</h2>
+            <mat-label>{{datestring}}</mat-label>
+        </div>
+
+        <div class="texts">
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Work Number</mat-label>
+                <input matInput  formControlName="worknumber">
+                <mat-hint align="end">Assigned by Peregrine</mat-hint>
+
+                <mat-error *ngIf="worknumber.invalid">
+                    Please Ensure Number has no letters and correct length 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Work Ethic</mat-label>
+                <select matNativeControl  formControlName="workethic">
+                    <option value={{number.number}} *ngFor="let number of numbers" >{{number.number}}</option>
+                </select>    
+                
+                <mat-error *ngIf="workethic.invalid">
+                    Please Enter Work Ethic Value 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Puntuality</mat-label>
+                <select matNativeControl  formControlName="puntuality">
+                    <option value={{number.number}} *ngFor="let number of numbers" >{{number.number}}</option>
+                </select>            
+
+                <mat-error *ngIf="puntuality.invalid">
+                    Please Enter Puntuality Value 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Team Work</mat-label>
+                <select matNativeControl  formControlName="teamwork">
+                    <option value={{number.number}} *ngFor="let number of numbers" >{{number.number}}</option>
+                </select>       
+                
+                <mat-error *ngIf="teamwork.invalid">
+                    Please Enter Team Work Value 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;" >
+                <mat-label>Initiative</mat-label>
+                <select matNativeControl  formControlName="initiative" >
+                <option value={{number.number}} *ngFor="let number of numbers" >{{number.number}}</option>
+                </select>        
+                
+                <mat-error *ngIf="initiative.invalid">
+                    Please Enter Initiative Value 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width" appearance="outline" floatLabel="auto" style="width: 40%;">
+                <mat-label>Positivity</mat-label>
+                <select matNativeControl  formControlName="positivity">
+                    <option value={{number.number}} *ngFor="let number of numbers" >{{number.number}}</option>
+                </select>    
+                
+                <mat-error *ngIf="positivity.invalid">
+                    Please Enter Positivity Value 
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div class="Comments">
+            <mat-form-field appearance="outline" floatLabel="auto" style="width: 70%;">
+                <mat-label>Comments</mat-label>
+                <textarea matInput rows="5" cols="2" formControlName="comments"></textarea>
+                <mat-hint align="end">Insert Additional details about this Team Member</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="alert">
+            <p *ngFor="let alert of alerts">
+                <ngb-alert [type]="alert.type" (close)="closealert(alert)">{{ alert.message }}</ngb-alert>
+            </p>
+        </div>
+
+        <div class="wrapper2"> 
+
+            <div>
+                <button mat-raised-button class="submitbutton" type="submit" [disabled]="rform.invalid">Update</button>
+            </div>
+        </div>
+
+    </div>
+
+</form>
