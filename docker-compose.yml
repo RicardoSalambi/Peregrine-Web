@@ -1,0 +1,36 @@
+services:
+
+  peregrine_frontend:
+    container_name: peregrine_frontend_container
+    build:
+      context: ./services/frontend
+      # target: base
+      dockerfile: frontend.dockerfile
+      network: host
+    ports:
+      - 4200:4200
+    volumes:
+      - ./services/frontend/app:/home/node/app
+
+  
+  peregrine_backend:
+    container_name: peregrine_backend_container
+    build:
+      context: ./services/backend-expressjs
+      # target: base
+      dockerfile: backend.dockerfile
+      network: host
+    ports:
+      - 5000:5000
+    volumes:
+      - ./services/backend-expressjs/app:/expressAPI
+
+  # web:
+  #   build:
+  #     context: angular
+  #     target: builder
+  #   ports:
+  #     - 4200:4200
+  #   volumes:
+  #     - ./angular:/project
+  #     - /project/node_modules 
